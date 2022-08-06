@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { withRouter } from 'react-router';
 import { Routes as Switch, Navigate, Route, HashRouter, useLocation } from 'react-router-dom';
 import { Login, SignUp, AccessDenied, NotFound, Forgot, Menu, Question } from './components';
+import Main from './layouts/Main/Main';
 const Routes = withRouter(({ location }) => {
   const [split, setSplit] = useState('');
 
@@ -10,9 +11,7 @@ const Routes = withRouter(({ location }) => {
     const splitUrl = window.location.href.slice(splitUrlIndex + 1);
     setSplit(splitUrl);
   }, 1000);
-  useEffect(() => {
-    console.log(location);
-  }, [location]);
+
   return (
     <div>
       <HashRouter
@@ -23,7 +22,14 @@ const Routes = withRouter(({ location }) => {
       >
         <Switch>
           <Route path="/" element={<Navigate to="/menu" />} />
-          <Route path="/menu" element={<Menu />} />
+          <Route
+            path="/menu"
+            element={
+              <Main>
+                <Menu />
+              </Main>
+            }
+          />
           <Route element={<Login />} path="/Login"></Route>
           <Route element={<SignUp />} path="/SignUp"></Route>
           <Route element={<Forgot />} path="/Forgot"></Route>
