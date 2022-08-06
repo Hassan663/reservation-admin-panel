@@ -1,0 +1,42 @@
+.main_wrap {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .ant-card-body {
+    padding: 0px;
+    height: 100%;
+    box-shadow: rgb(227 227 227) 0px 0px 5px;
+    background-color: 'white';
+  }
+
+  .cards {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    box-shadow: rgb(227 227 227) 0px 0px 5px;
+    background-color: white;
+    padding-bottom: 20px;
+
+    .cst_wrapper {
+      width: 100%;
+      height: 100%;
+      display: contents;
+
+      .header_profiles {
+        width: 100%;
+
+        .header_texts {
+          width: 800px;
+        }
+      }
+    }
+
+    .ant-card-body {
+      padding: 0px;
+    }
+  }
+}

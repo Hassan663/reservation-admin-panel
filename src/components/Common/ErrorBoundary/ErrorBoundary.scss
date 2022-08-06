@@ -1,0 +1,18 @@
+@import "../../../theme/variables.scss";
+.errorBoundary {
+  background-color: #43487a;
+  width: 100%;
+  text-align: center;
+  padding-top: 126px;
+  height: 100vh;
+  h1 {
+    color: #e6e6e6;
+    font-family: Roboto;
+    font-size: 50px;
+    font-weight: bold;
+  }
+  p {
+    color: #d2d2d2ef;
+    font-size: 25px;
+  }
+}

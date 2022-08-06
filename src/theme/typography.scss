@@ -1,0 +1,10 @@
+@import 'variables';
+
+body {
+  height: 100vh;
+  background-color: $body-bg;
+  color: $color-default;
+  font-family: $regular-fonts;
+  font-size: $regular-font-size;
+  line-height: $base-line-height;
+}

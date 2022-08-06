@@ -1,0 +1,117 @@
+.HeaderRight {
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  .headerBtn {
+    height: 17px;
+    width: 17px;
+    color: #764abc;
+
+    .ant-dropdown-arrow {
+      background-color: #51647c;
+    }
+
+    svg {
+      height: 17px;
+      width: 17px;
+    }
+  }
+
+  .Spacing {
+    width: 100%;
+    color: #764abc;
+    .badge {
+      position: absolute;
+      height: 20px !important;
+      width: 20px !important;
+      top: 2px;
+      right: 50px;
+      // padding: 0.6px 5px;
+      border-radius: 50%;
+      background-color: #d55122;
+      color: white;
+      display: flex;
+      justify-content: center;
+    }
+    .badge_none {
+      display: none;
+    }
+    .icons {
+      margin-left: 15px;
+      margin-right: 15px;
+      height: 100%;
+      color: #764abc;
+    }
+
+    .ant-dropdown .ant-dropdown-placement-bottomCenter {
+      top: 64px;
+    }
+
+    .ant-dropdown {
+      background-color: white;
+    }
+  }
+
+  .ant-dropdown-placement-bottomCenter {
+    background-color: white;
+    top: 69px !important;
+
+    .ant-dropdown-menu {
+      max-height: 550px;
+      overflow: auto;
+      overflow-x: hidden;
+    }
+  }
+}
+
+.mainNotif {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border: 1px solid rgba(207, 199, 199, 0.85);
+  background-color: white !important;
+  width: 400px;
+  height: 100%;
+
+  .read_msg {
+    width: 100%;
+    background-color: #5e42c5;
+    display: flex;
+    font-size: 12px;
+    justify-content: flex-end;
+  }
+
+  .innerBox {
+    background-color: white !important;
+    display: 'flex';
+    flex-direction: 'row';
+    padding-top: '10px';
+
+    .innerLeft {
+      width: 60px;
+      padding-top: 5px;
+      padding-left: 5px;
+    }
+
+    .innerRight {
+      width: 320px;
+      justify-content: space-between;
+      font-size: 12px;
+
+      .btn-customer {
+        color: #764abc;
+        display: flex;
+        font-size: 13px;
+        border: 1px solid #764abc;
+        justify-content: center;
+        // width: 90px;
+        // height: 28px;
+      }
+    }
+  }
+}
+
+.ant-dropdown-menu-vertical {
+  margin-top: 25px;
+}

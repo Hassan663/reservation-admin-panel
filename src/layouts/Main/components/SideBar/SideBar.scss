@@ -1,0 +1,102 @@
+@import 'theme/variables';
+
+.Wrapper {
+  .ant-layout-header {
+    padding: 0 2px;
+  }
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+    flex-direction: row;
+    height: 64px;
+
+    width: 100%;
+    .header_main_Left {
+      display: flex;
+      align-items: center;
+      svg {
+        height: 20px;
+        width: 20px;
+      }
+    }
+    .header_main_Right {
+      display: flex;
+      align-items: center;
+      margin-right: 20px;
+    }
+  }
+  .content-wrapper {
+    margin-top: 5px;
+    height: calc(100vh - 70px);
+    overflow: scroll;
+    overflow-x: hidden;
+    box-shadow: 0px 5px 15px #888888;
+    background: url('../../../../assets/images/patternbg.jpg');
+  }
+}
+.ant-layout-sider::-webkit-scrollbar {
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.leftArrow {
+  height: 60px;
+  display: flex;
+  margin-left: 20px;
+  align-items: center;
+}
+.sider {
+  .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+    background-color: #f2f2f2;
+    border-radius: 10px;
+  }
+  .ant-menu-inline .ant-menu-item:after,
+  .ant-menu-vertical-left .ant-menu-item:after,
+  .ant-menu-vertical-right .ant-menu-item:after,
+  .ant-menu-vertical .ant-menu-item:after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0px 25px 0px 25px;
+    bottom: 0;
+    border-right: none;
+    transform: scaleY(0.0001);
+    opacity: 0;
+    transition: transform 0.15s cubic-bezier(0.215, 0.61, 0.355, 1),
+      opacity 0.15s cubic-bezier(0.215, 0.61, 0.355, 1);
+    content: '';
+  }
+  .ant-menu-item-selected,
+  .ant-menu-item-selected a,
+  .ant-menu-item-selected a:hover {
+    color: #764abc;
+  }
+  .ant-menu-item:hover {
+    background-color: #f2f2f2;
+    border-radius: 10px;
+  }
+  .ant-menu-item .ant-menu-item-icon,
+  .ant-menu-item .anticon,
+  .ant-menu-submenu-title .ant-menu-item-icon,
+  .ant-menu-submenu-title .anticon {
+    color: #764abc;
+  }
+
+  .ant-menu-sub.ant-menu-inline {
+    box-shadow: none;
+    background: transparent;
+  }
+}
+// .ant-layout-sider {
+//   overflow: scroll;
+//   overflow-x: hidden;
+// }
+
+element.style {
+  color: rgb(118, 74, 188);
+}
+
+.ant-menu-inline {
+  border-right: none;
+}

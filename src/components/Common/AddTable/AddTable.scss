@@ -1,0 +1,32 @@
+@import 'theme/variables';
+
+.container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  menu-button {
+    display: flex;
+    flex-direction: row;
+  }
+}
+.body {
+  .items {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    margin: 10px 10px;
+    .btn_export {
+      background-color: white;
+      border: none;
+      box-shadow: none;
+      margin-left: 10px;
+      font-weight: normal;
+      width: 20px;
+      color: #848484;
+    }
+  }
+}

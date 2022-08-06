@@ -1,0 +1,72 @@
+.menuItems {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.button_container {
+  width: 40%;
+  justify-content: center;
+  display: flex;
+  place-items: center;
+  // height: 100vh;
+  font-size: 2rem;
+  background-color: black;
+  border-radius: 10px;
+  margin-left: 0%;
+  margin-right: 0%;
+  margin-top: -40px;
+}
+
+.child {
+  // display: flex;
+  align-items: center;
+  text-align: center;
+  width: 20%;
+  height: 32px;
+  font-family: 'Bebas Neue';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  // line-height: 29px;
+  margin: 0;
+  cursor: pointer;
+  color: #00151a;
+  border: none;
+  background-color: transparent;
+  color: #d6c99c;
+  opacity: 0.8;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  // margin-right: 2px;
+}
+.bg {
+  background-color: #d6c99c;
+  color: #00151a;
+}
+.caerosal {
+  margin-top: 3%;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+.caerosal .arrow-button {
+  border: none;
+  outline: none;
+  color: #d6c99c;
+  margin-top: 100px;
+  padding: 0%;
+  background-color: transparent;
+}
+.item {
+  // width: 20%;
+  margin-right: 1px;
+  height: 150px;
+  width: 49%;
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  // margin: auto;
+  // background-color: aqua;
+}

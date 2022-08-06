@@ -1,0 +1,140 @@
+@import 'theme/variables';
+.login-wrapper {
+  font-family: 'Open Sans', sans-serif;
+  background: url('../../assets//images/loginbg.jpg');
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  align-items: center;
+  background-position: top;
+  background-repeat: repeat;
+  background-size: 100%;
+  .login-main-grid {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .logo-area {
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      color: $black;
+      color: rgb(106, 108, 111);
+      // justify-content: center;
+      .main-title {
+        //color: rgb(106, 108, 111);
+        font-size: 100px;
+        font-family: 'Open Sans', sans-serif;
+        justify-content: center;
+      }
+      .sub-title {
+        color: rgb(106, 108, 111);
+        font-size: 18px;
+        align-items: center;
+        font-family: 'Open Sans', sans-serif;
+        text-align: center;
+        flex-direction: row;
+      }
+      .select-button-div {
+        display: flex;
+        flex-direction: row;
+        width: 350px;
+        height: 40px;
+        color: #161616;
+        // background-color: rgba(0, 0, 0, 0.03) !important;
+        .ant-input {
+          background-color: rgba(0, 0, 0, 0.03) !important;
+        }
+      }
+    }
+    .input-div {
+      margin-top: 120px;
+      display: flex;
+      justify-content: center;
+      align-items: left;
+      flex-direction: column;
+      margin: -5px;
+      color: #686767;
+      .form-input-field {
+        height: 35px;
+        color: #686767;
+        width: 420px;
+        font-family: 'Open Sans', sans-serif;
+        border: none;
+        margin-top: 20px;
+        font-size: 15px !important;
+        letter-spacing: 1.1px;
+        border-radius: 50px !important;
+        padding: 0px 0px 0px 50px !important;
+        background-color: rgba(0, 0, 0, 0.03) !important;
+        input {
+          color: #686767;
+          
+        }
+        svg {
+          fill: #686767;
+        }
+      }
+      .ant-input-affix-wrapper > input.ant-input {
+        padding: 0;
+        border: black;
+        border-radius: 20px;
+        height: 35px;
+        outline: none;
+      }
+
+      .login-form-format {
+        margin-top: 30px;
+        display: flex;
+        justify-content: center;
+        span {
+          font-size: medium;
+          color: #764abc !important;
+          justify-content: center;
+        }
+        .ant-checkbox-checked .ant-checkbox-inner {
+          background-color: gray;
+          border-color: gray;
+          // justify-content: center;
+        }
+        .login-forget-password {
+          color: $color-orange;
+          font-size: $regular-font-size;
+        }
+        .ant-layout {
+          color: #686767;
+        }
+      }
+      .login-button-div {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+      }
+      .btn-login {
+        border-radius: 50px !important;
+        text-transform: uppercase;
+        border: none;
+        margin-top: 50px;
+        font-family: 'Open Sans', sans-serif;
+        height: 50px;
+        width: 420px;
+        color: white;
+        background-color: #764abc;
+      }
+      .btn-forget {
+        color: #764abc !important;
+        font-family: 'Open Sans', sans-serif;
+      }
+    }
+  }
+}
+
+.ant-input-password-icon.anticon {
+  color: rgba(0,0,0,.45);
+  cursor: pointer;
+  transition: all .3s;
+  padding-right: 20px !important;
+}

@@ -1,0 +1,285 @@
+@import 'theme/variables';
+
+.main-header-wrapper {
+  // padding: 1px 1px 1px 1px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  // .ant-layout {
+
+  //   overflow-y: hidden;
+  // }
+
+  .version-wrapper {
+    background-color: transparent !important;
+    opacity: 0.5;
+
+    .version {
+      color: $white;
+      background-color: transparent !important;
+      font-family: li;
+      font-size: 0.8rem;
+      line-height: $base-line-height;
+      text-align: center;
+      margin-left: 5px;
+      letter-spacing: 0.3rem;
+    }
+  }
+
+  .Wrapper {
+    .ant-layout-header {
+      padding: 0 2px;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: rgb(255, 255, 255);
+      flex-direction: row;
+      height: 64px;
+
+      width: 100%;
+
+      .headerLeft {
+        display: flex;
+        align-items: center;
+
+        svg {
+          height: 20px;
+          width: 20px;
+        }
+      }
+
+      .headerRight {
+        display: flex;
+        align-items: center;
+        margin-right: 20px;
+      }
+    }
+
+    .content-wrapper {
+      padding: 20px;
+      margin-top: 5px;
+      height: calc(100vh - 70px);
+      overflow-x: hidden;
+      overflow-y: scroll;
+      box-shadow: 0px 5px 15px #888888;
+      background: url('../../assets/images/patternbg.jpg');
+      ::-webkit-scrollbar {
+        display: none;
+      }
+    }
+  }
+
+  .leftArrow {
+    height: 60px;
+    display: flex;
+    margin-left: 20px;
+    align-items: center;
+  }
+
+  .sider {
+    .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+      background-color: #f2f2f2;
+      border-radius: 10px;
+    }
+
+    .ant-menu-inline .ant-menu-item:after,
+    .ant-menu-vertical-left .ant-menu-item:after,
+    .ant-menu-vertical-right .ant-menu-item:after,
+    .ant-menu-vertical .ant-menu-item:after {
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 0px 25px 0px 25px;
+      bottom: 0;
+      border-right: none;
+      transform: scaleY(0.0001);
+      opacity: 0;
+      transition: transform 0.15s cubic-bezier(0.215, 0.61, 0.355, 1),
+        opacity 0.15s cubic-bezier(0.215, 0.61, 0.355, 1);
+      content: '';
+    }
+
+    .ant-menu-item-selected,
+    .ant-menu-item-selected a,
+    .ant-menu-item-selected a:hover {
+      color: #764abc;
+    }
+
+    .ant-menu-item:hover {
+      background-color: #f2f2f2;
+      border-radius: 10px;
+    }
+
+    .ant-menu-item .ant-menu-item-icon,
+    .ant-menu-item .anticon,
+    .ant-menu-submenu-title .ant-menu-item-icon,
+    .ant-menu-submenu-title .anticon {
+      color: #764abc;
+    }
+
+    .ant-menu-sub.ant-menu-inline {
+      box-shadow: none;
+      background: transparent;
+    }
+  }
+
+  .ant-layout-sider {
+    overflow: auto;
+    overflow-x: hidden;
+  }
+
+  element.style {
+    color: rgb(118, 74, 188);
+  }
+
+  .Wrapper {
+    .ant-layout-header {
+      padding: 0 2px;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: rgb(255, 255, 255);
+      flex-direction: row;
+      height: 64px;
+
+      width: 100%;
+
+      .headerLeft {
+        display: flex;
+        align-items: center;
+
+        svg {
+          height: 20px;
+          width: 20px;
+        }
+      }
+
+      .headerRight {
+        display: flex;
+        align-items: center;
+        margin-right: 20px;
+      }
+    }
+
+    .content-wrapper {
+      width: 100%;
+      padding: 20px;
+      margin-top: 5px;
+      height: calc(100vh - 70px);
+      overflow-x: hidden;
+      overflow-y: scroll;
+      box-shadow: 0px 5px 15px #888888;
+      background: url('../../assets/images/patternbg.jpg');
+      ::-webkit-scrollbar {
+        display: none;
+      }
+    }
+  }
+
+  .leftArrow {
+    height: 60px;
+    display: flex;
+    margin-left: 20px;
+    align-items: center;
+  }
+
+  .sider {
+    .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+      background-color: #f2f2f2;
+      border-radius: 10px;
+    }
+
+    .ant-menu-inline .ant-menu-item:after,
+    .ant-menu-vertical-left .ant-menu-item:after,
+    .ant-menu-vertical-right .ant-menu-item:after,
+    .ant-menu-vertical .ant-menu-item:after {
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 0px 25px 0px 25px;
+      bottom: 0;
+      border-right: none;
+      transform: scaleY(0.0001);
+      opacity: 0;
+      transition: transform 0.15s cubic-bezier(0.215, 0.61, 0.355, 1),
+        opacity 0.15s cubic-bezier(0.215, 0.61, 0.355, 1);
+      content: '';
+    }
+
+    .ant-menu-item-selected,
+    .ant-menu-item-selected a,
+    .ant-menu-item-selected a:hover {
+      color: #764abc;
+    }
+
+    .ant-menu-item:hover {
+      background-color: #f2f2f2;
+      border-radius: 10px;
+    }
+
+    .ant-menu-item .ant-menu-item-icon,
+    .ant-menu-item .anticon,
+    .ant-menu-submenu-title .ant-menu-item-icon,
+    .ant-menu-submenu-title .anticon {
+      color: #764abc;
+    }
+
+    .ant-menu-sub.ant-menu-inline {
+      box-shadow: none;
+      background: transparent;
+    }
+  }
+
+  .ant-layout-sider {
+    overflow: auto;
+    overflow-x: hidden;
+  }
+
+  element.style {
+    color: rgb(118, 74, 188);
+  }
+}
+
+.main-content-wrapper {
+  padding: 0px 20px;
+}
+
+#style-6::-webkit-scrollbar {
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.ant-layout .ant-layout-has-sider {
+  height: 100vh;
+  background: url('../../assets/images/menubg.jpg');
+  background-position: center;
+  background-size: cover;
+}
+
+.ant-layout-sider {
+  background: url('../../assets/images/menubg.jpg');
+  background-position: center;
+  background-size: cover;
+}
+
+.ant-menu-root.ant-menu-inline,
+.ant-menu-root.ant-menu-vertical,
+.ant-menu-root.ant-menu-vertical-left,
+.ant-menu-root.ant-menu-vertical-right {
+  box-shadow: none;
+  background: transparent;
+}
+
+.ant-menu-title-content {
+  color: black;
+}

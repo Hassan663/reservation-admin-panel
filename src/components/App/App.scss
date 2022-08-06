@@ -1,0 +1,16 @@
+@import '../../theme/variables.scss';
+@import '../../theme/base.scss';
+
+.ant-layout {
+  background-image: $body-background;
+}
+
+.ant-dropdown.ant-dropdown-placement-bottomLeft.ant-slide-up-appear.ant-slide-up-appear-prepare.ant-slide-up {
+  opacity: 1 !important;
+  pointer-events: initial !important;
+}
+
+body {
+  background: #ffffff;
+  color:$primary-color
+}

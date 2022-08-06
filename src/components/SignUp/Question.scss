@@ -1,0 +1,60 @@
+.main_hero_div {
+  width: 100vw;
+  height: 100vh;
+  background-image: url('./../../assets/images/hero-image.png');
+}
+.sub_main_hero_div {
+  width: 60vw;
+  height: 100vh;
+  border-top: 10px solid #d6c99c;
+  border-left: 10px solid #d6c99c;
+  border-right: 10px solid #d6c99c;
+  margin: 0px auto;
+  padding-top: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.hero_div_btn {
+  background: #262d2d;
+  border-radius: 100px;
+  width: 518px;
+  height: 71px;
+  font-weight: 400;
+  color: #e8e8e8;
+  font-size: 35px;
+  font-family: 'Bebas Neue';
+  font-style: normal;
+  outline: none;
+  border: none;
+}
+.hero_div_btn1 {
+  background: #b2b1ac;
+  border-radius: 100px;
+  width: 518px;
+  height: 71px;
+  font-weight: 400;
+  color: #232929;
+  font-size: 35px;
+  font-family: 'Bebas Neue';
+  font-style: normal;
+  outline: none;
+  border: none;
+  margin-top: 18px;
+}
+.hero_div_p {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #FFFFFF;
+  margin-top: 35px;
+}
+.hero_div_img{
+    margin-top: -10px;
+}

@@ -1,0 +1,54 @@
+@import 'theme/variables';
+
+.ims-button-wrapper {
+  .ant-btn {
+    font-family: $regular-fonts;
+    // font-weight: 600 ;
+    // box-shadow: none;
+    // box-shadow: 0px 12px 23px 0px rgba(62, 73, 84, 0.04) !important;
+    //box-shadow: 0px 5px 5px #3e404b;
+    //    box-shadow: 0px 12px 23px rgba(31, 35, 39, 0.1);
+    //  border-radius: 8px;
+    //border: 1px solid;
+    padding: 4px 8px !important;
+    min-width: 120px;
+    min-height: 36px;
+
+    &:hover {
+      opacity: 0.8;
+    }
+
+    &:disabled {
+      opacity: 0.4;
+
+      &:hover {
+        color: $color-purple;
+      }
+    }
+  }
+
+  .ant-btn-primary {
+    border-color: #746abc;
+    background-color: #746abc;
+  }
+
+  .primary-btn {
+    color: $white;
+    background: $color-purple;
+  }
+
+  .secondary-btn {
+    color: white;
+    background: $color-purple;
+  }
+
+  .ant-btn.big-btn {
+    min-height: 55px;
+    border-radius: 12px;
+  }
+
+  .ant-btn.small-btn {
+    min-height: 20px !important;
+    font-weight: 300 !important;
+  }
+}
