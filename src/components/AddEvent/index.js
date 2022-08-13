@@ -1,1 +1,1 @@
-export { default } from './AddPrevent';
+export { default } from './AddEvent';
