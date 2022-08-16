@@ -4,6 +4,7 @@ export const SideBarData = [
   { path: '/menu', cName: 'list-text', name: 'Menu', key: '2', icon: <HomeFilled /> },
   { path: '/addProduct', cName: 'list-text', name: 'Add Product', key: '2', icon: <HomeFilled /> },
   { path: '/addEvent', cName: 'list-text', name: 'Add Event', key: '2', icon: <HomeFilled /> },
+  { path: '/adminChat', cName: 'list-text', name: 'Chat', key: '2', icon: <HomeFilled /> },
 ];
 export const subSidebarData = [
   { path: '/dashboard/roles', cName: 'list-text', name: 'Roles', key: '8' },

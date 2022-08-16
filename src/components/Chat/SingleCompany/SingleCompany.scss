@@ -1,0 +1,27 @@
+.client_main_container {
+  width: 100%;
+  padding: 20px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+  background: #2b2e38;
+  border-bottom: 1px solid #363a46;
+  cursor: pointer;
+}
+.company_message {
+  height: 20px !important;
+  width: 20px !important;
+  border-radius: 50%;
+  background-color: #764abc;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.badge_div {
+  width: 80px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}

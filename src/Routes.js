@@ -12,6 +12,7 @@ import {
   AddProduct,
   AddEvent,
 } from './components';
+import Chat from './components/Chat';
 import Main from './layouts/Main/Main';
 const Routes = withRouter(({ location }) => {
   const [split, setSplit] = useState('');
@@ -53,6 +54,14 @@ const Routes = withRouter(({ location }) => {
             element={
               <Main>
                 <AddEvent />
+              </Main>
+            }
+          />
+          <Route
+            path="/adminChat"
+            element={
+              <Main>
+                <Chat />
               </Main>
             }
           />

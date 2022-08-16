@@ -1,0 +1,40 @@
+.singlechat:hover {
+  cursor: pointer;
+}
+
+.client_group_members_details_wrapper {
+  width: 100%;
+  padding: 20px 20px;
+  background-color: red;
+  background: #2b2e38;
+  color: #fff;
+  .client_group_members_details_inner_wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    img {
+      width: 43px;
+      height: 43px;
+      border-radius: 50%;
+    }
+    .circle_wrapper_client_grey {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: gray;
+      position: absolute;
+      bottom: 15%;
+      right: 15%;
+    }
+    .circle_wrapper_client_green {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: green;
+      position: absolute;
+      bottom: 15%;
+      right: 15%;
+    }
+  }
+}

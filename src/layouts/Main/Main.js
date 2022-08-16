@@ -34,7 +34,7 @@ const Main = props => {
       );
     }
     if (localStorage.getItem('userloggedin')) {
-      createUser(localStorage.getItem('userloggedin'));
+      // createUser(localStorage.getItem('userloggedin'));
     }
   }, []);
 
