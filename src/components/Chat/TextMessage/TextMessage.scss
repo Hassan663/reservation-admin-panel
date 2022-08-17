@@ -1,0 +1,128 @@
+.textarea_main_container {
+  width: 100%;
+  min-height: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  .time_main_wrapper {
+    width: 200px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+    background: rgba(241, 241, 241, 0.53);
+    margin-top: 5px;
+  }
+  .sender_message_textarea_wrapper {
+    width: 100%;
+    height: auto;
+    padding: 10px;
+    margin: 5px 0px;
+    color: white;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    .sender_text_box {
+      background: #2f3440;
+      color: #fff;
+      width: auto;
+      word-break: break-word;
+      max-width: 55%;
+      border-top-right-radius: 2px;
+      border-top-left-radius: 1.3em;
+      border-bottom-left-radius: 1.3em;
+      border-bottom-right-radius: 1.3em;
+      // display: inline-block;
+      padding: 6px 15px 7px 15px;
+      line-height: 130%;
+      white-space: pre-wrap;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-end;
+      span {
+        color: rgb(192, 192, 192);
+        font-size: 8px;
+      }
+    }
+    .profile_pic_sender_wrapper {
+      width: 35px;
+      height: auto;
+      margin: 0px 10px;
+      img {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+      }
+    }
+  }
+
+  .recevier_message_textarea_wrapper {
+    width: 100%;
+    height: auto;
+    padding: 10px;
+    margin: 5px 0px;
+    color: white;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    align-items: center;
+    .sender_text_box {
+      background: #2f3440;
+      color: #fff;
+      width: auto;
+      word-break: break-word;
+      max-width: 55%;
+      border-top-right-radius: 1.3em;
+      border-top-left-radius: 2px;
+      border-bottom-left-radius: 1.3em;
+      border-bottom-right-radius: 1.3em;
+      display: inline-block;
+      padding: 6px 15px 7px 15px;
+      line-height: 130%;
+      white-space: pre-wrap;
+    }
+    .profile_pic_sender_wrapper {
+      width: 35px;
+      height: auto;
+      margin: 0px 10px;
+      img {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+      }
+    }
+  }
+  .picture_card {
+    min-width: 160px;
+    min-height: 160px;
+    max-width: 450px;
+    max-height: 450px;
+    border-radius: 12px;
+    background-color: #2f3440;
+    color: #ffffff;
+    padding: 8px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    .picture_area {
+      // padding: 8px;
+      min-width: 140px;
+      min-height: 140px;
+      max-width: 440px;
+      max-height: 440px;
+      background-color: #ffffff;
+      border-radius: 8px;
+    }
+    .pic_size {
+      // padding: 8px;
+      min-width: 135px;
+      min-height: 135px;
+      max-width: 435px;
+      max-height: 435px;
+      border-radius: 8px;
+    }
+  }
+}

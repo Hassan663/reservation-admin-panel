@@ -1,0 +1,49 @@
+.Sgorup_main_container {
+  width: 100%;
+  .Sgorup_inner_container {
+    width: 100%;
+    background-color: #2f3440;
+    // height: 50px;
+    padding: 20px 20px;
+    cursor: pointer;
+    border-bottom: 1px solid rgb(97, 91, 91);
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .Sgorup_inner_container:hover {
+    width: 100%;
+    background-color: #2b2f38;
+  }
+  .single_card_wrapper_Sgroup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+    }
+  }
+}
+.create_button_group {
+  width: 100%;
+  height: 50px;
+  border: none;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #2b2f38;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background 500ms;
+  svg {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+    fill: #fff;
+  }
+}
+.create_button_group:hover {
+  background: #30333a;
+}

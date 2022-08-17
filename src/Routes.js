@@ -1,7 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { withRouter } from 'react-router';
 import { Routes as Switch, Navigate, Route, HashRouter, useLocation } from 'react-router-dom';
-import { Login, SignUp, AccessDenied, NotFound, Forgot, Menu, Question } from './components';
+import {
+  Login,
+  SignUp,
+  AccessDenied,
+  NotFound,
+  Forgot,
+  Menu,
+  Question,
+  AddProduct,
+  AddEvent,
+} from './components';
+import Chat from './components/Chat';
 import Main from './layouts/Main/Main';
 const Routes = withRouter(({ location }) => {
   const [split, setSplit] = useState('');
@@ -27,6 +38,30 @@ const Routes = withRouter(({ location }) => {
             element={
               <Main>
                 <Menu />
+              </Main>
+            }
+          />
+          <Route
+            path="/addProduct"
+            element={
+              <Main>
+                <AddProduct />
+              </Main>
+            }
+          />
+          <Route
+            path="/addEvent"
+            element={
+              <Main>
+                <AddEvent />
+              </Main>
+            }
+          />
+          <Route
+            path="/adminChat"
+            element={
+              <Main>
+                <Chat />
               </Main>
             }
           />

@@ -6,6 +6,7 @@ import {
   handleForgotPassword,
   handleChangePassword,
 } from './auth/saga';
+import adminChatWatcher from './adminChat/saga';
 export default function* rootSaga() {
   yield all([
     fork(handleSignupSubmit),
@@ -14,5 +15,6 @@ export default function* rootSaga() {
     fork(handleForgotPassword),
     fork(handleChangePassword),
     fork(handleSignout),
+    fork(adminChatWatcher),
   ]);
 }
