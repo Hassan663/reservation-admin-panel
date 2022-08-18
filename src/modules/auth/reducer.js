@@ -22,8 +22,10 @@ function authReducer(state = initialState, { type, payload }) {
         ...state,
         loading: false,
         error: false,
-        data: payload.data,
-        username: payload.data.user.username,
+        isLoggedIn: true,
+        data: payload,
+        user: payload,
+        // username: payload.data.user.username,
       };
 
     case SIGNUP.FAILURE:

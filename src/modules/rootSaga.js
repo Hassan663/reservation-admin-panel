@@ -1,7 +1,7 @@
 import { fork, all } from 'redux-saga/effects';
-import {
-  handleSignupSubmit,
-  handleSigninSubmit,
+import signWatcher, {
+  // handleSignupSubmit,
+  // handleSigninSubmit,
   handleSignout,
   handleForgotPassword,
   handleChangePassword,
@@ -9,8 +9,9 @@ import {
 import adminChatWatcher from './adminChat/saga';
 export default function* rootSaga() {
   yield all([
-    fork(handleSignupSubmit),
-    fork(handleSigninSubmit),
+    // fork(handleSignupSubmit),
+    // fork(handleSigninSubmit),
+    fork(signWatcher),
     fork(handleSignout),
     fork(handleForgotPassword),
     fork(handleChangePassword),
