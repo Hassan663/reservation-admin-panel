@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import './AddEvent.scss';
 import Label from 'components/Common/Label';
 import { useDispatch, useSelector } from 'react-redux';
-
+import EventActions from 'modules/event/actions';
 export const AddProduct = () => {
   const dispatch = useDispatch();
   const initialvalues = {
@@ -49,20 +49,37 @@ export const AddProduct = () => {
         photoPath: event.target.files[0],
         photoPathName: event.target.files[0].name,
       });
-      setFile(URL.createObjectURL(event.target.files[0]));
+      setFile(URL.createObjectURL(event.currentTarget.files[0]));
     }
   };
   const handleSubmit = () => {
     const formData = new FormData();
-    formData.append('name', productdata.name);
+    // formData.append('name', productdata.name);
     formData.append('title', productdata.title);
     formData.append('description', productdata.description);
-    formData.append('price', productdata.price);
+    formData.append('fileName', productdata.photoPathName);
+    formData.append('file', productdata.photoPath);
+    // formData.append('price', productdata.price);
 
     for (var pair of formData.entries()) {
-      console.log(pair[0] + ': ' + pair[1]);
+      console.log('Form Data.......... ', pair);
+      // console.log(pair[0] + ': ' + pair[1]);
     }
-    if (productdata.name && productdata.title && productdata.description) {
+    if (
+      productdata.title &&
+      productdata.description &&
+      productdata.photoPathName &&
+      productdata.photoPath
+    ) {
+      dispatch(EventActions.addEvent.request(formData));
+      setProductData({
+        ...productdata,
+
+        title: '',
+        description: '',
+        photoPathName: '',
+        photoPath: '',
+      });
       //   dispatch(staffActions.addStaff.request(formData));
       //   navigate('/dashboard/staff');
     } else {
@@ -116,7 +133,7 @@ export const AddProduct = () => {
                 fallback={defaultLogo}
                 preview={false}
               />
-              <Label title="Product Image"></Label>
+              <Label title="Event Image"></Label>
               <input
                 type="file"
                 id="img"

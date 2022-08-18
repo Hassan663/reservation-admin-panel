@@ -5,6 +5,7 @@ import authReducer from './auth/reducer';
 import eventReducer from './event/reducer';
 import productReducer from './product/reducer';
 import adimnChatReducer from './adminChat/reducer';
+
 const rootReducer = history =>
   combineReducers({
     router: connectRouter(history),

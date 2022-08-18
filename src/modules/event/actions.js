@@ -1,6 +1,6 @@
 import { ADD_EVENT, DELETE_EVENT, UPDATE_EVENT, FETCH_EVENT } from './types';
 
-const eventActions = {
+const EventActions = {
   addEvent: {
     request: data => {
       return { type: ADD_EVENT.REQUEST, payload: data };
@@ -46,4 +46,4 @@ const eventActions = {
     },
   },
 };
-export default productActions;
+export default EventActions;
