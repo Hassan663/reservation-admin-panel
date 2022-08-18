@@ -1,32 +1,31 @@
-import { call, take, put, select, takeLatest } from 'redux-saga/effects';
+import { call, take, put, takeLatest } from 'redux-saga/effects';
 import { message as antMessage } from 'antd';
-import { push } from 'connected-react-router';
 import authActions, { SIGNUP, SIGNIN, SIGNOUT, FORGOT_PASSWORD, CHANGE_PASSWORD } from './actions';
 import { REQUEST } from '../common/actions';
 import { signup, signin, signout, forgotPassword, changePassword } from '../../services/auth';
-import React from 'react';
-import { Alert, Button, Space } from 'antd';
 
 const forcedLogin = action => {
   action.payload.forced = 'true';
-  //console.log(action);
   handleSigninSubmit(action);
 };
 
-export function* handleSignupSubmit() {
-  while (true) {
-    try {
-      const { payload } = yield take(SIGNUP[REQUEST]);
-      const data = yield call(signup, payload);
-      yield put(authActions.signup.success(data));
-    } catch (error) {}
+export function* handleSignupSubmit(action) {
+  try {
+    const data = yield call(signup, action.payload);
+    yield put(authActions.signup.success(data.data));
+    antMessage.success('User Registered Successfully!', 2);
+    // yield put(authActions.signup.success(data.data));
+    // setSessionCookies({user: data.data.firstName, id: data.data.id });
+  } catch (error) {
+    yield put(authActions.signup.failure(error.response.data.message));
+    antMessage.error(error.response.data.message);
   }
 }
 
 export function* handleSigninRequest(action) {
   try {
     const { data } = yield call(signin, action.payload);
-    yield put(authActions.signin.success(data));
+    yield put(authActions.signin.success(data.data));
     setSessionCookies({ user: data.user, token: data.token });
   } catch (error) {
     console.log(error);
@@ -42,10 +41,6 @@ export function* handleSigninRequest(action) {
     }
     yield put(authActions.signin.failure(error));
   }
-}
-
-export function* handleSigninSubmit() {
-  yield takeLatest(SIGNIN.REQUEST, handleSigninRequest);
 }
 
 export function* handleSignout() {
@@ -93,3 +88,11 @@ export function* handleChangePassword() {
     }
   }
 }
+
+export default function* signWatcher() {
+  yield takeLatest(SIGNIN.REQUEST, handleSigninRequest);
+  yield takeLatest(SIGNUP.REQUEST, handleSignupSubmit);
+}
+// export function* handleSignup() {
+//   yield takeEvery(SIGNUP.REQUEST, handleSignupSubmit);
+// }

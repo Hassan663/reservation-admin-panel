@@ -1,16 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './SignUp.scss';
-import { Form, Input, Checkbox, Button } from 'antd';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { Form, Input, Button } from 'antd';
+import authActions from 'modules/auth/actions';
 
 const SignUp = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const signedUp = useSelector(state => state.authReducer.isLoggedIn);
+
+  useEffect(() => {
+    if (signedUp) navigate('/login');
+  }, [signedUp]);
+
   const onFinish = values => {
-    console.log('Success:', values);
+    dispatch(authActions.signup.request(values));
   };
 
   const onFinishFailed = errorInfo => {
-    console.log('Failed:', errorInfo);
+    console.log('User Registration Failed:', errorInfo);
   };
-
+  console.log('Reducer State: ', signedUp);
   return (
     <div className="signUp-wrapper">
       <div className="login-page">
@@ -22,7 +33,7 @@ const SignUp = () => {
             />
           </div>
           <Form
-            name="login-form"
+            name="signup-form"
             initialValues={{ remember: true }}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
@@ -30,25 +41,25 @@ const SignUp = () => {
             <p className="form-title">Sign Up</p>
             <p> Restaurant Reservation Admin Panel</p>
             <Form.Item
-              name="username"
+              name="firstName"
               style={{ marginBottom: '10px' }}
-              rules={[{ required: true, message: 'Please input your username or email!' }]}
+              rules={[{ required: true, message: 'Please enter your first name!' }]}
             >
-              <Input placeholder="Username / E-mail" />
+              <Input placeholder="First Name" />
             </Form.Item>
             <Form.Item
-              name="fullname"
+              name="lastName"
               style={{ marginBottom: '10px' }}
-              rules={[{ required: true, message: 'Please enter your full name!' }]}
+              rules={[{ required: true, message: 'Please enter your last name!' }]}
             >
-              <Input placeholder="Full Name" />
+              <Input placeholder="Last Name" />
             </Form.Item>
             <Form.Item
-              name="mobileNo"
+              name="email"
               style={{ marginBottom: '10px' }}
-              rules={[{ required: true, message: 'Please enter your Phone Number!' }]}
+              rules={[{ required: true, message: 'Please input your email!' }]}
             >
-              <Input placeholder="Mobile Phone No." type="number" />
+              <Input placeholder="E-mail" />
             </Form.Item>
             <Form.Item
               name="password"
@@ -58,9 +69,9 @@ const SignUp = () => {
               <Input.Password placeholder="Password" />
             </Form.Item>
             <Form.Item
-              name="retypepassword"
+              name="confrimPassword"
               style={{ marginBottom: '10px' }}
-              rules={[{ required: true, message: 'Please input your password again!' }]}
+              rules={[{ required: true, message: 'Please confirm your password again!' }]}
             >
               <Input.Password placeholder="Re Enter Password" />
             </Form.Item>

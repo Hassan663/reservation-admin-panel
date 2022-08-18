@@ -4,7 +4,11 @@ const host = window.location.origin;
 export const signup = payload => {
   return new Promise((resolve, reject) => {
     axios
-      .post('/signup')
+      .post(`${USERS_BASE_URL}/user/register`, payload, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
       .then(data => {
         resolve(data);
       })
