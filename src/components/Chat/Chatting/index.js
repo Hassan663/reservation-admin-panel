@@ -85,7 +85,7 @@ const Chattings = ({ setOpenStaffModel, setShowChatModel, receiverinfo, setrecei
     // dispatch(
     //   AdminChatActions.checkUserConnection.request([localStorage.getItem('userloggedin'), input])
     // );
-    // localStorage.setItem('messageReceiver', input);
+    localStorage.setItem('messageReceiver', input);
     setShowChatModel(true);
   };
 
