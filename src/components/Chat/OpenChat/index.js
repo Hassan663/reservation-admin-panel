@@ -40,6 +40,7 @@ const OpenChat = ({ receiverinfo, openStaffModel, setOpenStaffModel, setShowChat
   const dispatch = useDispatch();
   const [usersLogin, setUsersLogin] = useState([]);
   const formdata = new FormData();
+  localStorage.setItem('loggedInUserId', 'admin@gmail.com');
   const [message, setMessage] = useState({
     sender: localStorage.getItem('userloggedin'),
     receiver: '',
@@ -66,7 +67,7 @@ const OpenChat = ({ receiverinfo, openStaffModel, setOpenStaffModel, setShowChat
 
   useEffect(async () => {
     // mongodb
-    if (userConnectionId !== '' && receiverinfo.type !== 'group') {
+    if (userConnectionId !== '') {
       localStorage.setItem('currentChatConnection', userConnectionId); // setting conection id
       IDRef.current = userConnectionId; //connection id ref
       getChats(userConnectionId, setMychats); // getting chat of current conection
@@ -276,18 +277,19 @@ const OpenChat = ({ receiverinfo, openStaffModel, setOpenStaffModel, setShowChat
       )} */}
 
       <div className="txt_area_main_container_us" ref={containerRef}>
-        {mychats.map((chat, index) => (
-          <TextMessage
-            name={chat.name}
-            text={chat.text}
-            time={chat.createdAt}
-            file={chat.file}
-            key={index}
-            seen={chat.seen}
-            sender={chat.sender}
-            loggedin={localStorage.getItem('userloggedin')}
-          />
-        ))}
+        {!loading &&
+          mychats.map((chat, index) => (
+            <TextMessage
+              name={chat.name}
+              text={chat.text}
+              time={chat.createdAt}
+              file={chat.file}
+              key={index}
+              seen={chat.seen}
+              sender={chat.sender}
+              loggedin={localStorage.getItem('userloggedin')}
+            />
+          ))}
       </div>
 
       <div className="openchat_footer_text_input_main_container">
