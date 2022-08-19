@@ -1,12 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Login.scss';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import authActions from 'modules/auth/actions';
 import { Form, Input, Checkbox, Button } from 'antd';
 
 const Login = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const loggedIn = useSelector(state => state.authReducer.isLoggedIn);
+
+  useEffect(() => {
+    if (loggedIn) navigate('/menu');
+  }, [loggedIn]);
+
   const onFinish = values => {
-    console.log('Success:', values);
+    const { email, password } = values;
+    dispatch(authActions.signin.request({ email, password }));
   };
 
   const onFinishFailed = errorInfo => {
@@ -33,11 +43,11 @@ const Login = () => {
             <p className="form-title">Welcome back</p>
             <p>Login to the Restaurant Reservation Admin Panel</p>
             <Form.Item
-              name="username"
+              name="email"
               style={{ marginBottom: '10px' }}
-              rules={[{ required: true, message: 'Please input your username!' }]}
+              rules={[{ required: true, message: 'Please enter your email!' }]}
             >
-              <Input placeholder="Username" />
+              <Input placeholder="E-mail" />
             </Form.Item>
             <Form.Item
               name="password"

@@ -2,6 +2,7 @@ import { SIGNUP, SIGNIN, SIGNOUT, FORGOT_PASSWORD, CHANGE_PASSWORD } from './act
 
 const initialState = {
   isLoggedIn: false,
+  isSignedUp: false,
   user: true ?? {
     user: {
       firstName: '',
@@ -15,14 +16,14 @@ const initialState = {
 function authReducer(state = initialState, { type, payload }) {
   switch (type) {
     case SIGNUP.REQUEST:
-      return { ...state, loading: true, error: false, isLoggedIn: false };
+      return { ...state, loading: true, error: false, isSignedUp: false };
 
     case SIGNUP.SUCCESS:
       return {
         ...state,
         loading: false,
         error: false,
-        isLoggedIn: true,
+        isSignedUp: true,
         data: payload,
         user: payload,
         // username: payload.data.user.username,
@@ -33,7 +34,7 @@ function authReducer(state = initialState, { type, payload }) {
         ...state,
         loading: false,
         error: payload.message,
-        isLoggedIn: false,
+        isSignedUp: false,
       };
 
     case SIGNIN.REQUEST:
@@ -50,10 +51,10 @@ function authReducer(state = initialState, { type, payload }) {
         ...state,
         loading: false,
         error: false,
-        user: payload.user,
+        user: payload,
         isLoggedIn: true,
-        mfaFormType: '',
-        loginVisible: false,
+        // mfaFormType: '',
+        // loginVisible: false,
       };
 
     case SIGNIN.FAILURE:

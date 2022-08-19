@@ -1,6 +1,7 @@
 import { call, take, put, takeLatest } from 'redux-saga/effects';
 import { message as antMessage } from 'antd';
 import authActions, { SIGNUP, SIGNIN, SIGNOUT, FORGOT_PASSWORD, CHANGE_PASSWORD } from './actions';
+import { setSessionCookies } from 'modules/common/utils';
 import { REQUEST } from '../common/actions';
 import { signup, signin, signout, forgotPassword, changePassword } from '../../services/auth';
 
@@ -14,8 +15,6 @@ export function* handleSignupSubmit(action) {
     const data = yield call(signup, action.payload);
     yield put(authActions.signup.success(data.data));
     antMessage.success('User Registered Successfully!', 2);
-    // yield put(authActions.signup.success(data.data));
-    // setSessionCookies({user: data.data.firstName, id: data.data.id });
   } catch (error) {
     yield put(authActions.signup.failure(error.response.data.message));
     antMessage.error(error.response.data.message);
@@ -26,19 +25,10 @@ export function* handleSigninRequest(action) {
   try {
     const { data } = yield call(signin, action.payload);
     yield put(authActions.signin.success(data.data));
-    setSessionCookies({ user: data.user, token: data.token });
+    console.log('set Session: ', data);
+    // setSessionCookies(data.user);
   } catch (error) {
-    console.log(error);
-    if (error.message === 'Request failed with status code 400') {
-      //yield put(authActions.signin.failure(error));
-      //antMessage.error('User Already Logged In');
-    } else if (error.message === 'Request failed with status code 401') {
-      antMessage.error('Wrong Email Or Password');
-    } else if (error.message === 'Request failed with status code 503') {
-      antMessage.error('Maximum Active Sessions');
-    } else {
-      antMessage.error('Interval Server Error');
-    }
+    antMessage.error(error.response.data.message);
     yield put(authActions.signin.failure(error));
   }
 }
@@ -93,6 +83,6 @@ export default function* signWatcher() {
   yield takeLatest(SIGNIN.REQUEST, handleSigninRequest);
   yield takeLatest(SIGNUP.REQUEST, handleSignupSubmit);
 }
-// export function* handleSignup() {
-//   yield takeEvery(SIGNUP.REQUEST, handleSignupSubmit);
+// export function* handleSigninSubmit() {
+//   yield takeEvery(SIGNIN.REQUEST, handleSigninRequest);
 // }
