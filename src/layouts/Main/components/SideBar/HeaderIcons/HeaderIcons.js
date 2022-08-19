@@ -43,13 +43,13 @@ const HeaderIcons = () => {
 
   const handleLogout = async obj => {
     if (obj === 'Logout') {
-      inActiveStatus();
-      dispatch(
-        AdminChatActions.deleteToken.request({
-          id: localStorage.getItem('tokenid'),
-          userId: localStorage.getItem(`${ORIGIN}_uid`),
-        })
-      );
+      // inActiveStatus();
+      // dispatch(
+      //   AdminChatActions.deleteToken.request({
+      //     id: localStorage.getItem('tokenid'),
+      //     userId: localStorage.getItem(`${ORIGIN}_uid`),
+      //   })
+      // );
       dispatch({ type: 'LOGOUT', payload: {} });
       navigate('/admin/login');
     } else if (obj === 'My Profile') {

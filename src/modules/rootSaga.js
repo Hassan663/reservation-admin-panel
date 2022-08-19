@@ -6,16 +6,18 @@ import signWatcher, {
   handleForgotPassword,
   handleChangePassword,
 } from './auth/saga';
+import eventWatcher from './event/saga';
 import adminChatWatcher from './adminChat/saga';
 export default function* rootSaga() {
   yield all([
     // fork(handleSignupSubmit),
     // fork(handleSigninSubmit),
-    fork(signWatcher),
+    // fork(signWatcher),
     fork(handleSignout),
     fork(handleForgotPassword),
     fork(handleChangePassword),
     fork(handleSignout),
-    fork(adminChatWatcher),
+    // fork(adminChatWatcher),
+    fork(eventWatcher),
   ]);
 }
