@@ -8,7 +8,7 @@ import authActions from 'modules/auth/actions';
 const SignUp = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const signedUp = useSelector(state => state.authReducer.isLoggedIn);
+  const signedUp = useSelector(state => state.authReducer.isSignedUp);
 
   useEffect(() => {
     if (signedUp) navigate('/login');
@@ -21,7 +21,6 @@ const SignUp = () => {
   const onFinishFailed = errorInfo => {
     console.log('User Registration Failed:', errorInfo);
   };
-  console.log('Reducer State: ', signedUp);
   return (
     <div className="signUp-wrapper">
       <div className="login-page">

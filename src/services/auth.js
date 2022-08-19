@@ -18,17 +18,29 @@ export const signup = payload => {
   });
 };
 
-export const signin = async ({ email, password, forced, isChecked, userType }) =>
-  axios.post(`${USERS_BASE_URL}/auth/${userType}/login`, {
-    email,
-    password,
-    forced,
-    isChecked,
-    userType,
+export const signin = async ({ email, password }) => {
+  console.log('in API Auth: ', email, password);
+  return new Promise((resolve, reject) => {
+    axios
+      .post(
+        `${USERS_BASE_URL}/user/login`,
+        { email, password },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      )
+      .then(data => {
+        resolve(data);
+      })
+      .catch(error => {
+        reject(error);
+      });
   });
+};
 
 export const changePassword = payload => {
-  console.log(payload);
   const { email, currentPassword, newPassword, confirmPassword } = payload;
   return new Promise((resolve, reject) => {
     axios
