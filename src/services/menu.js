@@ -8,6 +8,6 @@ const request = axios.create({ baseURL: USERS_BASE_URL });
 request.interceptors.request.use(requestInterceptor);
 // request.interceptors.request.use(checkForce);
 const api = {
-  addEvent: data => request.post('/event', data),
+  addMenu: data => request.post('/menu', data),
 };
 export default apiWrapper(api);

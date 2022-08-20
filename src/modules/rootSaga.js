@@ -8,16 +8,20 @@ import signWatcher, {
 } from './auth/saga';
 import eventWatcher from './event/saga';
 import adminChatWatcher from './adminChat/saga';
+import meunWatcher from './menu/saga';
+
+
 export default function* rootSaga() {
   yield all([
     // fork(handleSignupSubmit),
     // fork(handleSigninSubmit),
-    // fork(signWatcher),
+    fork(signWatcher),
     fork(handleSignout),
     fork(handleForgotPassword),
     fork(handleChangePassword),
     fork(handleSignout),
-    // fork(adminChatWatcher),
+    fork(adminChatWatcher),
     fork(eventWatcher),
+    fork(menuWatcher),
   ]);
 }
