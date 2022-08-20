@@ -90,10 +90,10 @@ const Main = props => {
                   ) : (
                     <MenuFoldOutlined onClick={handleOpenChange} />
                   )}
-                  <img
+                  {/* <img
                     style={{ height: '45px', width: '70px', marginLeft: '30px' }}
                     src={logo}
-                  ></img>
+                  ></img> */}
                 </div>
                 <div className="headerRight">
                   <HeaderIcons></HeaderIcons>
