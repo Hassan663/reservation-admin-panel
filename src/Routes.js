@@ -12,6 +12,8 @@ import {
   AddProduct,
   AddEvent,
 } from './components';
+import AddCategory from 'components/AddCategory';
+import AddBlog from 'components/AddBlog';
 import Chat from './components/Chat';
 import Main from './layouts/Main/Main';
 const Routes = withRouter(({ location }) => {
@@ -46,6 +48,22 @@ const Routes = withRouter(({ location }) => {
             element={
               <Main>
                 <AddProduct />
+              </Main>
+            }
+          />
+          <Route
+            path="/addCategory"
+            element={
+              <Main>
+                <AddCategory />
+              </Main>
+            }
+          />
+          <Route
+            path="/addBlog"
+            element={
+              <Main>
+                <AddBlog />
               </Main>
             }
           />

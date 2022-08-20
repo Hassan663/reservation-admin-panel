@@ -4,6 +4,14 @@ export const SideBarData = [
   // { path: '/menu', cName: 'list-text', name: 'Menu', key: '2', icon: <HomeFilled /> },
   { path: '/addProduct', cName: 'list-text', name: 'Add Product', key: '2', icon: <HomeFilled /> },
   { path: '/addEvent', cName: 'list-text', name: 'Add Event', key: '2', icon: <HomeFilled /> },
+  { path: '/addBlog', cName: 'list-text', name: 'Add Blog', key: '2', icon: <HomeFilled /> },
+  {
+    path: '/addCategory',
+    cName: 'list-text',
+    name: 'Add Category',
+    key: '2',
+    icon: <HomeFilled />,
+  },
   { path: '/adminChat', cName: 'list-text', name: 'Chat', key: '2', icon: <HomeFilled /> },
 ];
 export const subSidebarData = [

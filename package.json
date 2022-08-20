@@ -97,7 +97,7 @@
     "react-error-overlay": "6.0.9"
   },
   "scripts": {
-    "start": "cross-env PORT=3000 react-scripts --openssl-legacy-provider start",
+    "start": "cross-env PORT=3000 react-scripts start",
     "start:qa": "cross-env PORT=3000  REACT_APP_ENV=qa react-app-rewired start",
     "start:prod": "cross-env PORT=3000 REACT_APP_ENV=prod react-app-rewired start",
     "build": "react-scripts build",
