@@ -5,6 +5,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './AddProduct.scss';
 import Label from 'components/Common/Label';
+import productActions from 'modules/product/actions';
 import { useDispatch, useSelector } from 'react-redux';
 
 export const AddProduct = () => {
@@ -59,12 +60,14 @@ export const AddProduct = () => {
     formData.append('title', productdata.title);
     formData.append('description', productdata.description);
     formData.append('price', productdata.price);
+    formData.append('fileName', productdata.photoPathName);
+    formData.append('file', productdata.photoPath);
 
-    for (var pair of formData.entries()) {
-      console.log(pair[0] + ': ' + pair[1]);
-    }
-    if (productdata.name && productdata.title && productdata.description) {
-      //   dispatch(staffActions.addStaff.request(formData));
+    // for (var pair of formData.entries()) {
+    //   console.log(pair[0] + ': ' + pair[1]);
+    // }
+    if (productdata.name && productdata.title && productdata.description && productdata.photoPath) {
+      dispatch(productActions.addProduct.request(formData));
       //   navigate('/dashboard/staff');
     } else {
       message.error('kindly fill the form');

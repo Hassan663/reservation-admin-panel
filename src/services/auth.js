@@ -19,7 +19,6 @@ export const signup = payload => {
 };
 
 export const signin = async ({ email, password }) => {
-  console.log('in API Auth: ', email, password);
   return new Promise((resolve, reject) => {
     axios
       .post(
