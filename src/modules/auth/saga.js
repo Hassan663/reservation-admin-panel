@@ -25,8 +25,7 @@ export function* handleSigninRequest(action) {
   try {
     const { data } = yield call(signin, action.payload);
     yield put(authActions.signin.success(data.data));
-    console.log('set Session: ', data);
-    // setSessionCookies(data.user);
+    setSessionCookies(data.user);
   } catch (error) {
     antMessage.error(error.response.data.message);
     yield put(authActions.signin.failure(error));

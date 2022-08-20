@@ -12,7 +12,7 @@ export default function* rootSaga() {
   yield all([
     // fork(handleSignupSubmit),
     // fork(handleSigninSubmit),
-    // fork(signWatcher),
+    fork(signWatcher),
     fork(handleSignout),
     fork(handleForgotPassword),
     fork(handleChangePassword),
