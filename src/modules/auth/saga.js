@@ -1,7 +1,7 @@
 import { call, take, put, takeLatest } from 'redux-saga/effects';
 import { message as antMessage } from 'antd';
 import authActions, { SIGNUP, SIGNIN, SIGNOUT, FORGOT_PASSWORD, CHANGE_PASSWORD } from './actions';
-import { setSessionCookies } from 'modules/common/utils';
+import { setSessionCookies, unSetSessionCookies } from 'modules/common/utils';
 import { REQUEST } from '../common/actions';
 import { signup, signin, signout, forgotPassword, changePassword } from '../../services/auth';
 
@@ -25,7 +25,7 @@ export function* handleSigninRequest(action) {
   try {
     const { data } = yield call(signin, action.payload);
     yield put(authActions.signin.success(data.data));
-    setSessionCookies(data.user);
+    setSessionCookies({ user: data.user, token: data.token });
   } catch (error) {
     antMessage.error(error.response.data.message);
     yield put(authActions.signin.failure(error));
