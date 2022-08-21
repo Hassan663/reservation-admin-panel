@@ -27,6 +27,7 @@ export const AddMenu = () => {
   const [file, setFile] = useState('');
   const navigate = useNavigate();
   const handleChange = event => {
+
     const { name, value } = event.target;
     setMenuItem({ ...menuItem, [name]: value });
   };
@@ -141,11 +142,19 @@ export const AddMenu = () => {
                 />
                 <Label title="Category"></Label>
               <Select
-                defaultValue="lucy"
+                // defaultValue="lucy"
+                name="category"
+                value={menuItem.category}
                 style={{
                   width: '100%',
                 }}
-                // onChange={handleChange}
+                // value={menuItem.category}
+                onChange={value =>{
+                  setMenuItem({
+                    ...menuItem,
+                    category:value
+                  })
+                } }
               >
                   <Option value="jack">Jack</Option>
                   <Option value="jack">Jack</Option>

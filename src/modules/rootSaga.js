@@ -8,7 +8,7 @@ import signWatcher, {
 } from './auth/saga';
 import eventWatcher from './event/saga';
 import adminChatWatcher from './adminChat/saga';
-import meunWatcher from './menu/saga';
+import menuWatcher from './menu/saga';
 
 
 export default function* rootSaga() {
