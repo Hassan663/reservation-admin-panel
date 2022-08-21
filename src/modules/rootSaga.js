@@ -6,10 +6,10 @@ import signWatcher, {
   handleForgotPassword,
   handleChangePassword,
 } from './auth/saga';
+import categoryWatcher from './category/saga';
 import eventWatcher from './event/saga';
 import adminChatWatcher from './adminChat/saga';
 import meunWatcher from './menu/saga';
-
 
 export default function* rootSaga() {
   yield all([
@@ -17,11 +17,12 @@ export default function* rootSaga() {
     // fork(handleSigninSubmit),
     fork(signWatcher),
     fork(handleSignout),
+    fork(categoryWatcher),
     fork(handleForgotPassword),
     fork(handleChangePassword),
     fork(handleSignout),
     fork(adminChatWatcher),
     fork(eventWatcher),
-    fork(menuWatcher),
+    // fork(menuWatcher),
   ]);
 }
