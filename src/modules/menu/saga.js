@@ -6,11 +6,6 @@ import actions from './actions';
 export function* handleAddMenu({ payload }) {
   // payload is coming from action when we call dispatch
   try {
-    for (var pair of payload.entries()) {
-      console.log('Form Data in handler ', pair);
-      // console.log(pair[0] + ': ' + pair[1]);
-    }
-    // console.log('Data in handleAddMenu', payload);
     const data = yield call(menu.addMenu, payload);
     yield put(actions.addMenu.success(data));
   } catch (error) {

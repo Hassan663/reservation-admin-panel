@@ -6,11 +6,6 @@ import { REQUEST } from 'modules/common/actions';
 export function* handleAddEvent({ payload }) {
   // payload is coming from action when we call dispatch
   try {
-    for (var pair of payload.entries()) {
-      console.log('Form Data in handler ', pair);
-      // console.log(pair[0] + ': ' + pair[1]);
-    }
-    console.log('Data in handleAddEvent');
     const data = yield call(event.addEvent, payload);
     yield put(actions.addEvent.success(data));
   } catch (error) {

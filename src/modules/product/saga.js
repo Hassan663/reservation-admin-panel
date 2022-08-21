@@ -5,12 +5,7 @@ import { REQUEST } from 'modules/common/actions';
 import { call, put, takeLatest } from 'redux-saga/effects';
 export function* handleAddProduct({ payload }) {
   try {
-      for (var pair of payload.entries()) {
-      console.log(pair[0] + ': ' + pair[1]);
-    }
-    console.log('in saga');
     const data = yield call(product.addProduct, payload);
-    console.log(data);
     yield put(productActions.addProduct.success(data));
   } catch (error) {
     yield put(productActions.addProduct.failure(error));

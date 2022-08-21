@@ -29,7 +29,6 @@ export const AddProduct = () => {
   };
 
   const handleChangePhoto = event => {
-    console.log('eventFile', event.target.files[0]);
     const file = event.target.files[0];
     var errSize = 'Max File Limit is 3MB';
     var errType = 'Invalid File Type';
@@ -50,8 +49,8 @@ export const AddProduct = () => {
       setFile(URL.createObjectURL(event.currentTarget.files[0]));
     }
   };
-  const handleSubmit = (e) => {
-    e.preventDefault()
+  const handleSubmit = e => {
+    e.preventDefault();
     const formData = new FormData();
     // formData.append('name', productdata.name);
     formData.append('name', productdata.name);
@@ -60,13 +59,8 @@ export const AddProduct = () => {
     // formData.append('price', productdata.price);
 
     for (var pair of formData.entries()) {
-      console.log('Form Data.......... ', pair);
-      // console.log(pair[0] + ': ' + pair[1]);
     }
-    if (
-      productdata.name &&
-      productdata.desc 
-    ) {
+    if (productdata.name && productdata.desc) {
       dispatch(EventActions.addEvent.request(formData));
       setProductData({
         ...productdata,
@@ -82,8 +76,6 @@ export const AddProduct = () => {
     }
   };
 
-  console.log('productdata', productdata);
-
   return (
     <div className="profile-main">
       <Card
@@ -98,7 +90,7 @@ export const AddProduct = () => {
               autoComplete="off"
             >
               <div className="form-main">
-                <Label name="Title" required={true}></Label>
+                <Label title="Title" required={true}></Label>
                 <Input
                   name="name"
                   maxLength="20"
@@ -107,7 +99,7 @@ export const AddProduct = () => {
                   ref={refValue}
                   onChange={event => handleChange(event)}
                 />
-                <Label name="Description" required={true}></Label>
+                <Label title="Description" required={true}></Label>
                 <Input
                   name="desc"
                   maxLength="50"
@@ -123,12 +115,13 @@ export const AddProduct = () => {
                   width: '160px',
                   border: 'solid 1px white',
                   borderRadius: '50%',
+                  marginTop: '20px',
                 }}
                 src={file}
                 fallback={defaultLogo}
                 preview={false}
               />
-              <Label name="Event Image"></Label>
+              <Label title="Event Image"></Label>
               <input
                 type="file"
                 id="img"
@@ -160,7 +153,7 @@ export const AddProduct = () => {
                 float: 'right',
                 marginTop: '20px',
               }}
-              onClick={(e)=>handleSubmit(e)}
+              onClick={e => handleSubmit(e)}
             >
               Add Event
             </Button>

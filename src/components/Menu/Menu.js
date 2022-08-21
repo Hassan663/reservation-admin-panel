@@ -27,7 +27,6 @@ export const AddMenu = () => {
   const [file, setFile] = useState('');
   const navigate = useNavigate();
   const handleChange = event => {
-
     const { name, value } = event.target;
     setMenuItem({ ...menuItem, [name]: value });
   };
@@ -36,7 +35,6 @@ export const AddMenu = () => {
   };
 
   const handleChangePhoto = event => {
-    console.log('eventFile', event.target.files[0]);
     const file = event.target.files[0];
     var errSize = 'Max File Limit is 3MB';
     var errType = 'Invalid File Type';
@@ -84,8 +82,6 @@ export const AddMenu = () => {
       message.error('kindly fill the form');
     }
   };
-
-  console.log('menuItem', menuItem);
 
   return (
     <div className="profile-main">
@@ -141,29 +137,21 @@ export const AddMenu = () => {
                   onChange={event => handleChangeHourlyRate(event)}
                 />
                 <Label title="Category"></Label>
-              <Select
-                // defaultValue="lucy"
-                name="category"
-                value={menuItem.category}
-                style={{
-                  width: '100%',
-                }}
-                // value={menuItem.category}
-                onChange={value =>{
-                  setMenuItem({
-                    ...menuItem,
-                    category:value
-                  })
-                } }
-              >
+                <Select
+                  defaultValue="lucy"
+                  style={{
+                    width: '100%',
+                  }}
+                  // onChange={handleChange}
+                >
                   <Option value="jack">Jack</Option>
                   <Option value="jack">Jack</Option>
                   <Option value="lucy">Lucy</Option>
                   <Option value="jack">Jack</Option>
                   <Option value="jack">Jack</Option>
-              </Select>
+                </Select>
               </div>
-              
+
               <Image
                 style={{
                   height: '160px',
@@ -184,7 +172,7 @@ export const AddMenu = () => {
                 onChange={event => handleChangePhoto(event, 'photoPath')}
                 style={{ display: 'none' }}
               ></input>
-              
+
               <label
                 for="img"
                 style={{

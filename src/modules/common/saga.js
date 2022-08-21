@@ -24,7 +24,6 @@ export function* handleFetchTopics() {
     const { data } = yield call(API.fetchTopics);
     yield put(actions.fetchTopics.success({ topics: data.results ?? [] }));
   } catch (error) {
-    console.log('api fail');
     yield put(actions.fetchTopics.failure(error));
   }
 }

@@ -1,10 +1,10 @@
-import { Form, Input, Button, Divider, InputNumber, message, Image } from 'antd';
-import defaultLogo from '../../assets/images/hero-image.png';
-import { Card } from 'components/Common';
-import React, { useState, useRef, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState, useRef } from 'react';
 import './AddProduct.scss';
+import { Card } from 'components/Common';
 import Label from 'components/Common/Label';
+import { Link, useNavigate } from 'react-router-dom';
+import defaultLogo from '../../assets/images/hero-image.png';
+import { Form, Input, Button, InputNumber, message, Image } from 'antd';
 import productActions from 'modules/product/actions';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -30,7 +30,6 @@ export const AddProduct = () => {
   };
 
   const handleChangePhoto = event => {
-    console.log('eventFile', event.target.files[0]);
     const file = event.target.files[0];
     var errSize = 'Max File Limit is 3MB';
     var errType = 'Invalid File Type';
@@ -52,29 +51,21 @@ export const AddProduct = () => {
       setFile(URL.createObjectURL(event.target.files[0]));
     }
   };
-  const handleSubmit = (e) => {
-    e.preventDefault()
+  const handleSubmit = e => {
+    e.preventDefault();
     const formData = new FormData();
     formData.append('name', productdata.name);
     formData.append('desc', productdata.desc);
     formData.append('price', productdata.price);
     formData.append('productPicture', productdata.productPicture);
 
-    // for (var pair of formData.entries()) {
-    //   console.log(pair[0] + ': ' + pair[1]);
-    // }
     // if (productdata.name && productdata.title && productdata.desc && productdata.productPicture) {
-      console.log('inside')
-      dispatch(productActions.addProduct.request(formData));
-      //   navigate('/dashboard/staff');
+    dispatch(productActions.addProduct.request(formData));
+    //   navigate('/dashboard/staff');
     // } else {
     //   message.error('kindly fill the form');
     // }
-    console.log('chalingggg');
   };
-
-  console.log('productdata', productdata);
-
   return (
     <div className="profile-main">
       <Card
@@ -107,7 +98,7 @@ export const AddProduct = () => {
                   ref={refValue}
                   onChange={event => handleChange(event)}
                 />
-                <Label title="Desc" required={true}></Label>
+                <Label title="Description" required={true}></Label>
                 <Input
                   name="desc"
                   maxLength="50"
@@ -135,6 +126,7 @@ export const AddProduct = () => {
                   width: '160px',
                   border: 'solid 1px white',
                   borderRadius: '50%',
+                  marginTop: '20px',
                 }}
                 src={file}
                 fallback={defaultLogo}
@@ -172,7 +164,7 @@ export const AddProduct = () => {
                 float: 'right',
                 marginTop: '20px',
               }}
-              onClick={(e)=>handleSubmit(e)}
+              onClick={e => handleSubmit(e)}
             >
               Add Product
             </Button>

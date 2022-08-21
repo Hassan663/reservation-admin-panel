@@ -28,7 +28,6 @@ const SideBar = () => {
     setOpen(true);
   };
   const { staff } = useSelector(state => state.staffsReducer);
-  // console.log(staff);
   useEffect(() => {
     dispatch(staffActions.getStaff.request(customerId));
   }, []);

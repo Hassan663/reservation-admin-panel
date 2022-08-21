@@ -18,7 +18,6 @@ const SingleCompany = ({
   const [customerContacts, setCustomerContacts] = useState([]);
   console.log('customerContacts', customerContacts);
   // const contacts = useSelector(state => state.contactsReducer.customerContacts);
-  // console.log(contacts);
   const getCompanyEmployess = async () => {
     const result = await contactServices.getCustomerContacts(companyId);
     setCustomerContacts(result?.data?.response?.data);
