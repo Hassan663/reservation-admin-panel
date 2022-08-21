@@ -1,9 +1,13 @@
 import { ADD_PRODUCT, DELETE_PRODUCT, UPDATE_PRODUCT, FETCH_PRODUCT } from './types';
 import productActions from './actions';
+import product from 'services/product';
 export function* handleAddProduct({ payload }) {
-  // payload is coming from action when we call dispatch
   try {
-  } catch (error) {}
+    const data = yield call(product.addProduct, payload);
+    yield put(productActions.addProduct.success(data));
+  } catch (error) {
+    yield put(productActions.addProduct.failure(error));
+  }
 }
 
 export function* handleDeleteProduct() {
