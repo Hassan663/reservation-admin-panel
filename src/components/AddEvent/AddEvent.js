@@ -98,7 +98,7 @@ export const AddProduct = () => {
               autoComplete="off"
             >
               <div className="form-main">
-                <Label name="Title" required={true}></Label>
+                <Label title="Title" required={true}></Label>
                 <Input
                   name="name"
                   maxLength="20"
@@ -107,7 +107,7 @@ export const AddProduct = () => {
                   ref={refValue}
                   onChange={event => handleChange(event)}
                 />
-                <Label name="Description" required={true}></Label>
+                <Label title="Description" required={true}></Label>
                 <Input
                   name="desc"
                   maxLength="50"
@@ -123,12 +123,13 @@ export const AddProduct = () => {
                   width: '160px',
                   border: 'solid 1px white',
                   borderRadius: '50%',
+                  marginTop:'20px'
                 }}
                 src={file}
                 fallback={defaultLogo}
                 preview={false}
               />
-              <Label name="Event Image"></Label>
+              <Label title="Event Image"></Label>
               <input
                 type="file"
                 id="img"

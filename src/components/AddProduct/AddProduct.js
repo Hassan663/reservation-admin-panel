@@ -107,7 +107,7 @@ export const AddProduct = () => {
                   ref={refValue}
                   onChange={event => handleChange(event)}
                 />
-                <Label title="Desc" required={true}></Label>
+                <Label title="Description" required={true}></Label>
                 <Input
                   name="desc"
                   maxLength="50"
@@ -135,6 +135,8 @@ export const AddProduct = () => {
                   width: '160px',
                   border: 'solid 1px white',
                   borderRadius: '50%',
+                  marginTop:'20px'
+
                 }}
                 src={file}
                 fallback={defaultLogo}
