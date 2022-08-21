@@ -11,7 +11,6 @@ export const AddCategory = () => {
   const onFinish = categories => {
     const { name } = categories;
     dispatch(categoryActions.addCategory.request({ name }));
-    console.log('Fun is Running: ', category);
   };
   return (
     <>

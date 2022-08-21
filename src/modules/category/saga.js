@@ -6,9 +6,7 @@ import { categoryApi } from 'services/category';
 
 export function* handleAddCategory(action) {
   try {
-    console.log('Category SAGA', action);
     const data = yield call(categoryApi, action.payload);
-    console.log('category API response: ', data);
     yield put(categoryActions.addCategory.success(data));
     antMessage.success('Product Category Added Successfully!', 2);
   } catch (error) {

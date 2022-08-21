@@ -28,7 +28,6 @@ const messaging = getMessaging(app);
 const onMessageListener = () => {
   return new Promise(resolve => {
     onMessage(messaging, payload => {
-      console.log('Message Received.....', payload.notification);
       // alert('Message Received')
       // NotificationManager.success(payload.notification.body, payload.notification.title);
 

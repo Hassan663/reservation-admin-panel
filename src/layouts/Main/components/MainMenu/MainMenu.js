@@ -39,7 +39,6 @@ const MainMenu = ({ match }) => {
   // const user = useSelector(state => state.authReducer.user);
 
   const aclService = new AclService('admin');
-  console.log({ match });
   return (
     <Menu
       onClick={e => setCurrent(e.key)}

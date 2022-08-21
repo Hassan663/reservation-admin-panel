@@ -250,7 +250,6 @@ export const createUser = async user => {
       currentUserChat: '',
       lastSeen: firebase.firestore.Timestamp.now().toDate(),
     }).then(response => {
-      // console.log('Response.....', response);
       // localStorage.setItem('currentUserFirebaseId', response?.id);
     });
     // await addDoc(chatRoomcollection, {

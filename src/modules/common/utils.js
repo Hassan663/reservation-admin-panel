@@ -9,14 +9,6 @@ var url = String(window.location.pathname);
 export const getUserId = () => window.localStorage[`${host}_uid`] ?? '';
 export const getTokens = () => JSON.parse(window.localStorage?.[`${host}_token`] ?? '{}');
 export const getUser = () => JSON.parse(window.localStorage?.[`${host}_user`] ?? '{}');
-
-// export const setSessionCookies = user => {   //old CODE Function
-//   console.log(user);
-//   window.localStorage['loggedInUserId'] = user.user._id;
-//   window.localStorage[`${host}_user`] = JSON.stringify(user);
-//   window.localStorage[`${host}_uid`] = JSON.stringify(user.user._id);
-//   window.localStorage[`${host}_token`] = JSON.stringify(user.token);
-// };
 export const setSessionCookies = user => {
   window.localStorage['userloggedin'] = user.user.email;
   window.localStorage['loggedInUserId'] = user.user._id;
