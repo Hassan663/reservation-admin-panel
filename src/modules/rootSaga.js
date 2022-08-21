@@ -9,7 +9,8 @@ import signWatcher, {
 import categoryWatcher from './category/saga';
 import eventWatcher from './event/saga';
 import adminChatWatcher from './adminChat/saga';
-import meunWatcher from './menu/saga';
+import productWatcher from './product/saga'
+import menuWatcher from './menu/saga';
 
 export default function* rootSaga() {
   yield all([
@@ -23,6 +24,7 @@ export default function* rootSaga() {
     fork(handleSignout),
     fork(adminChatWatcher),
     fork(eventWatcher),
-    // fork(menuWatcher),
+    fork(menuWatcher),
+    fork(productWatcher),
   ]);
 }
