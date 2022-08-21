@@ -29,7 +29,6 @@ export const AddProduct = () => {
   };
 
   const handleChangePhoto = event => {
-    console.log('eventFile', event.target.files[0]);
     const file = event.target.files[0];
     var errSize = 'Max File Limit is 3MB';
     var errType = 'Invalid File Type';
@@ -50,8 +49,8 @@ export const AddProduct = () => {
       setFile(URL.createObjectURL(event.currentTarget.files[0]));
     }
   };
-  const handleSubmit = (e) => {
-    e.preventDefault()
+  const handleSubmit = e => {
+    e.preventDefault();
     const formData = new FormData();
     // formData.append('name', productdata.name);
     formData.append('name', productdata.name);
@@ -60,13 +59,8 @@ export const AddProduct = () => {
     // formData.append('price', productdata.price);
 
     for (var pair of formData.entries()) {
-      console.log('Form Data.......... ', pair);
-      // console.log(pair[0] + ': ' + pair[1]);
     }
-    if (
-      productdata.name &&
-      productdata.desc 
-    ) {
+    if (productdata.name && productdata.desc) {
       dispatch(EventActions.addEvent.request(formData));
       setProductData({
         ...productdata,
@@ -81,8 +75,6 @@ export const AddProduct = () => {
       message.error('kindly fill the form');
     }
   };
-
-  console.log('productdata', productdata);
 
   return (
     <div className="profile-main">
@@ -123,7 +115,7 @@ export const AddProduct = () => {
                   width: '160px',
                   border: 'solid 1px white',
                   borderRadius: '50%',
-                  marginTop:'20px'
+                  marginTop: '20px',
                 }}
                 src={file}
                 fallback={defaultLogo}
@@ -161,7 +153,7 @@ export const AddProduct = () => {
                 float: 'right',
                 marginTop: '20px',
               }}
-              onClick={(e)=>handleSubmit(e)}
+              onClick={e => handleSubmit(e)}
             >
               Add Event
             </Button>

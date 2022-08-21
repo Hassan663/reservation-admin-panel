@@ -129,7 +129,6 @@ function authReducer(state = initialState, { type, payload }) {
         error: payload.message,
       };
     case 'LOGOUT':
-      console.log('LOGOUT');
       unSetSessionCookies();
       return {
         ...state,

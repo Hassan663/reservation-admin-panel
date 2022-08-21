@@ -19,6 +19,5 @@ export const getIds = members => {
   if (index > -1) {
     Ids1.splice(index, 1);
   }
-  // console.log('Ids...', Ids1);
   return Ids1 ?? [];
 };

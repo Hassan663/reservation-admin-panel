@@ -207,7 +207,6 @@ const Actions = {
       return { type: AdminChat.checkUserConnection.request, payload: data };
     },
     success: data => {
-      console.log('Admin Chat Action Id.....', data);
       return { type: AdminChat.checkUserConnection.success, payload: data };
     },
     failure: error => {

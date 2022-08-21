@@ -79,7 +79,6 @@ const Chattings = ({ setOpenStaffModel, setShowChatModel, receiverinfo, setrecei
   //   }
   // };
   const getUserEmail = input => {
-    console.log('input');
     // currentchat receiver
     dispatch(AdminChatActions.checkUserConnection.success(input));
     // dispatch(
