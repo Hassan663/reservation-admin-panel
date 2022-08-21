@@ -1,10 +1,10 @@
-import { Form, Input, Button, Divider, InputNumber, message, Image } from 'antd';
-import defaultLogo from '../../assets/images/hero-image.png';
-import { Card } from 'components/Common';
-import React, { useState, useRef, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState, useRef } from 'react';
 import './AddProduct.scss';
+import { Card } from 'components/Common';
 import Label from 'components/Common/Label';
+import { Link, useNavigate } from 'react-router-dom';
+import defaultLogo from '../../assets/images/hero-image.png';
+import { Form, Input, Button, InputNumber, message, Image } from 'antd';
 import productActions from 'modules/product/actions';
 import { useDispatch, useSelector } from 'react-redux';
 
