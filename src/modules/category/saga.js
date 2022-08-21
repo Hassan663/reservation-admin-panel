@@ -10,8 +10,8 @@ export function* handleAddCategory(action) {
     yield put(categoryActions.addCategory.success(data));
     antMessage.success('Product Category Added Successfully!', 2);
   } catch (error) {
-    yield put(authActions.signup.failure(error.response.data.message));
-    antMessage.error(error.message);
+    yield put(categoryActions.signup.failure(error.response.data.message));
+    antMessage.error(error.message, 2);
   }
 }
 

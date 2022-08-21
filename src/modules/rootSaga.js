@@ -9,8 +9,9 @@ import signWatcher, {
 import categoryWatcher from './category/saga';
 import eventWatcher from './event/saga';
 import adminChatWatcher from './adminChat/saga';
-import productWatcher from './product/saga'
+import productWatcher from './product/saga';
 import menuWatcher from './menu/saga';
+import blogWatcher from './blog/saga';
 
 export default function* rootSaga() {
   yield all([
@@ -26,5 +27,6 @@ export default function* rootSaga() {
     fork(eventWatcher),
     fork(menuWatcher),
     fork(productWatcher),
+    fork(blogWatcher),
   ]);
 }
