@@ -5,18 +5,17 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './AddProduct.scss';
 import Label from 'components/Common/Label';
+import productActions from 'modules/product/actions';
 import { useDispatch, useSelector } from 'react-redux';
 
 export const AddProduct = () => {
   const dispatch = useDispatch();
   const initialvalues = {
     name: '',
-    title: '',
-    description: '',
+    desc: '',
     price: 0,
     phone: '',
-    photoPath: '',
-    photoPathName: '',
+    productPicture: '',
   };
   const refValue = useRef(null);
   const [productdata, setProductData] = useState(initialvalues);
@@ -47,28 +46,31 @@ export const AddProduct = () => {
     } else {
       setProductData({
         ...productdata,
-        photoPath: event.target.files[0],
-        photoPathName: event.target.files[0].name,
+        productPicture: event.target.files[0],
+        productPictureName: event.target.files[0].name,
       });
       setFile(URL.createObjectURL(event.target.files[0]));
     }
   };
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault()
     const formData = new FormData();
     formData.append('name', productdata.name);
-    formData.append('title', productdata.title);
-    formData.append('description', productdata.description);
+    formData.append('desc', productdata.desc);
     formData.append('price', productdata.price);
+    formData.append('productPicture', productdata.productPicture);
 
-    for (var pair of formData.entries()) {
-      console.log(pair[0] + ': ' + pair[1]);
-    }
-    if (productdata.name && productdata.title && productdata.description) {
-      //   dispatch(staffActions.addStaff.request(formData));
+    // for (var pair of formData.entries()) {
+    //   console.log(pair[0] + ': ' + pair[1]);
+    // }
+    // if (productdata.name && productdata.title && productdata.desc && productdata.productPicture) {
+      console.log('inside')
+      dispatch(productActions.addProduct.request(formData));
       //   navigate('/dashboard/staff');
-    } else {
-      message.error('kindly fill the form');
-    }
+    // } else {
+    //   message.error('kindly fill the form');
+    // }
+    console.log('chalingggg');
   };
 
   console.log('productdata', productdata);
@@ -105,11 +107,11 @@ export const AddProduct = () => {
                   ref={refValue}
                   onChange={event => handleChange(event)}
                 />
-                <Label title="Description" required={true}></Label>
+                <Label title="Desc" required={true}></Label>
                 <Input
-                  name="description"
+                  name="desc"
                   maxLength="50"
-                  value={productdata.description}
+                  value={productdata.desc}
                   required
                   ref={refValue}
                   onChange={event => handleChange(event)}
@@ -142,9 +144,9 @@ export const AddProduct = () => {
               <input
                 type="file"
                 id="img"
-                filename="photoPath"
+                filename="productPicture"
                 placeholder="Select Files"
-                onChange={event => handleChangePhoto(event, 'photoPath')}
+                onChange={event => handleChangePhoto(event, 'productPicture')}
                 style={{ display: 'none' }}
               ></input>
               <label
@@ -161,7 +163,7 @@ export const AddProduct = () => {
               >
                 Upload Image
               </label>
-              <span>{productdata.photoPathName}</span>
+              <span>{productdata.productPictureName}</span>
             </Form>
             <Button
               style={{
@@ -170,7 +172,7 @@ export const AddProduct = () => {
                 float: 'right',
                 marginTop: '20px',
               }}
-              onClick={handleSubmit}
+              onClick={(e)=>handleSubmit(e)}
             >
               Add Product
             </Button>
