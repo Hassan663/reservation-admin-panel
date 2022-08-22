@@ -6,7 +6,6 @@ const initialState = {
 };
 
 function blogReducer(state = initialState, { type, payload }) {
-  console.log('Blog Reducer: ', payload);
   switch (type) {
     case ADD_BLOG.REQUEST:
       return {
