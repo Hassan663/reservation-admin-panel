@@ -20,3 +20,24 @@ export const categoryApi = category => {
       });
   });
 };
+export const getCategoryApi = category => {
+  const token = getTokens();
+  console.log('new Api', category);
+  return new Promise((resolve, reject) => {
+    axios
+      .get(`${USERS_BASE_URL}/getAllCategory`, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then(data => {
+        console.log('API Successfully Fetched', data);
+        resolve(data);
+      })
+      .catch(error => {
+        console.log('API Error', error);
+        reject(error);
+      });
+  });
+};
