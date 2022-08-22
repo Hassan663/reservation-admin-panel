@@ -16,13 +16,10 @@ export function* handleAddCategory(action) {
 }
 export function* handleGetCategory(action) {
   try {
-    console.log('chlo Saga mn tw agyee: ');
     const data = yield call(getCategoryApi);
-    console.log('API response in Saga: ', data);
     yield put(categoryActions.getCategory.success(data));
-    console.success('Category Fetched Successfully!');
   } catch (error) {
-    yield put(categoryActions.getCategory.failure(error.response.data.message));
+    yield put(categoryActions.getCategory.failure(error.message));
     antMessage.error(error.message, 2);
   }
 }
