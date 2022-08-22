@@ -4,7 +4,7 @@ import { Card } from 'components/Common';
 import Label from 'components/Common/Label';
 import { Link, useNavigate } from 'react-router-dom';
 import defaultLogo from '../../assets/images/hero-image.png';
-import { Form, Input, Button, InputNumber, message, Image } from 'antd';
+import { Select, Form, Input, Button, InputNumber, message, Image } from 'antd';
 import productActions from 'modules/product/actions';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -21,9 +21,22 @@ export const AddProduct = () => {
   const [productdata, setProductData] = useState(initialvalues);
   const [file, setFile] = useState('');
   const navigate = useNavigate();
+  const { Option } = Select;
+
+  const categoryValues = [
+    { name: 'Appetizers', value: 'Appetizers' },
+    { name: 'Beverages', value: 'Beverages' },
+    { name: 'Desserts', value: 'Desserts' },
+    { name: 'Main Course', value: 'Main Course' },
+    { name: 'Salads', value: 'Salads' },
+    { name: 'Soups', value: 'Soups' },
+  ];
   const handleChange = event => {
     const { name, value } = event.target;
     setProductData({ ...productdata, [name]: value });
+  };
+  const handleCategoryChange = value => {
+    console.log('Drop-Down value', value);
   };
   const handleChangeHourlyRate = event => {
     setProductData({ ...productdata, price: event });
@@ -98,6 +111,20 @@ export const AddProduct = () => {
                   ref={refValue}
                   onChange={event => handleChange(event)}
                 />
+                <Label title="Category" required={true}></Label>
+                <Select
+                  name="category"
+                  onChange={event => handleCategoryChange(event)}
+                  style={{ width: '50%' }}
+                >
+                  {categoryValues.map((option, key) => {
+                    return (
+                      <Option key={key} value={option.value}>
+                        {option.name}
+                      </Option>
+                    );
+                  })}
+                </Select>
                 <Label title="Description" required={true}></Label>
                 <Input
                   name="desc"
