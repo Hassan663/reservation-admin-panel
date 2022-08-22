@@ -12,7 +12,6 @@ export const AddProduct = () => {
   const initialvalues = {
     name: '',
     desc: '',
-
     phone: '',
     eventPicture: '',
   };
