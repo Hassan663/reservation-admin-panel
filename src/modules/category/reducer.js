@@ -1,7 +1,7 @@
-import { ADD_CATEGORY } from './actions';
+import { ADD_CATEGORY, GET_CATEGORY } from './actions';
 
 const initialState = {
-  category: {},
+  category: [],
   loading: false,
   error: false,
 };
@@ -24,6 +24,12 @@ function categoryReducer(state = initialState, { type, payload }) {
         loading: false,
         error: payload.message,
       };
+    case GET_CATEGORY.REQUEST:
+      return { ...state, loading: true, error: false };
+    case GET_CATEGORY.SUCCESS:
+      return { ...state, loading: true, error: false, category: payload.data };
+    case GET_CATEGORY.FAILURE:
+      return { ...state, loading: false, error: payload.message };
     default:
       return state;
   }

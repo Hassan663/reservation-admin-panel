@@ -1,15 +1,22 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './AddProduct.scss';
 import { Card } from 'components/Common';
 import Label from 'components/Common/Label';
-import { Link, useNavigate } from 'react-router-dom';
-import defaultLogo from '../../assets/images/hero-image.png';
-import { Form, Input, Button, InputNumber, message, Image } from 'antd';
 import productActions from 'modules/product/actions';
+import categoryActions from 'modules/category/actions';
 import { useDispatch, useSelector } from 'react-redux';
+import defaultLogo from '../../assets/images/hero-image.png';
+import { Select, Form, Input, Button, InputNumber, Image } from 'antd';
 
 export const AddProduct = () => {
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(categoryActions.getCategory.request());
+  }, []);
+
+  const categoryData = useSelector(state => state.categoryReducer.category);
+
   const initialvalues = {
     name: '',
     desc: '',
@@ -20,10 +27,14 @@ export const AddProduct = () => {
   const refValue = useRef(null);
   const [productdata, setProductData] = useState(initialvalues);
   const [file, setFile] = useState('');
-  const navigate = useNavigate();
+  const { Option } = Select;
+
   const handleChange = event => {
     const { name, value } = event.target;
     setProductData({ ...productdata, [name]: value });
+  };
+  const handleCategoryChange = value => {
+    setProductData({ ...productdata, category: value });
   };
   const handleChangeHourlyRate = event => {
     setProductData({ ...productdata, price: event });
@@ -57,14 +68,10 @@ export const AddProduct = () => {
     formData.append('name', productdata.name);
     formData.append('desc', productdata.desc);
     formData.append('price', productdata.price);
+    formData.append('category', productdata.category);
     formData.append('productPicture', productdata.productPicture);
 
-    // if (productdata.name && productdata.title && productdata.desc && productdata.productPicture) {
     dispatch(productActions.addProduct.request(formData));
-    //   navigate('/dashboard/staff');
-    // } else {
-    //   message.error('kindly fill the form');
-    // }
   };
   return (
     <div className="profile-main">
@@ -98,6 +105,20 @@ export const AddProduct = () => {
                   ref={refValue}
                   onChange={event => handleChange(event)}
                 />
+                <Label title="Category" required={true}></Label>
+                <Select
+                  name="category"
+                  onChange={event => handleCategoryChange(event)}
+                  style={{ width: '50%' }}
+                >
+                  {categoryData?.map((option, key) => {
+                    return (
+                      <Option key={key} value={option.name}>
+                        {option.name}
+                      </Option>
+                    );
+                  })}
+                </Select>
                 <Label title="Description" required={true}></Label>
                 <Input
                   name="desc"
