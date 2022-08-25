@@ -18,6 +18,7 @@ export const setSessionCookies = user => {
 };
 export const unSetSessionCookies = () => {
   window.localStorage.removeItem(`userloggedin`);
+  window.localStorage.removeItem(`loggedInUserId`);
   window.localStorage.removeItem(`currentUserFirebaseId`);
   window.localStorage.removeItem(`${host}_user`);
   window.localStorage.removeItem(`${host}_uid`);
