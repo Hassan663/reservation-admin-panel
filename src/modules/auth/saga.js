@@ -33,18 +33,13 @@ export function* handleSigninRequest(action) {
 }
 
 export function* handleSignout() {
-  while (true) {
-    try {
-      const { payload } = yield take(SIGNOUT[REQUEST]);
-      yield call(signout, 'true');
-
-      unSetSessionCookies();
-      yield put(authActions.signout.success());
-      // window.location.href = '/';
-    } catch (error) {
-      const { code, message } = error;
-      yield put(authActions.signout.success({ code, message }));
-    }
+  try {
+    yield take(SIGNOUT[REQUEST]);
+    unSetSessionCookies();
+    yield put(authActions.signout.success());
+    window.location.href = '/';
+  } catch (error) {
+    yield put(authActions.signout.failure());
   }
 }
 
@@ -81,7 +76,5 @@ export function* handleChangePassword() {
 export default function* signWatcher() {
   yield takeLatest(SIGNIN.REQUEST, handleSigninRequest);
   yield takeLatest(SIGNUP.REQUEST, handleSignupSubmit);
+  yield takeLatest(SIGNOUT.REQUEST, handleSignout);
 }
-// export function* handleSigninSubmit() {
-//   yield takeEvery(SIGNIN.REQUEST, handleSigninRequest);
-// }

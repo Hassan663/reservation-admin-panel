@@ -24,6 +24,7 @@ import {
   ClockCircleOutlined,
   WechatOutlined,
 } from '@ant-design/icons';
+import authActions from 'modules/auth/actions';
 // import { unregister } from './registerServiceWorker';
 import './HeaderIcons.scss';
 import { SocketContext } from 'constants/context/socket';
@@ -42,30 +43,35 @@ const HeaderIcons = () => {
   const navigate = useNavigate();
 
   const handleLogout = async obj => {
-    if (obj === 'Logout') {
-      // inActiveStatus();
-      // dispatch(
-      //   AdminChatActions.deleteToken.request({
-      //     id: localStorage.getItem('tokenid'),
-      //     userId: localStorage.getItem(`${ORIGIN}_uid`),
-      //   })
-      // );
-      dispatch({ type: 'LOGOUT', payload: {} });
-      navigate('/admin/login');
-    } else if (obj === 'My Profile') {
-      dispatch({ type: 'MY_PROFILE', payload: {} });
-      navigate('/dashboard/myprofile');
-    } else if (obj === 'Edit Profile') {
-      dispatch({ type: 'EDIT_PROFILE', payload: {} });
-      navigate('/dashboard/edit_admin_profile');
-    }
+    // if (obj === 'Logout') {
+    // inActiveStatus();
+    // dispatch(
+    //   AdminChatActions.deleteToken.request({
+    //     id: localStorage.getItem('tokenid'),
+    //     userId: localStorage.getItem(`${ORIGIN}_uid`),
+    //   })
+    // );
+    // dispatch({ type: 'LOGOUT', payload: {} });
+    // navigate('/admin/login');
+    // alert('call out!');
+    // } else if (obj === 'My Profile') {
+    //   dispatch({ type: 'MY_PROFILE', payload: {} });
+    //   navigate('/dashboard/myprofile');
+    // } else if (obj === 'Edit Profile') {
+    //   dispatch({ type: 'EDIT_PROFILE', payload: {} });
+    //   navigate('/dashboard/edit_admin_profile');
+    // }
+    dispatch(authActions.signout.request());
   };
 
   const menuProfile = (
     <Menu>
-      {['My Profile', 'My Timesheets', 'Edit Profile', 'Logout'].map(obj => (
-        <Menu.Item onClick={() => handleLogout(obj)}>{obj}</Menu.Item>
-      ))}
+      {
+        // ['My Profile', 'My Timesheets', 'Edit Profile', 'Logout']
+        ['Logout'].map(obj => (
+          <Menu.Item onClick={() => handleLogout(obj)}>{obj}</Menu.Item>
+        ))
+      }
     </Menu>
   );
   const menuStatus = (
