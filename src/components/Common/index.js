@@ -7,6 +7,6 @@ export { default as Button } from './Button';
 export { default as Image } from './DisplayImage';
 export { default as TextArea } from './TextArea/TextArea';
 export { default as Popup } from './Popup/Popup';
-export { default as Search } from './Search';
+// export { default as Search } from './Search';
 export { default as AdminUpload } from './AdminUpload/AdminUpload';
 export { default as Card } from './Card/Card';
