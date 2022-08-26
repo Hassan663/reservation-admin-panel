@@ -37,14 +37,14 @@ const Routes = withRouter(({ location }) => {
         <Switch>
           <Route path="/" element={<Navigate to="/login" />} />
           <Route exact path="/" element={<PrivateRoute />}>
-            <Route
+            {/* <Route
               path="/menu"
               element={
                 <Main>
                   <Menu />
                 </Main>
               }
-            />
+            /> */}
             <Route
               path="/addProduct"
               element={

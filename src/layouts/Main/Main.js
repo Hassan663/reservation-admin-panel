@@ -67,7 +67,7 @@ const Main = props => {
             <Menu style={{ color: '#764abc' }} mode="inline">
               <Menu.Item key="24">
                 Admin Panel
-                <PoweroffOutlined style={{ marginLeft: '80px' }}></PoweroffOutlined>
+                {/* <PoweroffOutlined style={{ marginLeft: '80px' }}></PoweroffOutlined> */}
               </Menu.Item>
               {newUpdatedSideBarData?.map(obj => (
                 <Menu.Item key={obj.key} icon={obj.icon}>
