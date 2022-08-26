@@ -19,13 +19,11 @@ import Chat from './components/Chat';
 import Main from './layouts/Main/Main';
 const Routes = withRouter(({ location }) => {
   const [split, setSplit] = useState('');
-
   setInterval(() => {
     const splitUrlIndex = window.location.href.lastIndexOf('/');
     const splitUrl = window.location.href.slice(splitUrlIndex + 1);
     setSplit(splitUrl);
   }, 1000);
-
   return (
     <div>
       <HashRouter
@@ -97,5 +95,4 @@ const Routes = withRouter(({ location }) => {
     </div>
   );
 });
-
 export default Routes;
