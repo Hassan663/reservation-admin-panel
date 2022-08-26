@@ -80,8 +80,8 @@ const Chattings = ({ setOpenStaffModel, setShowChatModel, receiverinfo, setrecei
   // };
   const getUserEmail = input => {
     // currentchat receiver
-    // dispatch(AdminChatActions.checkUserConnection.success(input));
-    dispatch(AdminChatActions.checkUserConnection.request(['admin@gmail.com', input]));
+    dispatch(AdminChatActions.checkUserConnection.success(input));
+    // dispatch(AdminChatActions.checkUserConnection.request(['admin@gmail.com', input]));
     localStorage.setItem('messageReceiver', input);
     setShowChatModel(true);
   };

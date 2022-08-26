@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { useState, useEffect, useRef } from 'react';
-import { Layout, Menu, Typography } from 'antd';
+import { Layout, Menu, Typography, Drawer } from 'antd';
 import { SideBarData, subSidebarData } from '../Main/components/SideBar/SideBarData';
 import {
   MenuUnfoldOutlined,
@@ -15,7 +15,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import './Main.scss';
 import { ORIGIN } from 'constants/config/config.dev';
 import { NotificationContainer } from 'react-notifications';
-
+import ClientChat from 'components/ClientChat';
 const Main = props => {
   const currentURL = window.location.href;
   const word = currentURL.split('/');
@@ -25,7 +25,7 @@ const Main = props => {
   const { Header, Sider, Content } = Layout;
   const [open, setOpen] = useState(false);
   const [side, setSide] = useState(true);
-
+  const [showChat, setShowChat] = useState(true);
   useEffect(() => {
     if (localStorage.getItem(`${ORIGIN}_user`)) {
       localStorage.setItem(
@@ -96,7 +96,7 @@ const Main = props => {
                   ></img> */}
                 </div>
                 <div className="headerRight">
-                  <HeaderIcons></HeaderIcons>
+                  <HeaderIcons showChat={showChat} setShowChat={setShowChat}></HeaderIcons>
                 </div>
               </div>
             </Header>
@@ -106,6 +106,18 @@ const Main = props => {
           </div>
         </Layout>
       </Layout>
+      <div style={{ marginTop: '100px' }}>
+        <Drawer
+          placement={'right'}
+          width={500}
+          visible={showChat}
+          height="200"
+          closable={false}
+          style={{ marginTop: '100px', height: '590px', padding: 'none' }}
+        >
+          <ClientChat showChat={showChat} setShowChat={setShowChat} />
+        </Drawer>
+      </div>
       <NotificationContainer />
     </div>
   );

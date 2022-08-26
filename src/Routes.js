@@ -36,56 +36,56 @@ const Routes = withRouter(({ location }) => {
       >
         <Switch>
           <Route path="/" element={<Navigate to="/login" />} />
-          <Route exact path="/" element={<PrivateRoute />}>
-            <Route
-              path="/menu"
-              element={
-                <Main>
-                  <Menu />
-                </Main>
-              }
-            />
-            <Route
-              path="/addProduct"
-              element={
-                <Main>
-                  <AddProduct />
-                </Main>
-              }
-            />
-            <Route
-              path="/addCategory"
-              element={
-                <Main>
-                  <AddCategory />
-                </Main>
-              }
-            />
-            <Route
-              path="/addBlog"
-              element={
-                <Main>
-                  <AddBlog />
-                </Main>
-              }
-            />
-            <Route
-              path="/addEvent"
-              element={
-                <Main>
-                  <AddEvent />
-                </Main>
-              }
-            />
-            <Route
-              path="/adminChat"
-              element={
-                <Main>
-                  <Chat />
-                </Main>
-              }
-            />
-          </Route>
+          {/* <Route exact path="/" element={<PrivateRoute />}> */}
+          <Route
+            path="/menu"
+            element={
+              <Main>
+                <Menu />
+              </Main>
+            }
+          />
+          <Route
+            path="/addProduct"
+            element={
+              <Main>
+                <AddProduct />
+              </Main>
+            }
+          />
+          <Route
+            path="/addCategory"
+            element={
+              <Main>
+                <AddCategory />
+              </Main>
+            }
+          />
+          <Route
+            path="/addBlog"
+            element={
+              <Main>
+                <AddBlog />
+              </Main>
+            }
+          />
+          <Route
+            path="/addEvent"
+            element={
+              <Main>
+                <AddEvent />
+              </Main>
+            }
+          />
+          <Route
+            path="/adminChat"
+            element={
+              <Main>
+                <Chat />
+              </Main>
+            }
+          />
+          {/* </Route> */}
           <Route element={<Login />} path="/Login"></Route>
           <Route element={<SignUp />} path="/SignUp"></Route>
           <Route element={<Forgot />} path="/Forgot"></Route>
