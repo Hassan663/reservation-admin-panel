@@ -11,7 +11,7 @@ const Login = () => {
   const loggedIn = useSelector(state => state.authReducer.isLoggedIn);
 
   useEffect(() => {
-    if (loggedIn) navigate('/menu');
+    if (loggedIn) navigate('/addProduct');
   }, [loggedIn]);
 
   const onFinish = values => {
