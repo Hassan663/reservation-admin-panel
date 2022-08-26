@@ -136,11 +136,11 @@ const HeaderIcons = ({ showChat, setShowChat }) => {
           ></Avatar>
         </Dropdown>
 
-        <Badge className="icons" size={'small'} count={'5'}>
+        {/* <Badge className="icons" size={'small'} count={'5'}>
           <CheckSquareOutlined
             style={{ color: '#764abc ', marginTop: '2px' }}
           ></CheckSquareOutlined>
-        </Badge>
+        </Badge> */}
 
         {/* <Dropdown className="icons" trigger={'click'} overlay={menuNotif} placement="bottom"> */}
         <Badge className="icons" size={'small'} count={'5'}>
