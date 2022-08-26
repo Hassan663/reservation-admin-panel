@@ -33,10 +33,10 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 import { ORIGIN } from 'constants/config/config.dev';
-
+import ClientChat from 'components/ClientChat';
 const host = window.location.origin;
 
-const HeaderIcons = () => {
+const HeaderIcons = ({ showChat, setShowChat }) => {
   const socket = useContext(SocketContext);
   const dispatch = useDispatch();
 
@@ -127,7 +127,6 @@ const HeaderIcons = () => {
   );
   return (
     <div className="HeaderRight">
-      <Search></Search>
       <div className="Spacing" size="large">
         <Dropdown className="icons" overlay={menuProfile} placement="bottom">
           <Avatar
@@ -136,29 +135,24 @@ const HeaderIcons = () => {
             size="medium"
           ></Avatar>
         </Dropdown>
-        <Dropdown
-          className="icons"
-          trigger={'click'}
-          overlay={menuStatus}
-          placement="bottom"
-          style={{ backgroundColor: '#51647c' }}
-        >
-          <WechatOutlined style={{ color: '#2ecc71' }} className="headerBtn"></WechatOutlined>
-        </Dropdown>
-        <FaShare className="icons"></FaShare>
+
         <Badge className="icons" size={'small'} count={'5'}>
           <CheckSquareOutlined
             style={{ color: '#764abc ', marginTop: '2px' }}
           ></CheckSquareOutlined>
         </Badge>
-        <Dropdown className="icons" trigger={'click'} overlay={menuTimer} placement="bottom">
-          <ClockCircleOutlined className="headerBtn"></ClockCircleOutlined>
-        </Dropdown>
-        <Dropdown className="icons" trigger={'click'} overlay={menuNotif} placement="bottom">
-          <Badge className="icons" size={'small'} count={ReadCounter}>
-            <BellOutlined className="headerBtn" />
-          </Badge>
-        </Dropdown>
+
+        {/* <Dropdown className="icons" trigger={'click'} overlay={menuNotif} placement="bottom"> */}
+        <Badge className="icons" size={'small'} count={'5'}>
+          <BellOutlined
+            className="headerBtn"
+            onClick={() => {
+              setShowChat(!showChat);
+            }}
+          />
+        </Badge>
+
+        {/* </Dropdown> */}
       </div>
     </div>
   );

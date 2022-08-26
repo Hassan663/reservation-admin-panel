@@ -40,7 +40,7 @@ const OpenChat = ({ receiverinfo, openStaffModel, setOpenStaffModel, setShowChat
   const dispatch = useDispatch();
   const [usersLogin, setUsersLogin] = useState([]);
   const formdata = new FormData();
-  localStorage.setItem('loggedInUserId', 'admin@gmail.com');
+  // localStorage.setItem('loggedInUserId', 'admin@gmail.com');
   const [message, setMessage] = useState({
     sender: localStorage.getItem('userloggedin'),
     receiver: '',
