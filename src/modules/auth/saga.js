@@ -13,6 +13,7 @@ const forcedLogin = action => {
 export function* handleSignupSubmit(action) {
   try {
     const data = yield call(signup, action.payload);
+    console.log('data: ' + data);
     yield put(authActions.signup.success(data.data));
     antMessage.success('User Registered Successfully!', 2);
   } catch (error) {
