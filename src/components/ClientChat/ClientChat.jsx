@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import './clientChat.scss';
-
 import { useDispatch, useSelector } from 'react-redux';
-
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
-
+import SingleNotification from './SingleNotification';
+import notificationActions from '../../modules/notification/actions';
 const ClientChat = ({ showChat, setShowChat }) => {
   const user = localStorage.getItem('userloggedin');
   const scrollRef = useRef();
@@ -14,7 +13,7 @@ const ClientChat = ({ showChat, setShowChat }) => {
 
   const [loader, setLoader] = useState(true);
 
-  const [mychats, setMychats] = useState(['1 ', '2', '3']);
+  const [mychats, setMychats] = useState(['1 ', '2', '3', '1 ', '2', '3', '1 ', '2', '3']);
   const [message, setMessage] = useState({
     sender: localStorage.getItem('userloggedin'),
     receiver: '',
@@ -22,6 +21,9 @@ const ClientChat = ({ showChat, setShowChat }) => {
   });
 
   const containerRef = useRef(null);
+  useEffect(() => {
+    dispatch(notificationActions.getNotification.request());
+  });
   useEffect(() => {
     if (containerRef && containerRef.current) {
       const element = containerRef.current;
@@ -65,7 +67,7 @@ const ClientChat = ({ showChat, setShowChat }) => {
       {true ? (
         <div id="style-5" ref={containerRef} className={'client_chat_body_main_container'}>
           {mychats.map((chat, index) => (
-            <label>ok</label>
+            <SingleNotification />
           ))}
         </div>
       ) : (
