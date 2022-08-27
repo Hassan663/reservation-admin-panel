@@ -12,6 +12,8 @@ export const SideBarData = [
     key: '2',
     icon: <HomeFilled />,
   },
+  { path: '/bookings', cName: 'list-text', name: 'Bookings', key: '2', icon: <HomeFilled /> },
+
   { path: '/adminChat', cName: 'list-text', name: 'Chat', key: '2', icon: <HomeFilled /> },
 ];
 export const subSidebarData = [
