@@ -7,6 +7,7 @@ import categoryReducer from './category/reducer';
 import productReducer from './product/reducer';
 import adimnChatReducer from './adminChat/reducer';
 import menuReducer from './menu/reducer';
+import bookingsReducer from './bookings/reducer';
 // import notificationReducer from './notification/reducer';
 const rootReducer = history =>
   combineReducers({
@@ -17,6 +18,7 @@ const rootReducer = history =>
     categoryReducer,
     productReducer,
     menuReducer,
+    bookingsReducer,
     // notificationReducer,
   });
 export default rootReducer;

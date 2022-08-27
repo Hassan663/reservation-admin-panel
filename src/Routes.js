@@ -12,6 +12,7 @@ import {
   AddProduct,
   AddEvent,
 } from './components';
+import Bookings from 'components/Bookings';
 import AddCategory from 'components/AddCategory';
 import AddBlog from 'components/AddBlog';
 import PrivateRoute from 'PrivateRoute';
@@ -72,6 +73,14 @@ const Routes = withRouter(({ location }) => {
               element={
                 <Main>
                   <AddEvent />
+                </Main>
+              }
+            />
+            <Route
+              path="/bookings"
+              element={
+                <Main>
+                  <Bookings />
                 </Main>
               }
             />
