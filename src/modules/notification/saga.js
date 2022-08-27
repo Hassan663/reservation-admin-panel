@@ -6,18 +6,18 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 export function* handleFetchNotification({ payload }) {
   try {
     console.log('Fetching  Notification');
-    // const data = yield call(notification.getNotification, payload);
-    // yield put(notificationActions.getNotification.success(data));
+    const data = yield call(notification.getNotification, payload);
+    yield put(notificationActions.getNotification.success(data));
   } catch (error) {
-    // yield put(notificationActions.getNotification.failure(error));
+    yield put(notificationActions.getNotification.failure(error));
   }
 }
 export function* handleDeleteNotificaton({ payload }) {
   try {
-    // const data = yield call(notification.deleteNotification, payload);
-    // yield put(notificationActions.deleteNotification.success(data));
+    const data = yield call(notification.deleteNotification, payload);
+    yield put(notificationActions.deleteNotification.success(data));
   } catch (error) {
-    // yield call(notificationActions.deleteNotification.failure(error));
+    yield call(notificationActions.deleteNotification.failure(error));
   }
 }
 
