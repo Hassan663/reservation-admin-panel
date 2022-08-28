@@ -199,7 +199,7 @@ export const AddProduct = () => {
     // const fileCheck = typeof updatedData?.productPicture.name === 'string' 
     // console.log(fileCheck);
     // if ( fileCheck === true ) {
-    //   formData.append('productPicture', updatedData.productPicture);
+      formData.append('productPicture', updatedData.productPicture);
     // }
     formData.append('category', updatedData.category);
 
