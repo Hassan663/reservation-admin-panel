@@ -53,10 +53,15 @@ const Chattings = ({ setOpenStaffModel, setShowChatModel, receiverinfo, setrecei
     {
       firstName: 'Mohsin',
       lastName: 'Ali',
-      email: 'Mohsin@gmail.com',
+      email: 'mohsin@gmail.com',
     },
     {
       firstName: 'Muneeb',
+      lastName: 'Ali',
+      email: 'Muneeb@gmail.com',
+    },
+    {
+      firstName: 'AWAIS',
       lastName: 'Ali',
       email: 'Muneeb@gmail.com',
     },
