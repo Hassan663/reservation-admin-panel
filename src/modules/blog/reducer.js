@@ -1,8 +1,10 @@
-import { ADD_BLOG } from './types';
+import { ADD_BLOG,DELETE_BLOG,FETCH_BLOG,UPDATE_BLOG } from './types';
 
 const initialState = {
   loading: false,
   error: false,
+  blogs:{},
+  blog:{}
 };
 
 function blogReducer(state = initialState, { type, payload }) {
@@ -17,6 +19,7 @@ function blogReducer(state = initialState, { type, payload }) {
       return {
         ...state,
         loading: true,
+        blog:payload,
         error: false,
       };
     case ADD_BLOG.FAILURE:
@@ -25,6 +28,74 @@ function blogReducer(state = initialState, { type, payload }) {
         loading: true,
         error: false,
       };
+      case DELETE_BLOG.REQUEST:
+        return {
+          ...state,
+          loading: true,
+          error: false,
+        };
+      case DELETE_BLOG.SUCCESS:
+        return {
+          ...state,
+          loading: true,
+          error: false,
+        };
+      case DELETE_BLOG.FAILURE:
+        return {
+          ...state,
+          loading: true,
+          error: false,
+        };
+      case UPDATE_BLOG.REQUEST:
+        return {
+          ...state,
+          loading: true,
+          error: false,
+        };
+      case UPDATE_BLOG.SUCCESS:
+        return {
+          ...state,
+          loading: true,
+          error: false,
+          blogs: [
+            ...state.blogs.map(blog => {
+              if (blog.id === payload.data.id)
+                return payload.data;
+              else return blog;
+            }),
+          ],
+        };
+      case UPDATE_BLOG.FAILURE:
+        return {
+          ...state,
+          loading: true,
+          error: false,
+        };
+      case FETCH_BLOG.REQUEST:
+        return {
+          ...state,
+          loading: true,
+          error: false,
+        };
+    case FETCH_BLOG.SUCCESS:
+      console.log(payload);
+        return {
+          ...state,
+          loading: true,
+          error: false,
+          blogs:[...payload]
+        };
+      case FETCH_BLOG.FAILURE:
+        return {
+          ...state,
+          loading: true,
+          error: false,
+      };
+      default: {
+        return {
+          ...state,
+        };
+      }
   }
 }
 export default blogReducer;

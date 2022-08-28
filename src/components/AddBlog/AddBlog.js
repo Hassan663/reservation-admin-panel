@@ -1,13 +1,21 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './AddBlog.scss';
 import { Card } from 'components/Common';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Label from 'components/Common/Label';
 import blogActions from 'modules/blog/actions';
-import { Form, Input, Button, message, Image } from 'antd';
+import { Form, Input, Button, message, Image, Modal, Table, Typography } from 'antd';
 import defaultLogo from '../../assets/images/hero-image.png';
+import { USERS_BASE_URL } from 'constants/config/config.dev';
 
 export const AddBlog = () => {
+  const [isEditModalVisible, setIsEditModalVisible] = useState(false);
+  const { blogs, blog } = useSelector(state => state.blogReducer);
+  const [blogdata, setBlogData] = useState([]);
+  const [fileEdit, setFileEdit] = useState('');
+  const BlogId = localStorage.getItem('BlogId');
+  const SelectedBlog = blogdata.filter(obj => obj.id === BlogId)[0];
+  const [updatedData, setUpdatedData] = useState();
   const initialvalues = {
     name: '',
     desc: '',
@@ -21,6 +29,10 @@ export const AddBlog = () => {
   const [productdata, setProductData] = useState(initialvalues);
   const [file, setFile] = useState('');
 
+  useEffect(() => {
+    setUpdatedData(SelectedBlog);
+  }, [SelectedBlog]);
+  console.log(SelectedBlog);
   const handleChange = event => {
     const { name, value } = event.target;
     setProductData({ ...productdata, [name]: value });
@@ -67,9 +79,143 @@ export const AddBlog = () => {
       message.error('kindly fill the form');
     }
   };
+
+  /////////////////// Edit Functionality ////////////////////
+
+  const handleDelete = Id => {
+    console.log(Id);
+    dispatch(blogActions.deleteBlog.request(Id));
+  };
+  const columns = [
+    {
+      title: 'Blogs',
+      align: 'left',
+      dataIndex: 'name',
+      key: 'name',
+      sort: true,
+      defaultSortOrder: 'descend',
+      sorter: (a, b) => a.name - b.name,
+      render: (text, record) => {
+        return (
+          <div className="name_contacts">
+            <div>
+              <img
+                style={{ height: '32px', width: '32px', borderRadius: '50px' }}
+                src={`${USERS_BASE_URL}/uploads/${record.blogPicture[0]?.img}`}
+                fallback={defaultLogo}
+                preview={false}
+              />
+            </div>
+            <div className="detail_wrap">
+              <div className="name">
+                <a>{record.name}</a>
+              </div>
+            </div>
+          </div>
+        );
+      },
+    },
+    {
+      title: 'Description',
+      align: 'left',
+      dataIndex: 'desc',
+      key: 'desc',
+      defaultSortOrder: 'descend',
+      sorter: (a, b) => a.desc - b.desc,
+    },
+    {
+      title: 'Options',
+      align: 'left',
+      dataIndex: 'option',
+      key: 'option',
+      render: (text, record) => {
+        return (
+          <div id="a" style={{ display: 'flex', justifyContent: 'space-evenly' }}>
+            <a style={{ color: '#746abc' }}>
+              <span
+                onClick={() => {
+                  localStorage.setItem('BlogId', record.id), showEditModal();
+                }}
+              >
+                Edit
+              </span>
+            </a>
+            <a style={{ color: 'red' }} onClick={() => handleDelete(record.id)}>
+              {' '}
+              Delete
+            </a>
+          </div>
+        );
+      },
+    },
+  ];
+  const handleChangePhotoEdit = event => {
+    console.log(event, 'file');
+    const EditedFile = event.target.files[0];
+    var errSize = 'Max File Limit is 3MB';
+    var errType = 'Invalid File Type';
+
+    if (EditedFile.size > 3072 * 1000) {
+      window.alert(errSize);
+    } else if (
+      EditedFile.type !== 'image/jpg' &&
+      EditedFile.type !== 'image/jpeg' &&
+      EditedFile.type !== 'image/png'
+    ) {
+      window.alert(errType);
+    } else {
+      setUpdatedData({
+        ...updatedData,
+        blogPicture: event.target.files[0],
+      });
+      setFileEdit(URL.createObjectURL(event.currentTarget.files[0]));
+    }
+  };
+  const handleChangeEdit = event => {
+    const { name, value } = event.target;
+    setUpdatedData({ ...updatedData, [name]: value });
+  };
+
+  const showEditModal = () => {
+    setIsEditModalVisible(true);
+  };
+
+  const handleEditOk = () => {
+    const formData = new FormData();
+    formData.append('name', updatedData.name);
+    formData.append('desc', updatedData.desc);
+    formData.append('blogPicture', updatedData.blogPicture);
+
+    setIsEditModalVisible(false);
+
+    const objdata = {
+      data: formData,
+      id: BlogId,
+    };
+    dispatch(blogActions.updateBlog.request(objdata));
+  };
+  const handleEditCancel = () => {
+    setIsEditModalVisible(false);
+  };
+
+  useEffect(() => {
+    dispatch(blogActions.fetchBlog.request('page=1'));
+  }, []);
+
+  useEffect(() => {
+    if (blogs.length > 0) {
+      setBlogData(blogs);
+    }
+  }, [blogs]);
+
+  const EditableFile = `${USERS_BASE_URL}/uploads/${SelectedBlog?.blogPicture[0]?.img}`;
+
   return (
     <>
-      <div>
+      <div className="profile-main">
+        <div className="header_profile">
+          <Typography className="header_text">Add New Blog</Typography>
+        </div>
         <Card
           style={{ width: '100%' }}
           content={
@@ -141,6 +287,99 @@ export const AddBlog = () => {
               <Button className="category-btn" onClick={e => handleSubmit(e)}>
                 Add Blog
               </Button>
+            </>
+          }
+        ></Card>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <Card
+          style={{ width: '100%' }}
+          content={
+            <>
+              <Table columns={columns} dataSource={blogdata}></Table>
+              <Modal
+                title="Edit Event"
+                okText="SAVE"
+                width={600}
+                cancelText="CLOSE"
+                visible={isEditModalVisible}
+                onOk={handleEditOk}
+                onCancel={handleEditCancel}
+              >
+                <Card
+                  style={{ width: '100%' }}
+                  content={
+                    <>
+                      <Form
+                        name="basic"
+                        labelCol={{ span: 24 }}
+                        wrapperCol={{ span: 100 }}
+                        initialValues={{ remember: true }}
+                        autoComplete="off"
+                      >
+                        <div className="form-main">
+                          <Label title="Title" required={true}></Label>
+                          <Input
+                            name="name"
+                            maxLength="20"
+                            value={updatedData.name}
+                            required
+                            ref={refValue}
+                            onChange={event => handleChange(event)}
+                          />
+                          <Label title="Description" required={true}></Label>
+                          <Input
+                            name="desc"
+                            maxLength="50"
+                            value={updatedData.desc}
+                            required
+                            ref={refValue}
+                            onChange={event => handleChangeEdit(event)}
+                          />
+                        </div>
+                        <Image
+                          style={{
+                            height: '160px',
+                            width: '160px',
+                            border: 'solid 1px white',
+                            borderRadius: '50%',
+                            marginTop: '20px',
+                          }}
+                          src={fileEdit || EditableFile}
+                          fallback={defaultLogo}
+                          preview={false}
+                        />
+                        <Label title="Blog Image"></Label>
+                        <input
+                          type="file"
+                          id="img2"
+                          filename="blogPicture"
+                          placeholder="Select Files"
+                          onChange={event => handleChangePhotoEdit(event, 'blogPicture')}
+                          style={{ display: 'none' }}
+                        ></input>
+                        <label
+                          for="img2"
+                          style={{
+                            width: '110px',
+                            height: '30px',
+                            backgroundColor: '#764ABC',
+                            color: 'white',
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                          }}
+                        >
+                          Upload Image
+                        </label>
+                        <span>{updatedData?.blogPictureName}</span>
+                      </Form>
+                    </>
+                  }
+                ></Card>
+              </Modal>
             </>
           }
         ></Card>

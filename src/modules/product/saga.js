@@ -9,6 +9,7 @@ export function* handleAddProduct({ payload }) {
     const data = yield call(product.addProduct, payload);
     yield put(productActions.addProduct.success(data));
     antMessage.success('Product Added Successfully!', 2);
+    yield put(productActions.fetchProduct.request());
   } catch (error) {
     yield put(productActions.addProduct.failure(error));
   }
@@ -16,15 +17,33 @@ export function* handleAddProduct({ payload }) {
 
 export function* handleDeleteProduct() {
   try {
-  } catch (error) {}
+    const {data} = yield call(product.deleteProduct, payload);
+    yield put(productActions.deleteProduct.success(data));
+    message.success('Product Deleted Successfully!', 2);
+    yield put(productActions.fetchProduct.request());
+  } catch (error) {
+    yield put(productActions.deleteProduct.failure(error));
+  }
 }
-export function* handleUpdateProduct() {
+export function* handleUpdateProduct({payload}) {
   try {
-  } catch (error) {}
+    const { data } = yield call(product.updateProduct, payload);
+    console.log(data);
+    yield put(productActions.updateProduct.success({ productId: payload.id, data }));
+    message.success('Product Updated Successfully!', 2);
+    yield put(productActions.fetchProduct.request());
+
+  } catch (error) {
+    yield put(productActions.updateProduct.failure(error));
+  }
 }
 export function* handleFetchProduct() {
   try {
-  } catch (error) {}
+    const { data } = yield call(product.fetchProduct);
+    yield put(productActions.fetchProduct.success(data.product));
+  } catch (error) {
+    yield put(productActions.fetchProduct.failure(error));
+  }
 }
 export default function* productWatcher() {
   yield takeLatest(ADD_PRODUCT[REQUEST], handleAddProduct);

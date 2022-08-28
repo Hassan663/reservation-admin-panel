@@ -9,5 +9,8 @@ request.interceptors.request.use(requestInterceptor);
 // request.interceptors.request.use(checkForce);
 const api = {
   addEvent: data => request.post('/event', data),
+  deleteEvent: id => request.delete(`/event/${id}`),
+  updateEvent: ({data,id}) => request.patch(`/event/${id}`,data),
+  fetchEvent: () => request.get('/event'),
 };
 export default apiWrapper(api);

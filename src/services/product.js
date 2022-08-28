@@ -9,5 +9,8 @@ request.interceptors.request.use(requestInterceptor);
 // request.interceptors.request.use(checkForce);
 const api = {
   addProduct: data => request.post(`${USERS_BASE_URL}/product`, data),
+  deleteProduct: id => request.delete(`/product/${id}`),
+  updateProduct: ({data,id}) => request.patch(`/product/${id}`,data),
+  fetchProduct: () => request.get('/product'),
 };
 export default apiWrapper(api);
