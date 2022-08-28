@@ -35,7 +35,7 @@ export const AddProduct = () => {
   const [file, setFile] = useState('');
   const [fileEdit, setFileEdit] = useState('');
   const EventId = localStorage.getItem('EventId');
-  const SelectedEvent = eventdata.filter(obj => obj.id === EventId)[0];
+  let SelectedEvent = eventdata.filter(obj => obj.id === EventId)[0];
   const [updatedData, setUpdatedData] = useState();
 
 
@@ -44,7 +44,6 @@ export const AddProduct = () => {
   useEffect(() => {
     setUpdatedData(SelectedEvent);
   }, [SelectedEvent]);
-  console.log(SelectedEvent);
   const handleChangePhoto = event => {
     const file = event.target.files[0];
     var errSize = 'Max File Limit is 3MB';
@@ -97,7 +96,7 @@ export const AddProduct = () => {
   };
 
   /////////////////// Edit Functionality ////////////////////
-
+ 
   const handleDelete = Id => {
     console.log(Id);
     dispatch(EventActions.deleteEvent.request(Id));
@@ -149,9 +148,8 @@ export const AddProduct = () => {
           <div id="a" style={{ display: 'flex', justifyContent: 'space-evenly' }}>
             <a style={{ color: '#746abc' }}>
               <span
-                onClick={() => {
-                  localStorage.setItem('EventId', record.id), showEditModal();
-                }}
+                onClick={()=>(localStorage.setItem('EventId', record.id),showEditModal())
+                }
               >
                 Edit
               </span>
@@ -187,6 +185,10 @@ export const AddProduct = () => {
       setFileEdit(URL.createObjectURL(event.currentTarget.files[0]));
     }
   };
+  // const editFunction = id => {
+  //   localStorage.setItem('EventId', id);
+  //   showEditModal();
+  // };
   const handleChangeEdit = event => {
     const { name, value } = event.target;
     setUpdatedData({ ...updatedData, [name]: value });
@@ -200,8 +202,12 @@ export const AddProduct = () => {
     const formData = new FormData();
     formData.append('name', updatedData.name);
     formData.append('desc', updatedData.desc);
-    formData.append('eventPicture', updatedData.eventPicture);
 
+    const fileCheck = typeof updatedData?.eventPicture.name === 'string' 
+    console.log(fileCheck);
+    if (fileCheck === true) {
+      formData.append('eventPicture', updatedData.eventPicture);
+    }
     setIsEditModalVisible(false);
 
     const objdata = {
@@ -209,6 +215,7 @@ export const AddProduct = () => {
       id: EventId,
     };
     dispatch(EventActions.updateEvent.request(objdata));
+    setUpdatedData([]);
   };
   const handleEditCancel = () => {
     setIsEditModalVisible(false);

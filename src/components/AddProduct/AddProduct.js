@@ -22,10 +22,11 @@ export const AddProduct = () => {
   useEffect(() => {
     dispatch(categoryActions.getCategory.request());
   }, []);
+  let SelectedProduct = proddata.filter(obj => obj._id === ProductId)[0];
 
-  // useEffect(() => {
-  //   setUpdatedData(SelectedProduct);
-  // }, [SelectedProduct]);
+  useEffect(() => {
+    setUpdatedData(SelectedProduct);
+  }, [SelectedProduct]);
 
   const categoryData = useSelector(state => state.categoryReducer.category);
 
@@ -40,7 +41,6 @@ export const AddProduct = () => {
   const [productdata, setProductData] = useState(initialvalues);
   const [file, setFile] = useState('');
   const { Option } = Select;
-  console.log(proddata);
   console.log(updatedData);
   const handleChange = event => {
     const { name, value } = event.target;
@@ -124,11 +124,8 @@ export const AddProduct = () => {
     dispatch(productActions.deleteProduct.request(Id));
   };
 
-  const SelectedProduct = proddata.filter(obj => obj._id === ProductId)[0];
-
   const editFunction = id => {
     localStorage.setItem('ProductId', id);
-    setUpdatedData(SelectedProduct);
     showEditModal();
   };
   const columns = [
@@ -196,11 +193,10 @@ export const AddProduct = () => {
     const formData = new FormData();
     formData.append('name', updatedData.name);
     formData.append('desc', updatedData.desc);
-    // const fileCheck = typeof updatedData?.productPicture.name === 'string' 
-    // console.log(fileCheck);
-    // if ( fileCheck === true ) {
+    const fileCheck = typeof updatedData?.productPicture.name === 'string';
+    if (fileCheck === true) {
       formData.append('productPicture', updatedData.productPicture);
-    // }
+    }
     formData.append('category', updatedData.category);
 
     setIsEditModalVisible(false);
@@ -210,9 +206,12 @@ export const AddProduct = () => {
       id: ProductId,
     };
     dispatch(productActions.updateProduct.request(objdata));
+    setUpdatedData([]);
   };
   const handleEditCancel = () => {
     setIsEditModalVisible(false);
+    // setUpdatedData([]);
+    // SelectedProduct = ''
   };
 
   useEffect(() => {
@@ -226,7 +225,6 @@ export const AddProduct = () => {
   }, [products]);
 
   const EditableFile = `${USERS_BASE_URL}/uploads/${SelectedProduct?.productPicture[0]?.img}`;
-console.log(EditableFile);
   return (
     <div className="profile-main">
       <div className="header_profile">

@@ -14,7 +14,7 @@ export const AddBlog = () => {
   const [blogdata, setBlogData] = useState([]);
   const [fileEdit, setFileEdit] = useState('');
   const BlogId = localStorage.getItem('BlogId');
-  const SelectedBlog = blogdata.filter(obj => obj.id === BlogId)[0];
+  let SelectedBlog = blogdata.filter(obj => obj.id === BlogId)[0];
   const [updatedData, setUpdatedData] = useState();
   const initialvalues = {
     name: '',
@@ -23,16 +23,19 @@ export const AddBlog = () => {
   };
 
   const refValue = useRef(null);
-
+  
+  useEffect(() => {
+    setUpdatedData(SelectedBlog);
+  }, [SelectedBlog]);
   const dispatch = useDispatch();
 
   const [productdata, setProductData] = useState(initialvalues);
   const [file, setFile] = useState('');
 
-  useEffect(() => {
-    setUpdatedData(SelectedBlog);
-  }, [SelectedBlog]);
-  console.log(SelectedBlog);
+  // useEffect(() => {
+  //   setUpdatedData(SelectedBlog);
+  // }, [SelectedBlog]);
+  // console.log(SelectedBlog);
   const handleChange = event => {
     const { name, value } = event.target;
     setProductData({ ...productdata, [name]: value });
@@ -133,9 +136,8 @@ export const AddBlog = () => {
           <div id="a" style={{ display: 'flex', justifyContent: 'space-evenly' }}>
             <a style={{ color: '#746abc' }}>
               <span
-                onClick={() => {
-                  localStorage.setItem('BlogId', record.id), showEditModal();
-                }}
+ 
+                onClick={()=>(   localStorage.setItem('BlogId', record.id),showEditModal())}
               >
                 Edit
               </span>
@@ -179,13 +181,20 @@ export const AddBlog = () => {
   const showEditModal = () => {
     setIsEditModalVisible(true);
   };
-
+  // const editFunction = id => {
+  //   localStorage.setItem('BlogId', id);
+  //   setUpdatedData(SelectedBlog);
+  //   showEditModal();
+  // };
   const handleEditOk = () => {
     const formData = new FormData();
     formData.append('name', updatedData.name);
     formData.append('desc', updatedData.desc);
-    formData.append('blogPicture', updatedData.blogPicture);
-
+    const fileCheck = typeof updatedData?.blogPicture.name === 'string' 
+    console.log(fileCheck);
+    if ( fileCheck === true ) {
+      formData.append('blogPicture', updatedData.blogPicture);
+    }
     setIsEditModalVisible(false);
 
     const objdata = {
