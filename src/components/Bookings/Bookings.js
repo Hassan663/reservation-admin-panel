@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import bookingsAction from 'modules/bookings/actions';
-import { Table } from 'antd';
-import { Card } from 'components/Common';
+import React, { useState, useEffect } from 'react';
 import './Booking.scss';
 import moment from 'moment';
+import { Table } from 'antd';
+import { Card } from 'components/Common';
+import { useDispatch, useSelector } from 'react-redux';
+import bookingsAction from 'modules/bookings/actions';
 
 export const Bookings = () => {
   const dispatch = useDispatch();
@@ -14,6 +14,12 @@ export const Bookings = () => {
   }, []);
 
   const reservations = useSelector(state => state.bookingsReducer.bookings);
+
+  const [bookingsData, setBookingsData] = useState([]);
+
+  useEffect(() => {
+    setBookingsData(reservations);
+  }, [reservations]);
 
   const columns = [
     {
@@ -75,7 +81,7 @@ export const Bookings = () => {
         style={{ width: '100%', marginTop: '5%' }}
         content={
           <>
-            <Table columns={columns} dataSource={reservations} />
+            <Table columns={columns} dataSource={bookingsData} />
           </>
         }
       ></Card>
