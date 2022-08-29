@@ -8,6 +8,8 @@ import productReducer from './product/reducer';
 import adimnChatReducer from './adminChat/reducer';
 import menuReducer from './menu/reducer';
 import notificationReducer from './notification/reducer';
+import bookingsReducer from './bookings/reducer';
+import blogReducer from './blog/reducer';
 const rootReducer = history =>
   combineReducers({
     router: connectRouter(history),
@@ -18,5 +20,7 @@ const rootReducer = history =>
     productReducer,
     menuReducer,
     notificationReducer,
+    bookingsReducer,
+    blogReducer,
   });
 export default rootReducer;
