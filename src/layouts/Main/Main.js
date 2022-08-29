@@ -16,6 +16,7 @@ import './Main.scss';
 import { ORIGIN } from 'constants/config/config.dev';
 import { NotificationContainer } from 'react-notifications';
 import ClientChat from 'components/ClientChat';
+
 const Main = props => {
   const currentURL = window.location.href;
   const word = currentURL.split('/');
@@ -25,7 +26,7 @@ const Main = props => {
   const { Header, Sider, Content } = Layout;
   const [open, setOpen] = useState(false);
   const [side, setSide] = useState(true);
-  const [showChat, setShowChat] = useState(true);
+  const [showChat, setShowChat] = useState(false);
   useEffect(() => {
     if (localStorage.getItem(`${ORIGIN}_user`)) {
       localStorage.setItem(

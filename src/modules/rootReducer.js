@@ -7,9 +7,9 @@ import categoryReducer from './category/reducer';
 import productReducer from './product/reducer';
 import adimnChatReducer from './adminChat/reducer';
 import menuReducer from './menu/reducer';
+import notificationReducer from './notification/reducer';
 import bookingsReducer from './bookings/reducer';
 import blogReducer from './blog/reducer';
-// import notificationReducer from './notification/reducer';
 const rootReducer = history =>
   combineReducers({
     router: connectRouter(history),
@@ -19,8 +19,8 @@ const rootReducer = history =>
     categoryReducer,
     productReducer,
     menuReducer,
+    notificationReducer,
     bookingsReducer,
     blogReducer,
-    // notificationReducer,
   });
 export default rootReducer;

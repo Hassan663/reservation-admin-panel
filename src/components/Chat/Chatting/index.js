@@ -53,10 +53,15 @@ const Chattings = ({ setOpenStaffModel, setShowChatModel, receiverinfo, setrecei
     {
       firstName: 'Mohsin',
       lastName: 'Ali',
-      email: 'Mohsin@gmail.com',
+      email: 'mohsin@gmail.com',
     },
     {
       firstName: 'Muneeb',
+      lastName: 'Ali',
+      email: 'Muneeb@gmail.com',
+    },
+    {
+      firstName: 'AWAIS',
       lastName: 'Ali',
       email: 'Muneeb@gmail.com',
     },
@@ -80,9 +85,9 @@ const Chattings = ({ setOpenStaffModel, setShowChatModel, receiverinfo, setrecei
   // };
   const getUserEmail = input => {
     // currentchat receiver
-    dispatch(AdminChatActions.checkUserConnection.success(input));
-    // dispatch(AdminChatActions.checkUserConnection.request(['admin@gmail.com', input]));
-    localStorage.setItem('messageReceiver', input);
+    // dispatch(AdminChatActions.checkUserConnection.success(input));
+    dispatch(AdminChatActions.checkUserConnection.request(['admin@gmail.com', input]));
+    // localStorage.setItem('messageReceiver', input);
     setShowChatModel(true);
   };
 
