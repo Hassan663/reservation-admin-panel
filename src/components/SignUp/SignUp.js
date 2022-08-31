@@ -68,7 +68,7 @@ const SignUp = () => {
               <Input.Password placeholder="Password" />
             </Form.Item>
             <Form.Item
-              name="confrimPassword"
+              name="confirmPassword"
               style={{ marginBottom: '10px' }}
               rules={[{ required: true, message: 'Please confirm your password again!' }]}
             >
