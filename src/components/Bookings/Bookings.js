@@ -3,8 +3,8 @@ import './Booking.scss';
 import moment from 'moment';
 import { Table } from 'antd';
 import { Card } from 'components/Common';
-import { useDispatch, useSelector } from 'react-redux';
 import bookingsAction from 'modules/bookings/actions';
+import { useDispatch, useSelector } from 'react-redux';
 
 export const Bookings = () => {
   const dispatch = useDispatch();
@@ -78,7 +78,7 @@ export const Bookings = () => {
   return (
     <>
       <Card
-        style={{ width: '100%', marginTop: '5%' }}
+        style={{ width: '100%' }}
         content={
           <>
             <Table columns={columns} dataSource={bookingsData} />
