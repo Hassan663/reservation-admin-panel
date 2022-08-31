@@ -91,3 +91,18 @@ export const signout = latest => {
       });
   });
 };
+export const getAllUsers = data => {
+  // const refreshToken = localStorage.getItem(`${host}_tokens`);
+  // const token = JSON.parse(refreshToken).refresh.token;
+  console.log('Calling api for All Users');
+  return new Promise((resolve, reject) => {
+    axios
+      .get(`${USERS_BASE_URL}/user`)
+      .then(data => {
+        resolve(data);
+      })
+      .catch(error => {
+        reject(error);
+      });
+  });
+};

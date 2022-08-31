@@ -1,6 +1,6 @@
 import { REQUEST, SUCCESS, FAILURE, createRequestTypes, action } from '../common/actions';
 import { message as antMessage } from 'antd';
-
+import { GET_ALL_CLIENTS } from './types';
 export const SIGNUP = createRequestTypes('SIGNUP');
 
 export const SIGNIN = createRequestTypes('SIGNIN');
@@ -64,6 +64,17 @@ const authActions = {
     },
     failure: error => {
       return action(CHANGE_PASSWORD[FAILURE], { payload: error });
+    },
+  },
+  getAllClients: {
+    request: data => {
+      return { type: GET_ALL_CLIENTS.REQUEST, payload: data };
+    },
+    success: data => {
+      return { type: GET_ALL_CLIENTS.SUCCESS, payload: data };
+    },
+    failure: error => {
+      return { type: GET_ALL_CLIENTS.FAILURE, payload: error };
     },
   },
 };

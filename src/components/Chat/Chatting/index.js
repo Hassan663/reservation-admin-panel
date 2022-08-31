@@ -31,6 +31,7 @@ import {
   where,
 } from 'firebase/firestore';
 import AdminChatActions from 'modules/adminChat/actions';
+import authActions from 'modules/auth/actions';
 import { Tooltip } from 'antd';
 
 import './Chatting.scss';
@@ -46,31 +47,23 @@ let user = localStorage.getItem('userloggedin');
 
 const Chattings = ({ setOpenStaffModel, setShowChatModel, receiverinfo, setreceiverinfo }) => {
   const dispatch = useDispatch();
+  const { allUsers } = useSelector(state => state.authReducer);
   const [stafchat, setStaffChat] = useState(true);
 
   const [showHeader, setShowHeader] = useState('');
-  const [conversation, setConversation] = useState([
-    {
-      firstName: 'Mohsin',
-      lastName: 'Ali',
-      email: 'mohsin@gmail.com',
-    },
-    {
-      firstName: 'Muneeb',
-      lastName: 'Ali',
-      email: 'Muneeb@gmail.com',
-    },
-    {
-      firstName: 'AWAIS',
-      lastName: 'Ali',
-      email: 'Awais@gmail.com',
-    },
-  ]);
+  const [conversation, setConversation] = useState([]);
   const [usersLogin, setUsersLogin] = useState([]);
 
   useEffect(() => {
     getOnlineUsers(setUsersLogin); // getting online users from firebase
   }, []);
+  useEffect(() => {
+    dispatch(authActions.getAllClients.request());
+  }, []);
+  useEffect(() => {
+    setConversation([...allUsers]);
+    // console.log('All Users in Chat', allUsers);
+  }, [allUsers]);
 
   // const SearchItems = e => {
   //   const inputvalue = e.target.value.toLowerCase();
@@ -87,6 +80,7 @@ const Chattings = ({ setOpenStaffModel, setShowChatModel, receiverinfo, setrecei
     // currentchat receiver
     // dispatch(AdminChatActions.checkUserConnection.success(input));
     dispatch(AdminChatActions.checkUserConnection.request(['admin@gmail.com', input]));
+    dispatch(AdminChatActions.setReceiverInfo.request(input));
     // localStorage.setItem('messageReceiver', input);
     setShowChatModel(true);
   };

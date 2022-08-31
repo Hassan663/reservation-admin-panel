@@ -3,7 +3,15 @@ import { message as antMessage } from 'antd';
 import authActions, { SIGNUP, SIGNIN, SIGNOUT, FORGOT_PASSWORD, CHANGE_PASSWORD } from './actions';
 import { setSessionCookies, unSetSessionCookies } from 'modules/common/utils';
 import { REQUEST } from '../common/actions';
-import { signup, signin, signout, forgotPassword, changePassword } from '../../services/auth';
+import {
+  signup,
+  signin,
+  signout,
+  forgotPassword,
+  changePassword,
+  getAllUsers,
+} from '../../services/auth';
+import { GET_ALL_CLIENTS } from './types';
 
 const forcedLogin = action => {
   action.payload.forced = 'true';
@@ -30,6 +38,17 @@ export function* handleSigninRequest(action) {
   } catch (error) {
     antMessage.error(error.response.data.message);
     yield put(authActions.signin.failure(error));
+  }
+}
+
+export function* handleGetAllClients(action) {
+  try {
+    console.log('I am calling');
+    const { data } = yield call(getAllUsers, action.payload);
+    console.log('Response of getting all Users', data);
+    yield put(authActions.getAllClients.success(data));
+  } catch (error) {
+    yield put(authActions.getAllClients.failure(error.message));
   }
 }
 
@@ -78,4 +97,5 @@ export default function* signWatcher() {
   yield takeLatest(SIGNIN.REQUEST, handleSigninRequest);
   yield takeLatest(SIGNUP.REQUEST, handleSignupSubmit);
   yield takeLatest(SIGNOUT.REQUEST, handleSignout);
+  yield takeLatest(GET_ALL_CLIENTS.REQUEST, handleGetAllClients);
 }
