@@ -23,7 +23,7 @@ export const AddBlog = () => {
   };
 
   const refValue = useRef(null);
-  
+
   useEffect(() => {
     setUpdatedData(SelectedBlog);
   }, [SelectedBlog]);
@@ -135,10 +135,7 @@ export const AddBlog = () => {
         return (
           <div id="a" style={{ display: 'flex', justifyContent: 'space-evenly' }}>
             <a style={{ color: '#746abc' }}>
-              <span
- 
-                onClick={()=>(   localStorage.setItem('BlogId', record.id),showEditModal())}
-              >
+              <span onClick={() => (localStorage.setItem('BlogId', record.id), showEditModal())}>
                 Edit
               </span>
             </a>
@@ -190,9 +187,9 @@ export const AddBlog = () => {
     const formData = new FormData();
     formData.append('name', updatedData.name);
     formData.append('desc', updatedData.desc);
-    const fileCheck = typeof updatedData?.blogPicture.name === 'string' 
+    const fileCheck = typeof updatedData?.blogPicture.name === 'string';
     console.log(fileCheck);
-    if ( fileCheck === true ) {
+    if (fileCheck === true) {
       formData.append('blogPicture', updatedData.blogPicture);
     }
     setIsEditModalVisible(false);
