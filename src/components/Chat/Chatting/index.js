@@ -63,7 +63,7 @@ const Chattings = ({ setOpenStaffModel, setShowChatModel, receiverinfo, setrecei
     {
       firstName: 'AWAIS',
       lastName: 'Ali',
-      email: 'Muneeb@gmail.com',
+      email: 'Awais@gmail.com',
     },
   ]);
   const [usersLogin, setUsersLogin] = useState([]);

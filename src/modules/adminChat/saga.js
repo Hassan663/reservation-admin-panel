@@ -60,6 +60,7 @@ export function* handleCheckUserConnection({ payload }) {
   try {
     console.log('Data of chat connection.', payload);
     const { data } = yield call(chatActions.checkUserConnection, payload);
+    console.log('Data .......', data);
     console.log('Response of chat connections', data._id);
     yield put(actions.checkUserConnection.success(data._id));
   } catch (error) {
