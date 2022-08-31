@@ -333,7 +333,7 @@ export const AddBlog = () => {
                           <Input
                             name="name"
                             maxLength="20"
-                            value={updatedData.name}
+                            value={updatedData?.name}
                             required
                             ref={refValue}
                             onChange={event => handleChange(event)}
@@ -342,7 +342,7 @@ export const AddBlog = () => {
                           <Input
                             name="desc"
                             maxLength="50"
-                            value={updatedData.desc}
+                            value={updatedData?.desc}
                             required
                             ref={refValue}
                             onChange={event => handleChangeEdit(event)}
