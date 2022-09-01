@@ -15,12 +15,13 @@ export function* handleAddProduct({ payload }) {
   }
 }
 
-export function* handleDeleteProduct() {
+export function* handleDeleteProduct({payload}) {
   try {
     const {data} = yield call(product.deleteProduct, payload);
     yield put(productActions.deleteProduct.success(data));
-    message.success('Product Deleted Successfully!', 2);
+    console.log(data);
     yield put(productActions.fetchProduct.request());
+    message.success('Product Deleted Successfully!', 2);
   } catch (error) {
     yield put(productActions.deleteProduct.failure(error));
   }

@@ -121,6 +121,7 @@ export const AddProduct = () => {
     }
   };
   const handleDelete = Id => {
+    console.log(Id);
     dispatch(productActions.deleteProduct.request(Id));
   };
 
