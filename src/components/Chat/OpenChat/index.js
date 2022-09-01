@@ -52,8 +52,15 @@ const OpenChat = ({ receiverinfo, openStaffModel, setOpenStaffModel, setShowChat
   const [endUser, setEndUser] = useState('');
   const [groupOfflineUsers, setGroupOfflineUsers] = useState([]);
   const IDRef = useRef(null);
-  const { loading, userConnectionId, groups, currentGroupUsersIds, endUserid, multiEndUsersToken } =
-    useSelector(state => state.adimnChatReducer);
+  const {
+    loading,
+    userConnectionId,
+    groups,
+    currentGroupUsersIds,
+    endUserid,
+    multiEndUsersToken,
+    endUserEmail,
+  } = useSelector(state => state.adimnChatReducer);
   const adminAuth = useSelector(state => state.authReducer);
   const firstName = adminAuth.user?.user?.firstName ?? adminAuth.user?.firstName;
   const lastName = adminAuth.user?.user?.lastName ?? adminAuth.user?.lastName;
@@ -76,13 +83,11 @@ const OpenChat = ({ receiverinfo, openStaffModel, setOpenStaffModel, setShowChat
   }, [userConnectionId]);
 
   useEffect(() => {
-    if (receiverinfo.type !== 'group') {
-      // DeleteSeenMessage(receiverinfo.email); // deleting
-      // setEndUser(''); // setting null to end user
-      // alert('gettiing end user');
-      // findEndUser(receiverinfo.email, setEndUser); // checking whose chat is opened by receiver
-    }
-  }, [receiverinfo.email]); // when will click on someone chat
+    DeleteSeenMessage(endUserEmail); // deleting
+    // setEndUser(''); // setting null to end user
+    // alert('gettiing end user');
+    // findEndUser(receiverinfo.email, setEndUser); // checking whose chat is opened by receiver
+  }, [endUserEmail]); // when will click on someone chat
 
   const onStaffModelClose = () => {
     setOpenStaffModel(false);

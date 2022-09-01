@@ -369,7 +369,8 @@ export const getAllGroupUnseenCount = async setGroupUnSeen => {
   });
 };
 export const DeleteSeenMessage = async send => {
-  const messageR = JSON.parse(localStorage.getItem(`${ORIGIN}_user`))?.user?.email;
+  // const messageR = JSON.parse(localStorage.getItem(`${ORIGIN}_user`))?.user?.email;
+  const messageR = 'admin@gmail.com';
   const unSeenRemove = query(
     // query for getting  UnSeenMessage
     collection(db, `Notification/${messageR}/UnSeenMessages`), //from login user
@@ -400,7 +401,9 @@ export const DeleteGroupSeenMessage = async group_id => {
   });
 };
 export const singleChatUnseen = async (receiver, sender, setUnseenMessages) => {
-  const messageR = JSON.parse(localStorage.getItem(`${ORIGIN}_user`))?.user?.email;
+  // const messageR = JSON.parse(localStorage.getItem(`${ORIGIN}_user`))?.user?.email;
+  const messageR = 'admin@gmail.com';
+  console.log('sender in SigleChat Unseen', sender);
   const UnSeen = query(
     collection(db, `Notification/${messageR}/UnSeenMessages`),
     where('sender', '==', sender)
