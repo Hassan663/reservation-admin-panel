@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import defaultLogo from '../../assets/images/hero-image.png';
 import { Select, Form, Input, Button, InputNumber, Image, Modal, Table, Typography } from 'antd';
 import { USERS_BASE_URL } from 'constants/config/config.dev';
+import { createUser } from '../../components/commonActions/FirebaseActions';
 
 export const AddProduct = () => {
   const [isEditModalVisible, setIsEditModalVisible] = useState(false);
@@ -21,6 +22,7 @@ export const AddProduct = () => {
 
   useEffect(() => {
     dispatch(categoryActions.getCategory.request());
+    createUser('admin@gmail.com');
   }, []);
   let SelectedProduct = proddata.filter(obj => obj._id === ProductId)[0];
 

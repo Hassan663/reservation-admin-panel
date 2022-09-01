@@ -68,6 +68,7 @@ const OpenChat = ({ receiverinfo, openStaffModel, setOpenStaffModel, setShowChat
   useEffect(() => {
     getOnlineUsers(setUsersLogin); // getting curret online users
     return async () => {
+      console.log('Calling Current Chat End User');
       await setCurrentUserChat('', ''); // current user end user.. mean jis ki chat ham na open ki thi
     };
   }, []);
@@ -78,6 +79,7 @@ const OpenChat = ({ receiverinfo, openStaffModel, setOpenStaffModel, setShowChat
       localStorage.setItem('currentChatConnection', userConnectionId); // setting conection id
       IDRef.current = userConnectionId; //connection id ref
       getChats(userConnectionId, setMychats); // getting chat of current conection
+      await setCurrentUserChat(endUserEmail, endUserEmail);
       // await BlueTick(IDRef.current, receiverinfo.email); // setting blue tick if message seen by user
     }
   }, [userConnectionId]);

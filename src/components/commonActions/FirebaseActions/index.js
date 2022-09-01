@@ -244,7 +244,7 @@ export const createUser = async user => {
     });
   } else {
     const chatRoomcollection = collection(db, 'Users');
-    await setDoc(doc(db, 'Users', JSON.parse(localStorage.getItem(`${ORIGIN}_user`))?.user?._id), {
+    await setDoc(doc(db, 'Users', 'admin@gmail.com'), {
       user: user,
       onlineStatus: true,
       currentUserChat: '',
@@ -350,7 +350,7 @@ export const getOnlineUsersUsingRedux = async () => {
   });
 };
 export const setCurrentUserChat = async (id, chatUser) => {
-  await updateDoc(doc(db, 'Users', localStorage.getItem('loggedInUserId')), {
+  await updateDoc(doc(db, 'Users', 'admin@gmail.com'), {
     currentUserChat: chatUser,
   });
 };
