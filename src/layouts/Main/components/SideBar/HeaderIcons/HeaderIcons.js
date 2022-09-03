@@ -134,14 +134,14 @@ const HeaderIcons = ({ showChat, setShowChat }) => {
         </Dropdown>
 
         {/* <Dropdown className="icons" trigger={'click'} overlay={menuNotif} placement="bottom"> */}
-        <Badge className="icons" size={'small'} count={'5'}>
+        {/* <Badge className="icons" size={'small'} count={'5'}>
           <BellOutlined
             className="headerBtn"
             onClick={() => {
-              setShowChat(!showChat);
+              // setShowChat(!showChat);
             }}
           />
-        </Badge>
+        </Badge> */}
 
         {/* </Dropdown> */}
       </div>
