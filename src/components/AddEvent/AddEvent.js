@@ -88,14 +88,10 @@ export const AddProduct = () => {
         desc: '',
         eventPicture: '',
       });
-      //   dispatch(staffActions.addStaff.request(formData));
-      //   navigate('/dashboard/staff');
     } else {
       message.error('kindly fill the form');
     }
   };
-
-  /////////////////// Edit Functionality ////////////////////
 
   const handleDelete = Id => {
     console.log(Id);
