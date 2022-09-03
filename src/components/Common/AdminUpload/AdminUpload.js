@@ -1,7 +1,7 @@
-import { Upload, Modal, message, Image } from "antd";
-import { UserOutlined } from "@ant-design/icons";
-import "./AdminUpload.scss";
-import React, { useState } from "react";
+import { Upload, Modal, message, Image } from 'antd';
+import { UserOutlined } from '@ant-design/icons';
+import './AdminUpload.scss';
+import React, { useState } from 'react';
 import { USERS_BASE_URL } from 'constants/config/config.dev';
 import defaultAdmin from '../../../assets/images/profile_placeholder.png';
 function getBase64(file) {
@@ -9,40 +9,38 @@ function getBase64(file) {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => resolve(reader.result);
-    reader.onerror = (error) => reject(error);
+    reader.onerror = error => reject(error);
   });
 }
-const PicturesWall = ({
-  handleImageChange,
-  fileList,
-  customClass,
-  defaultImage,
-  ...props
-}) => {
+const PicturesWall = ({ handleImageChange, fileList, customClass, defaultImage, ...props }) => {
   const [previewVisible, setPreviewVisibile] = useState(false);
-  const [previewImage, setPreviewImage] = useState("");
-  const [previewTitle, setpreviewTitle] = useState("");
-  console.log("defaultImage :", defaultImage);
+  const [previewImage, setPreviewImage] = useState('');
+  const [previewTitle, setpreviewTitle] = useState('');
   const uploadButton = (
-    <div style={{borderRadius:"7px"}}>
-      <Image  className="profile_uploader" src={`${USERS_BASE_URL}/uploads/${defaultImage}`} fallback={defaultAdmin} preview={false}/>
+    <div style={{ borderRadius: '7px' }}>
+      <Image
+        className="profile_uploader"
+        src={`${USERS_BASE_URL}/uploads/${defaultImage}`}
+        fallback={defaultAdmin}
+        preview={false}
+      />
     </div>
   );
   const handleCancel = () => {
-    setPreviewImage("");
+    setPreviewImage('');
     setPreviewVisibile(false);
   };
-  const handlePreview = async (file) => {
+  const handlePreview = async file => {
     if (!file.url && !file.preview) {
       file.preview = await getBase64(file.originFileObj);
     }
     setPreviewImage(file.url || file.preview);
     setPreviewVisibile(true);
   };
-  const uploadImage = async (options) => {
+  const uploadImage = async options => {
     const { onSuccess } = options;
     setTimeout(() => {
-      onSuccess("Ok");
+      onSuccess('Ok');
     }, 0);
   };
   return (
@@ -60,13 +58,8 @@ const PicturesWall = ({
           {fileList?.length >= 1 ? null : uploadButton}
         </Upload>
       </div>
-      <Modal
-        visible={previewVisible}
-        title={previewTitle}
-        footer={null}
-        onCancel={handleCancel}
-      >
-        <img alt={previewTitle} style={{ width: "100%" }} src={previewImage} />
+      <Modal visible={previewVisible} title={previewTitle} footer={null} onCancel={handleCancel}>
+        <img alt={previewTitle} style={{ width: '100%' }} src={previewImage} />
       </Modal>
     </>
   );

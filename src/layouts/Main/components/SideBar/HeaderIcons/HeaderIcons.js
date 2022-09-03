@@ -22,8 +22,10 @@ import {
   BellOutlined,
   CheckSquareOutlined,
   ClockCircleOutlined,
+  SettingOutlined,
   WechatOutlined,
 } from '@ant-design/icons';
+import authActions from 'modules/auth/actions';
 // import { unregister } from './registerServiceWorker';
 import './HeaderIcons.scss';
 import { SocketContext } from 'constants/context/socket';
@@ -32,40 +34,45 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 import { ORIGIN } from 'constants/config/config.dev';
-
+import ClientChat from 'components/ClientChat';
 const host = window.location.origin;
 
-const HeaderIcons = () => {
+const HeaderIcons = ({ showChat, setShowChat }) => {
   const socket = useContext(SocketContext);
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
   const handleLogout = async obj => {
-    if (obj === 'Logout') {
-      // inActiveStatus();
-      // dispatch(
-      //   AdminChatActions.deleteToken.request({
-      //     id: localStorage.getItem('tokenid'),
-      //     userId: localStorage.getItem(`${ORIGIN}_uid`),
-      //   })
-      // );
-      dispatch({ type: 'LOGOUT', payload: {} });
-      navigate('/admin/login');
-    } else if (obj === 'My Profile') {
-      dispatch({ type: 'MY_PROFILE', payload: {} });
-      navigate('/dashboard/myprofile');
-    } else if (obj === 'Edit Profile') {
-      dispatch({ type: 'EDIT_PROFILE', payload: {} });
-      navigate('/dashboard/edit_admin_profile');
-    }
+    // if (obj === 'Logout') {
+    // inActiveStatus();
+    // dispatch(
+    //   AdminChatActions.deleteToken.request({
+    //     id: localStorage.getItem('tokenid'),
+    //     userId: localStorage.getItem(`${ORIGIN}_uid`),
+    //   })
+    // );
+    // dispatch({ type: 'LOGOUT', payload: {} });
+    // navigate('/admin/login');
+    // alert('call out!');
+    // } else if (obj === 'My Profile') {
+    //   dispatch({ type: 'MY_PROFILE', payload: {} });
+    //   navigate('/dashboard/myprofile');
+    // } else if (obj === 'Edit Profile') {
+    //   dispatch({ type: 'EDIT_PROFILE', payload: {} });
+    //   navigate('/dashboard/edit_admin_profile');
+    // }
+    dispatch(authActions.signout.request());
   };
 
   const menuProfile = (
     <Menu>
-      {['My Profile', 'My Timesheets', 'Edit Profile', 'Logout'].map(obj => (
-        <Menu.Item onClick={() => handleLogout(obj)}>{obj}</Menu.Item>
-      ))}
+      {
+        // ['My Profile', 'My Timesheets', 'Edit Profile', 'Logout']
+        ['Logout'].map(obj => (
+          <Menu.Item onClick={() => handleLogout(obj)}>{obj}</Menu.Item>
+        ))
+      }
     </Menu>
   );
   const menuStatus = (
@@ -121,38 +128,22 @@ const HeaderIcons = () => {
   );
   return (
     <div className="HeaderRight">
-      <Search></Search>
       <div className="Spacing" size="large">
         <Dropdown className="icons" overlay={menuProfile} placement="bottom">
-          <Avatar
-            style={{ height: '30px', width: '30px' }}
-            // src={staff?.photoPath ? `${USERS_BASE_URL}/uploads/${staff?.photoPath}` : defaultAdmin}
-            size="medium"
-          ></Avatar>
+          <SettingOutlined className="headerBtn"></SettingOutlined>
         </Dropdown>
-        <Dropdown
-          className="icons"
-          trigger={'click'}
-          overlay={menuStatus}
-          placement="bottom"
-          style={{ backgroundColor: '#51647c' }}
-        >
-          <WechatOutlined style={{ color: '#2ecc71' }} className="headerBtn"></WechatOutlined>
-        </Dropdown>
-        <FaShare className="icons"></FaShare>
-        <Badge className="icons" size={'small'} count={'5'}>
-          <CheckSquareOutlined
-            style={{ color: '#764abc ', marginTop: '2px' }}
-          ></CheckSquareOutlined>
-        </Badge>
-        <Dropdown className="icons" trigger={'click'} overlay={menuTimer} placement="bottom">
-          <ClockCircleOutlined className="headerBtn"></ClockCircleOutlined>
-        </Dropdown>
-        <Dropdown className="icons" trigger={'click'} overlay={menuNotif} placement="bottom">
-          <Badge className="icons" size={'small'} count={ReadCounter}>
-            <BellOutlined className="headerBtn" />
-          </Badge>
-        </Dropdown>
+
+        {/* <Dropdown className="icons" trigger={'click'} overlay={menuNotif} placement="bottom"> */}
+        {/* <Badge className="icons" size={'small'} count={'5'}>
+          <BellOutlined
+            className="headerBtn"
+            onClick={() => {
+              // setShowChat(!showChat);
+            }}
+          />
+        </Badge> */}
+
+        {/* </Dropdown> */}
       </div>
     </div>
   );

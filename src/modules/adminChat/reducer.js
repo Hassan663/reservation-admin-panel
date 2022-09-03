@@ -109,7 +109,7 @@ function adminChat(state = initialState, action) {
     // case AdminChats.setReceiverInfo.success:
     //   return { ...state, receiverinfo: action.payload, loading: false, error: false };
     case AdminChats.setReceiverInfo.request:
-      return { ...state, receiverinfo: { ...action.payload }, loading: false, error: false };
+      return { ...state, endUserEmail: action.payload, loading: false, error: false };
     // case AdminChats.setReceiverEmail.success:
     //   return { ...state, loading: false, error: false };
 

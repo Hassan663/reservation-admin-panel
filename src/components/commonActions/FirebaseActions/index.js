@@ -244,13 +244,12 @@ export const createUser = async user => {
     });
   } else {
     const chatRoomcollection = collection(db, 'Users');
-    await setDoc(doc(db, 'Users', JSON.parse(localStorage.getItem(`${ORIGIN}_user`))?.user?._id), {
+    await setDoc(doc(db, 'Users', 'admin@gmail.com'), {
       user: user,
       onlineStatus: true,
       currentUserChat: '',
       lastSeen: firebase.firestore.Timestamp.now().toDate(),
     }).then(response => {
-      // console.log('Response.....', response);
       // localStorage.setItem('currentUserFirebaseId', response?.id);
     });
     // await addDoc(chatRoomcollection, {
@@ -351,7 +350,7 @@ export const getOnlineUsersUsingRedux = async () => {
   });
 };
 export const setCurrentUserChat = async (id, chatUser) => {
-  await updateDoc(doc(db, 'Users', localStorage.getItem('loggedInUserId')), {
+  await updateDoc(doc(db, 'Users', 'admin@gmail.com'), {
     currentUserChat: chatUser,
   });
 };
@@ -370,7 +369,8 @@ export const getAllGroupUnseenCount = async setGroupUnSeen => {
   });
 };
 export const DeleteSeenMessage = async send => {
-  const messageR = JSON.parse(localStorage.getItem(`${ORIGIN}_user`))?.user?.email;
+  // const messageR = JSON.parse(localStorage.getItem(`${ORIGIN}_user`))?.user?.email;
+  const messageR = 'admin@gmail.com';
   const unSeenRemove = query(
     // query for getting  UnSeenMessage
     collection(db, `Notification/${messageR}/UnSeenMessages`), //from login user
@@ -401,7 +401,9 @@ export const DeleteGroupSeenMessage = async group_id => {
   });
 };
 export const singleChatUnseen = async (receiver, sender, setUnseenMessages) => {
-  const messageR = JSON.parse(localStorage.getItem(`${ORIGIN}_user`))?.user?.email;
+  // const messageR = JSON.parse(localStorage.getItem(`${ORIGIN}_user`))?.user?.email;
+  const messageR = 'admin@gmail.com';
+  console.log('sender in SigleChat Unseen', sender);
   const UnSeen = query(
     collection(db, `Notification/${messageR}/UnSeenMessages`),
     where('sender', '==', sender)

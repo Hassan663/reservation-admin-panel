@@ -27,6 +27,7 @@ const SingleChat = ({
   useEffect(async () => {
     await singleChatUnseen(user, email, setUnSeenCount);
   }, []);
+  console.log('Unseen Count', UnSeenCount);
   return (
     <div
       className="singlechat_main_container"
@@ -69,7 +70,7 @@ const SingleChat = ({
                 </Col>
                 <Col span={6} style={{ fontSize: '12px', color: '#6986e8' }}>
                   {' '}
-                  {Status ? 'Online' : 'Offline'}
+                  {/* {Status ? 'Online' : 'Offline'} */}
                 </Col>
               </Row>
               <Row

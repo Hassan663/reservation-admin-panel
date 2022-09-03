@@ -1,9 +1,17 @@
 import { call, take, put, takeLatest } from 'redux-saga/effects';
 import { message as antMessage } from 'antd';
 import authActions, { SIGNUP, SIGNIN, SIGNOUT, FORGOT_PASSWORD, CHANGE_PASSWORD } from './actions';
-import { setSessionCookies } from 'modules/common/utils';
+import { setSessionCookies, unSetSessionCookies } from 'modules/common/utils';
 import { REQUEST } from '../common/actions';
-import { signup, signin, signout, forgotPassword, changePassword } from '../../services/auth';
+import {
+  signup,
+  signin,
+  signout,
+  forgotPassword,
+  changePassword,
+  getAllUsers,
+} from '../../services/auth';
+import { GET_ALL_CLIENTS } from './types';
 
 const forcedLogin = action => {
   action.payload.forced = 'true';
@@ -13,6 +21,7 @@ const forcedLogin = action => {
 export function* handleSignupSubmit(action) {
   try {
     const data = yield call(signup, action.payload);
+    console.log('data: ' + data);
     yield put(authActions.signup.success(data.data));
     antMessage.success('User Registered Successfully!', 2);
   } catch (error) {
@@ -25,27 +34,32 @@ export function* handleSigninRequest(action) {
   try {
     const { data } = yield call(signin, action.payload);
     yield put(authActions.signin.success(data.data));
-    console.log('set Session: ', data);
-    // setSessionCookies(data.user);
+    setSessionCookies({ user: data.user, token: data.token });
   } catch (error) {
     antMessage.error(error.response.data.message);
     yield put(authActions.signin.failure(error));
   }
 }
 
-export function* handleSignout() {
-  while (true) {
-    try {
-      const { payload } = yield take(SIGNOUT[REQUEST]);
-      yield call(signout, 'true');
+export function* handleGetAllClients(action) {
+  try {
+    console.log('I am calling');
+    const { data } = yield call(getAllUsers, action.payload);
+    console.log('Response of getting all Users', data);
+    yield put(authActions.getAllClients.success(data));
+  } catch (error) {
+    yield put(authActions.getAllClients.failure(error.message));
+  }
+}
 
-      unSetSessionCookies();
-      yield put(authActions.signout.success());
-      // window.location.href = '/';
-    } catch (error) {
-      const { code, message } = error;
-      yield put(authActions.signout.success({ code, message }));
-    }
+export function* handleSignout() {
+  try {
+    yield take(SIGNOUT[REQUEST]);
+    unSetSessionCookies();
+    yield put(authActions.signout.success());
+    window.location.href = '/';
+  } catch (error) {
+    yield put(authActions.signout.failure());
   }
 }
 
@@ -82,7 +96,6 @@ export function* handleChangePassword() {
 export default function* signWatcher() {
   yield takeLatest(SIGNIN.REQUEST, handleSigninRequest);
   yield takeLatest(SIGNUP.REQUEST, handleSignupSubmit);
+  yield takeLatest(SIGNOUT.REQUEST, handleSignout);
+  yield takeLatest(GET_ALL_CLIENTS.REQUEST, handleGetAllClients);
 }
-// export function* handleSigninSubmit() {
-//   yield takeEvery(SIGNIN.REQUEST, handleSigninRequest);
-// }

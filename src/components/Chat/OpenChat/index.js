@@ -40,7 +40,7 @@ const OpenChat = ({ receiverinfo, openStaffModel, setOpenStaffModel, setShowChat
   const dispatch = useDispatch();
   const [usersLogin, setUsersLogin] = useState([]);
   const formdata = new FormData();
-  localStorage.setItem('loggedInUserId', 'admin@gmail.com');
+  // localStorage.setItem('loggedInUserId', 'admin@gmail.com');
   const [message, setMessage] = useState({
     sender: localStorage.getItem('userloggedin'),
     receiver: '',
@@ -52,8 +52,15 @@ const OpenChat = ({ receiverinfo, openStaffModel, setOpenStaffModel, setShowChat
   const [endUser, setEndUser] = useState('');
   const [groupOfflineUsers, setGroupOfflineUsers] = useState([]);
   const IDRef = useRef(null);
-  const { loading, userConnectionId, groups, currentGroupUsersIds, endUserid, multiEndUsersToken } =
-    useSelector(state => state.adimnChatReducer);
+  const {
+    loading,
+    userConnectionId,
+    groups,
+    currentGroupUsersIds,
+    endUserid,
+    multiEndUsersToken,
+    endUserEmail,
+  } = useSelector(state => state.adimnChatReducer);
   const adminAuth = useSelector(state => state.authReducer);
   const firstName = adminAuth.user?.user?.firstName ?? adminAuth.user?.firstName;
   const lastName = adminAuth.user?.user?.lastName ?? adminAuth.user?.lastName;
@@ -61,6 +68,7 @@ const OpenChat = ({ receiverinfo, openStaffModel, setOpenStaffModel, setShowChat
   useEffect(() => {
     getOnlineUsers(setUsersLogin); // getting curret online users
     return async () => {
+      console.log('Calling Current Chat End User');
       await setCurrentUserChat('', ''); // current user end user.. mean jis ki chat ham na open ki thi
     };
   }, []);
@@ -71,18 +79,17 @@ const OpenChat = ({ receiverinfo, openStaffModel, setOpenStaffModel, setShowChat
       localStorage.setItem('currentChatConnection', userConnectionId); // setting conection id
       IDRef.current = userConnectionId; //connection id ref
       getChats(userConnectionId, setMychats); // getting chat of current conection
+      await setCurrentUserChat(endUserEmail, endUserEmail);
       // await BlueTick(IDRef.current, receiverinfo.email); // setting blue tick if message seen by user
     }
   }, [userConnectionId]);
 
   useEffect(() => {
-    if (receiverinfo.type !== 'group') {
-      // DeleteSeenMessage(receiverinfo.email); // deleting
-      // setEndUser(''); // setting null to end user
-      // alert('gettiing end user');
-      // findEndUser(receiverinfo.email, setEndUser); // checking whose chat is opened by receiver
-    }
-  }, [receiverinfo.email]); // when will click on someone chat
+    DeleteSeenMessage(endUserEmail); // deleting
+    // setEndUser(''); // setting null to end user
+    // alert('gettiing end user');
+    // findEndUser(receiverinfo.email, setEndUser); // checking whose chat is opened by receiver
+  }, [endUserEmail]); // when will click on someone chat
 
   const onStaffModelClose = () => {
     setOpenStaffModel(false);

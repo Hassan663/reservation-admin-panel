@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { ProfileOutlined, ArrowLeftOutlined, CloseOutlined } from '@ant-design/icons';
 import { Dropdown, Typography, Space, List } from 'antd';
 import { InformationIcon } from 'assets/icons';
-import { SearchField } from 'components/Common';
+// import { SearchField } from 'components/Common';
 
 import HelpArticleDetails from './HelpArticleDetails';
 
@@ -40,7 +40,7 @@ const InformationMenu = () => {
             <CloseOutlined onClick={() => setShowInfoDropdown(false)} />
           </span>
         </div>
-        <SearchField size="small" placeholder="Search Help" />
+        {/* <SearchField size="small" placeholder="Search Help" /> */}
 
         {!selectedSection ? (
           <>

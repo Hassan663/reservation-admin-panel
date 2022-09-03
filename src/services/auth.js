@@ -4,7 +4,7 @@ const host = window.location.origin;
 export const signup = payload => {
   return new Promise((resolve, reject) => {
     axios
-      .post(`${USERS_BASE_URL}/user/register`, payload, {
+      .post(`${USERS_BASE_URL}/admin/register`, payload, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -19,11 +19,10 @@ export const signup = payload => {
 };
 
 export const signin = async ({ email, password }) => {
-  console.log('in API Auth: ', email, password);
   return new Promise((resolve, reject) => {
     axios
       .post(
-        `${USERS_BASE_URL}/user/login`,
+        `${USERS_BASE_URL}/admin/login`,
         { email, password },
         {
           headers: {
@@ -86,6 +85,21 @@ export const signout = latest => {
       .post(`${USERS_BASE_URL}/auth/logout`, { refreshToken: token, latest: latest })
       .then(() => {
         resolve();
+      })
+      .catch(error => {
+        reject(error);
+      });
+  });
+};
+export const getAllUsers = data => {
+  // const refreshToken = localStorage.getItem(`${host}_tokens`);
+  // const token = JSON.parse(refreshToken).refresh.token;
+  console.log('Calling api for All Users');
+  return new Promise((resolve, reject) => {
+    axios
+      .get(`${USERS_BASE_URL}/user`)
+      .then(data => {
+        resolve(data);
       })
       .catch(error => {
         reject(error);

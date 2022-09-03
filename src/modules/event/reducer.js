@@ -2,6 +2,8 @@ import { ADD_EVENT, DELETE_EVENT, UPDATE_EVENT, FETCH_EVENT } from './types';
 const initialState = {
   loading: false,
   error: false,
+  events: [],
+  event: {},
 };
 
 function eventReducer(state = initialState, action) {
@@ -17,6 +19,7 @@ function eventReducer(state = initialState, action) {
         ...state,
         loading: true,
         error: false,
+        events: [...state.events, action.payload],
       };
     case ADD_EVENT.FAILURE:
       return {
@@ -31,9 +34,12 @@ function eventReducer(state = initialState, action) {
         error: false,
       };
     case DELETE_EVENT.SUCCESS:
+      console.log('Events', state.events);
+      console.log('Events', action.payload);
       return {
         ...state,
         loading: true,
+        events: [...state.events.filter(event => event.id !== action.payload)],
         error: false,
       };
     case DELETE_EVENT.FAILURE:
@@ -53,6 +59,12 @@ function eventReducer(state = initialState, action) {
         ...state,
         loading: true,
         error: false,
+        events: [
+          ...state.events.map(event => {
+            if (event.id === action.payload.data.id) return action.payload.data;
+            else return event;
+          }),
+        ],
       };
     case UPDATE_EVENT.FAILURE:
       return {
@@ -71,6 +83,7 @@ function eventReducer(state = initialState, action) {
         ...state,
         loading: true,
         error: false,
+        events: action.payload,
       };
     case FETCH_EVENT.FAILURE:
       return {

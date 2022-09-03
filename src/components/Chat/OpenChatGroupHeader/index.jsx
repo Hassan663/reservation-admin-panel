@@ -8,7 +8,6 @@ const OpenChatGroupHeader = ({
   setOpenGroupModel,
   setShowChatModel,
 }) => {
-  // console.log('infooooo', receiverinfo);
   return (
     <div className="openchat_staff_header_mian_container">
       <div className="leftside_openchat_header_main_wrapper">

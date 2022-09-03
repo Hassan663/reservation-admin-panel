@@ -1,5 +1,5 @@
 /* global window */
-import { PRIORITY_COLORS, STATUS_COLORS } from 'constants/options';
+// import { PRIORITY_COLORS, STATUS_COLORS } from 'constants/options';
 import { ACTUS_WEBHOST } from 'constants/index';
 import moment from 'moment';
 import _ from 'lodash';
@@ -9,14 +9,6 @@ var url = String(window.location.pathname);
 export const getUserId = () => window.localStorage[`${host}_uid`] ?? '';
 export const getTokens = () => JSON.parse(window.localStorage?.[`${host}_token`] ?? '{}');
 export const getUser = () => JSON.parse(window.localStorage?.[`${host}_user`] ?? '{}');
-
-// export const setSessionCookies = user => {   //old CODE Function
-//   console.log(user);
-//   window.localStorage['loggedInUserId'] = user.user._id;
-//   window.localStorage[`${host}_user`] = JSON.stringify(user);
-//   window.localStorage[`${host}_uid`] = JSON.stringify(user.user._id);
-//   window.localStorage[`${host}_token`] = JSON.stringify(user.token);
-// };
 export const setSessionCookies = user => {
   window.localStorage['userloggedin'] = user.user.email;
   window.localStorage['loggedInUserId'] = user.user._id;
@@ -26,6 +18,7 @@ export const setSessionCookies = user => {
 };
 export const unSetSessionCookies = () => {
   window.localStorage.removeItem(`userloggedin`);
+  window.localStorage.removeItem(`loggedInUserId`);
   window.localStorage.removeItem(`currentUserFirebaseId`);
   window.localStorage.removeItem(`${host}_user`);
   window.localStorage.removeItem(`${host}_uid`);
@@ -170,8 +163,8 @@ export const pascalCase = s => {
   return s.charAt(0).toUpperCase() + s.slice(1);
 };
 
-export const getStatusColor = text => STATUS_COLORS[text];
-export const getPriorityColor = text => PRIORITY_COLORS[text];
+// export const getStatusColor = text => STATUS_COLORS[text];
+// export const getPriorityColor = text => PRIORITY_COLORS[text];
 
 export const createParts = (segments, startTime, from) => {
   return segments.map((segment, index) => {

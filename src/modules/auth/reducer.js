@@ -1,8 +1,10 @@
 import { SIGNUP, SIGNIN, SIGNOUT, FORGOT_PASSWORD, CHANGE_PASSWORD } from './actions';
 
+import { GET_ALL_CLIENTS } from './types';
 const initialState = {
   isLoggedIn: false,
   isSignedUp: false,
+  allUsers: [],
   user: true ?? {
     user: {
       firstName: '',
@@ -16,8 +18,10 @@ const initialState = {
 function authReducer(state = initialState, { type, payload }) {
   switch (type) {
     case SIGNUP.REQUEST:
+    case GET_ALL_CLIENTS.REQUEST:
       return { ...state, loading: true, error: false, isSignedUp: false };
-
+    case GET_ALL_CLIENTS.SUCCESS:
+      return { ...state, loading: false, error: false, allUsers: [...payload] };
     case SIGNUP.SUCCESS:
       return {
         ...state,
@@ -129,7 +133,6 @@ function authReducer(state = initialState, { type, payload }) {
         error: payload.message,
       };
     case 'LOGOUT':
-      console.log('LOGOUT');
       unSetSessionCookies();
       return {
         ...state,

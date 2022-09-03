@@ -1,7 +1,6 @@
 import React from 'react';
 import { USERS_BASE_URL } from '../../../../constants/config/config.dev';
 const Photo = ({ pictures }) => {
-  console.log('pictures.....', pictures);
   return (
     <>
       {pictures?.map((element, index) => {

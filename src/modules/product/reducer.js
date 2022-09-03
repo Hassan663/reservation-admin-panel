@@ -2,6 +2,8 @@ import { ADD_PRODUCT, DELETE_PRODUCT, UPDATE_PRODUCT, FETCH_PRODUCT } from './ty
 const initialState = {
   loading: false,
   error: false,
+  products: [],
+  product: {},
 };
 
 function productReducer(state = { ...initialState }, action) {
@@ -18,6 +20,7 @@ function productReducer(state = { ...initialState }, action) {
         ...state,
         loading: false,
         error: false,
+        event: action.payload,
       };
     case ADD_PRODUCT.FAILURE:
       return {
@@ -34,8 +37,10 @@ function productReducer(state = { ...initialState }, action) {
       };
 
     case DELETE_PRODUCT.SUCCESS:
+      console.log('Products....', state.products);
       return {
         ...state,
+        products: [...state.products.filter(product => product._id !== action.payload)],
         loading: false,
         error: false,
       };
@@ -53,10 +58,17 @@ function productReducer(state = { ...initialState }, action) {
       };
 
     case UPDATE_PRODUCT.SUCCESS:
+      console.log(action.payload);
       return {
         ...state,
         loading: false,
         error: false,
+        products: [
+          ...state.products.map(product => {
+            if (product._id === action.payload.data._id) return action.payload.data;
+            else return product;
+          }),
+        ],
       };
     case UPDATE_PRODUCT.FAILURE:
       return {
@@ -76,6 +88,7 @@ function productReducer(state = { ...initialState }, action) {
         ...state,
         loading: false,
         error: false,
+        products: [...action.payload],
       };
     case FETCH_PRODUCT.FAILURE:
       return {

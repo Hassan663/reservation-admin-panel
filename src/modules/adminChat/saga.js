@@ -15,7 +15,6 @@ import chatActions from 'services/adminChat';
 export function* handleUpdateGroup({ payload }) {
   try {
     const data = yield call(chatActions.updateGroup, { objectId: payload.id, data: payload.data });
-
     yield put(actions.updateGroup.success(data.data.response.data));
   } catch (error) {
     yield put(actions.updateGroup.failure(error));
@@ -31,17 +30,11 @@ export function* handleDeleteGroup({ payload }) {
 }
 export function* handlegetAdminChats({ payload }) {
   try {
-   
-  } catch (error) {
-
-  }
+  } catch (error) {}
 }
 export function* handlegetOnlineUsers({ payload }) {
   try {
-
-  } catch (error) {
-
-  }
+  } catch (error) {}
 }
 // export function* handle({}) {}
 export function* handleGetAllGroups({ payload }) {
@@ -65,18 +58,18 @@ export function* handleCreateGroup({ payload }) {
 export function* handleCheckUserConnection({ payload }) {
   // true
   try {
+    console.log('Data of chat connection.', payload);
     const { data } = yield call(chatActions.checkUserConnection, payload);
-    yield put(actions.checkUserConnection.success(data.response.data._id));
+    console.log('Data .......', data);
+    console.log('Response of chat connections', data._id);
+    yield put(actions.checkUserConnection.success(data._id));
   } catch (error) {
     yield put(actions.checkUserConnection.failure(error));
   }
 }
 export function* handleCreateOnetoOneConnection({ payload }) {
   try {
-
-  } catch (error) {
- 
-  }
+  } catch (error) {}
 }
 export function* handleAddToken({ payload }) {
   try {
@@ -107,17 +100,13 @@ export function* handleDeleteToken({ payload }) {
   try {
     // alert('wait');
     const data = yield call(chatActions.deleteToken, payload);
-   
-  } catch (error) {
-
-  }
+  } catch (error) {}
 }
 export function* handleSendNotification({ payload }) {
   try {
     const data = yield call(chatActions.sendNotification, payload);
     yield put(actions.sendNotification.success(data));
-  } catch (error) {
-  }
+  } catch (error) {}
 }
 export default function* chatWatcher() {
   yield takeLatest(AdminChat.updateGroup.request, handleUpdateGroup);
