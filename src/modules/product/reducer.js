@@ -3,7 +3,7 @@ const initialState = {
   loading: false,
   error: false,
   products: [],
-  product:{}
+  product: {},
 };
 
 function productReducer(state = { ...initialState }, action) {
@@ -20,7 +20,7 @@ function productReducer(state = { ...initialState }, action) {
         ...state,
         loading: false,
         error: false,
-        event:action.payload
+        event: action.payload,
       };
     case ADD_PRODUCT.FAILURE:
       return {
@@ -37,8 +37,10 @@ function productReducer(state = { ...initialState }, action) {
       };
 
     case DELETE_PRODUCT.SUCCESS:
+      console.log('Products....', state.products);
       return {
         ...state,
+        products: [...state.products.filter(product => product._id !== action.payload)],
         loading: false,
         error: false,
       };
@@ -63,8 +65,7 @@ function productReducer(state = { ...initialState }, action) {
         error: false,
         products: [
           ...state.products.map(product => {
-            if (product._id === action.payload.data._id)
-              return action.payload.data;
+            if (product._id === action.payload.data._id) return action.payload.data;
             else return product;
           }),
         ],
@@ -87,8 +88,7 @@ function productReducer(state = { ...initialState }, action) {
         ...state,
         loading: false,
         error: false,
-        products:[...action.payload]
-
+        products: [...action.payload],
       };
     case FETCH_PRODUCT.FAILURE:
       return {

@@ -12,23 +12,23 @@ export function* handleAddEvent({ payload }) {
     yield put(actions.addEvent.success(data.data));
     message.success('Event Added Successfully!', 2);
 
-    yield put(EventActions.fetchEvent.request());
+    // yield put(EventActions.fetchEvent.request());
   } catch (error) {
     yield put(actions.addEvent.failure(error));
   }
 }
 
-export function* handleDeleteEvent({payload}) {
+export function* handleDeleteEvent({ payload }) {
   try {
-    const {data} = yield call(event.deleteEvent, payload);
-    yield put(actions.deleteEvent.success(data));
+    const { data } = yield call(event.deleteEvent, payload);
+    yield put(actions.deleteEvent.success(payload));
     message.success('Event Deleted Successfully!', 2);
-    yield put(EventActions.fetchEvent.request());
+    // yield put(EventActions.fetchEvent.request());
   } catch (error) {
     yield put(actions.deleteEvent.failure(error));
   }
 }
-export function* handleUpdateEvent({payload}) {
+export function* handleUpdateEvent({ payload }) {
   try {
     const { data } = yield call(event.updateEvent, payload);
     yield put(actions.updateEvent.success({ eventId: payload.id, data }));
@@ -37,9 +37,9 @@ export function* handleUpdateEvent({payload}) {
     yield put(actions.updateEvent.failure(error));
   }
 }
-export function* handleFetchEvent({payload}) {
+export function* handleFetchEvent({ payload }) {
   try {
-    const {data} = yield call(event.fetchEvent, payload);
+    const { data } = yield call(event.fetchEvent, payload);
     yield put(actions.fetchEvent.success(data.event));
   } catch (error) {
     yield put(actions.fetchEvent.failure(error));

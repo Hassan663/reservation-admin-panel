@@ -1,4 +1,4 @@
-import { ADD_BLOG,DELETE_BLOG,FETCH_BLOG,UPDATE_BLOG } from './types';
+import { ADD_BLOG, DELETE_BLOG, FETCH_BLOG, UPDATE_BLOG } from './types';
 
 const blogActions = {
   addBlog: {
@@ -17,6 +17,7 @@ const blogActions = {
       return { type: DELETE_BLOG.REQUEST, payload: data };
     },
     success: data => {
+      console.log('blogs deleted', data);
       return { type: DELETE_BLOG.SUCCESS, payload: data };
     },
     failure: data => {

@@ -15,25 +15,25 @@ export function* handleAddProduct({ payload }) {
   }
 }
 
-export function* handleDeleteProduct({payload}) {
+export function* handleDeleteProduct({ payload }) {
   try {
-    const {data} = yield call(product.deleteProduct, payload);
-    yield put(productActions.deleteProduct.success(data));
-    console.log(data);
-    yield put(productActions.fetchProduct.request());
-    message.success('Product Deleted Successfully!', 2);
+    console.log('I am deleting Product');
+    const { data } = yield call(product.deleteProduct, payload);
+    console.log('Product has been deleted Successfully', payload);
+    antMessage.success('Product Deleted Successfully!', 2);
+    yield put(productActions.deleteProduct.success(payload));
+    // yield put(productActions.fetchProduct.request());
   } catch (error) {
     yield put(productActions.deleteProduct.failure(error));
   }
 }
-export function* handleUpdateProduct({payload}) {
+export function* handleUpdateProduct({ payload }) {
   try {
     const { data } = yield call(product.updateProduct, payload);
     console.log(data);
     yield put(productActions.updateProduct.success({ productId: payload.id, data }));
     message.success('Product Updated Successfully!', 2);
     yield put(productActions.fetchProduct.request());
-
   } catch (error) {
     yield put(productActions.updateProduct.failure(error));
   }
