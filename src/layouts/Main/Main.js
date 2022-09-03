@@ -97,10 +97,7 @@ const Main = props => {
                   ></img> */}
                 </div>
                 <div className="headerRight">
-                  <HeaderIcons
-                  // showChat={showChat}
-                  // setShowChat={setShowChat}
-                  ></HeaderIcons>
+                  <HeaderIcons showChat={showChat} setShowChat={setShowChat}></HeaderIcons>
                 </div>
               </div>
             </Header>
