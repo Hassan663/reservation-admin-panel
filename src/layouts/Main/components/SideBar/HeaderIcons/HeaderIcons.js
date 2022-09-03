@@ -22,6 +22,7 @@ import {
   BellOutlined,
   CheckSquareOutlined,
   ClockCircleOutlined,
+  SettingOutlined,
   WechatOutlined,
 } from '@ant-design/icons';
 import authActions from 'modules/auth/actions';
@@ -129,18 +130,8 @@ const HeaderIcons = ({ showChat, setShowChat }) => {
     <div className="HeaderRight">
       <div className="Spacing" size="large">
         <Dropdown className="icons" overlay={menuProfile} placement="bottom">
-          <Avatar
-            style={{ height: '30px', width: '30px' }}
-            // src={staff?.photoPath ? `${USERS_BASE_URL}/uploads/${staff?.photoPath}` : defaultAdmin}
-            size="medium"
-          ></Avatar>
+          <SettingOutlined className="headerBtn"></SettingOutlined>
         </Dropdown>
-
-        <Badge className="icons" size={'small'} count={'5'}>
-          <CheckSquareOutlined
-            style={{ color: '#764abc ', marginTop: '2px' }}
-          ></CheckSquareOutlined>
-        </Badge>
 
         {/* <Dropdown className="icons" trigger={'click'} overlay={menuNotif} placement="bottom"> */}
         <Badge className="icons" size={'small'} count={'5'}>

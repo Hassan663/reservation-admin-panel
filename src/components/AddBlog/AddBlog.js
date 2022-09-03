@@ -306,7 +306,7 @@ export const AddBlog = () => {
             <>
               <Table columns={columns} dataSource={blogdata}></Table>
               <Modal
-                title="Edit Event"
+                title="Edit Blog"
                 okText="SAVE"
                 width={600}
                 cancelText="CLOSE"
@@ -333,7 +333,7 @@ export const AddBlog = () => {
                             value={updatedData?.name}
                             required
                             ref={refValue}
-                            onChange={event => handleChange(event)}
+                            onChange={event => handleChangeEdit(event)}
                           />
                           <Label title="Description" required={true}></Label>
                           <Input
