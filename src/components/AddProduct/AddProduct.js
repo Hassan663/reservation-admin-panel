@@ -352,7 +352,7 @@ export const AddProduct = () => {
           <>
             <Table columns={columns} dataSource={proddata}></Table>
             <Modal
-              title="Edit Event"
+              title="Edit Product"
               okText="SAVE"
               width={600}
               cancelText="CLOSE"

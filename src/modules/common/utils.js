@@ -1,5 +1,5 @@
 /* global window */
-import { PRIORITY_COLORS, STATUS_COLORS } from 'constants/options';
+// import { PRIORITY_COLORS, STATUS_COLORS } from 'constants/options';
 import { ACTUS_WEBHOST } from 'constants/index';
 import moment from 'moment';
 import _ from 'lodash';
@@ -163,8 +163,8 @@ export const pascalCase = s => {
   return s.charAt(0).toUpperCase() + s.slice(1);
 };
 
-export const getStatusColor = text => STATUS_COLORS[text];
-export const getPriorityColor = text => PRIORITY_COLORS[text];
+// export const getStatusColor = text => STATUS_COLORS[text];
+// export const getPriorityColor = text => PRIORITY_COLORS[text];
 
 export const createParts = (segments, startTime, from) => {
   return segments.map((segment, index) => {
