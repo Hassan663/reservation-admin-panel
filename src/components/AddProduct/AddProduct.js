@@ -29,7 +29,9 @@ export const AddProduct = () => {
   useEffect(() => {
     setUpdatedData(SelectedProduct);
   }, [SelectedProduct]);
-
+  useEffect(() => {
+    setproddata([...products]);
+  }, [products]);
   const categoryData = useSelector(state => state.categoryReducer.category);
 
   const initialvalues = {

@@ -38,12 +38,12 @@ export const AddProduct = () => {
   let SelectedEvent = eventdata.filter(obj => obj.id === EventId)[0];
   const [updatedData, setUpdatedData] = useState();
 
-
-
-  
   useEffect(() => {
     setUpdatedData(SelectedEvent);
   }, [SelectedEvent]);
+  useEffect(() => {
+    setEventData([...events]);
+  }, [events]);
   const handleChangePhoto = event => {
     const file = event.target.files[0];
     var errSize = 'Max File Limit is 3MB';
@@ -96,7 +96,7 @@ export const AddProduct = () => {
   };
 
   /////////////////// Edit Functionality ////////////////////
- 
+
   const handleDelete = Id => {
     console.log(Id);
     dispatch(EventActions.deleteEvent.request(Id));
@@ -147,10 +147,7 @@ export const AddProduct = () => {
         return (
           <div id="a" style={{ display: 'flex', justifyContent: 'space-evenly' }}>
             <a style={{ color: '#746abc' }}>
-              <span
-                onClick={()=>(localStorage.setItem('EventId', record.id),showEditModal())
-                }
-              >
+              <span onClick={() => (localStorage.setItem('EventId', record.id), showEditModal())}>
                 Edit
               </span>
             </a>
@@ -203,7 +200,7 @@ export const AddProduct = () => {
     formData.append('name', updatedData.name);
     formData.append('desc', updatedData.desc);
 
-    const fileCheck = typeof updatedData?.eventPicture.name === 'string' 
+    const fileCheck = typeof updatedData?.eventPicture.name === 'string';
     console.log(fileCheck);
     if (fileCheck === true) {
       formData.append('eventPicture', updatedData.eventPicture);

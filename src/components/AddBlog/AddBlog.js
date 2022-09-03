@@ -27,6 +27,9 @@ export const AddBlog = () => {
   useEffect(() => {
     setUpdatedData(SelectedBlog);
   }, [SelectedBlog]);
+  useEffect(() => {
+    setBlogData([...blogs]);
+  }, [blogs]);
   const dispatch = useDispatch();
 
   const [productdata, setProductData] = useState(initialvalues);
