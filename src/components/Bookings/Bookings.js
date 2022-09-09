@@ -14,7 +14,6 @@ export const Bookings = () => {
   }, []);
 
   const { bookings } = useSelector(state => state.bookingsReducer);
-  console.log('bookings', bookings);
   const [bookingsData, setBookingsData] = useState([]);
 
   useEffect(() => {

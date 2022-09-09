@@ -37,7 +37,6 @@ function productReducer(state = { ...initialState }, action) {
       };
 
     case DELETE_PRODUCT.SUCCESS:
-      console.log('Products....', state.products);
       return {
         ...state,
         products: [...state.products.filter(product => product._id !== action.payload)],
