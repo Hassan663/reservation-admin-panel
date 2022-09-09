@@ -8,22 +8,27 @@ import { Form, Input, Button, Table } from 'antd';
 export const AddCategory = () => {
   const dispatch = useDispatch();
   const { category, loading, error } = useSelector(state => state.categoryReducer);
+
   const [categories, setCategories] = useState([]);
-  console.log('category.......', category);
+
   useEffect(() => {
     dispatch(categoryActions.getCategory.request());
   }, []);
+
   useEffect(() => {
     setCategories([...category]);
   }, [category]);
+
   const onFinish = categories => {
     const { name } = categories;
     dispatch(categoryActions.addCategory.request({ name }));
     name = '';
   };
+
   const handleDeleteCategory = id => {
     dispatch(categoryActions.deleteCategory.request(id));
   };
+
   const columns = [
     {
       title: 'Categories',
@@ -34,24 +39,7 @@ export const AddCategory = () => {
       defaultSortOrder: 'descend',
       sorter: (a, b) => a.name - b.name,
       render: (text, record) => {
-        return (
-          <div className="name_contacts">
-            {/* <div>
-              <img
-                style={{ height: '32px', width: '32px', borderRadius: '50px' }}
-                src={`${USERS_BASE_URL}/uploads/${record.blogPicture[0]?.img}`}
-                fallback={defaultLogo}
-                preview={false}
-              />
-            </div>
-            <div className="detail_wrap">
-              <div className="name">
-                <a>{record.name}</a>
-              </div>
-            </div> */}
-            {record.name}
-          </div>
-        );
+        return <div className="name_contacts">{record.name}</div>;
       },
     },
     {
@@ -62,11 +50,6 @@ export const AddCategory = () => {
       render: (text, record) => {
         return (
           <div id="a" style={{ display: 'flex', justifyContent: 'space-evenly' }}>
-            {/* <a style={{ color: '#746abc' }}>
-              <span onClick={() => (localStorage.setItem('BlogId', record.id), showEditModal())}>
-                Edit
-              </span>
-            </a> */}
             <a style={{ color: 'red' }} onClick={() => handleDeleteCategory(record.id)}>
               {' '}
               Delete
