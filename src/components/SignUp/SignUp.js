@@ -67,13 +67,13 @@ const SignUp = () => {
             >
               <Input.Password placeholder="Password" />
             </Form.Item>
-            <Form.Item
+            {/* <Form.Item
               name="confirmPassword"
               style={{ marginBottom: '10px' }}
               rules={[{ required: true, message: 'Please confirm your password again!' }]}
             >
               <Input.Password placeholder="Re Enter Password" />
-            </Form.Item>
+            </Form.Item> */}
             <Form.Item>
               <Button htmlType="submit" className="login-form-button">
                 SIGN UP

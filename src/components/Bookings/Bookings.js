@@ -13,13 +13,13 @@ export const Bookings = () => {
     dispatch(bookingsAction.getBookings.request());
   }, []);
 
-  const reservations = useSelector(state => state.bookingsReducer.bookings);
-
+  const { bookings } = useSelector(state => state.bookingsReducer);
+  console.log('bookings', bookings);
   const [bookingsData, setBookingsData] = useState([]);
 
   useEffect(() => {
-    setBookingsData(reservations);
-  }, [reservations]);
+    setBookingsData(bookings);
+  }, [bookings]);
 
   const columns = [
     {
@@ -28,13 +28,19 @@ export const Bookings = () => {
       dataIndex: 'name',
       key: 'name',
       defaultSortOrder: 'descend',
+      render: (text, record) => {
+        return <div>{record.user.firstName + ' ' + record.user.lastName}</div>;
+      },
     },
     {
       title: 'E-mail',
       align: 'left',
-      dataIndex: 'email',
+      dataIndex: `email`,
       key: 'email',
       defaultSortOrder: 'descend',
+      render: (text, record) => {
+        return <div>{record.user.email}</div>;
+      },
     },
     {
       title: 'Reservation Date',
@@ -61,18 +67,42 @@ export const Bookings = () => {
       },
     },
     {
-      title: 'Phone Number',
+      title: 'Cancelled',
       align: 'left',
-      dataIndex: 'phoneNo',
-      key: 'phoneNo',
+      dataIndex: 'cancelled',
+      key: 'cancelled',
       defaultSortOrder: 'descend',
+      render: (text, record) => {
+        return <div>{!record.cancelled ? 'No' : 'Yes'}</div>;
+      },
     },
+
     {
       title: 'Total Persons',
       align: 'center',
-      dataIndex: 'persons',
+      dataIndex: 'reservedSeats',
       key: 'persons',
       defaultSortOrder: 'descend',
+    },
+    {
+      title: 'reservedTables',
+      align: 'left',
+      dataIndex: 'reservedTables',
+      key: 'reservedTables',
+      defaultSortOrder: 'descend',
+      render: (text, record) => {
+        return <div>{record.bookingSlot.reservedTables}</div>;
+      },
+    },
+    {
+      title: 'Un-reservedTables',
+      align: 'left',
+      dataIndex: 'unReservedTable',
+      key: 'unReservedTable',
+      defaultSortOrder: 'descend',
+      render: (text, record) => {
+        return <div>{record.bookingSlot.unReservedTable}</div>;
+      },
     },
   ];
   return (
