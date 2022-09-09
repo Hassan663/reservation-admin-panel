@@ -1,4 +1,4 @@
-import { ADD_BOOKING_SLOT } from './actions';
+import { ADD_BOOKING_SLOT, DELETE_BOOKING_SLOT, GET_BOOKING_SLOT } from './actions';
 
 const initialState = {
   bookingSlots: [],
@@ -9,6 +9,7 @@ const initialState = {
 function bookingSlotsReducer(state = initialState, { type, payload }) {
   switch (type) {
     case ADD_BOOKING_SLOT.REQUEST:
+    case DELETE_BOOKING_SLOT.REQUEST:
       return { ...state, loading: true, error: false };
     case ADD_BOOKING_SLOT.SUCCESS:
       return {
@@ -19,6 +20,26 @@ function bookingSlotsReducer(state = initialState, { type, payload }) {
       };
     case ADD_BOOKING_SLOT.FAILURE:
       return { ...state, loading: false, error: payload.message };
+
+    case GET_BOOKING_SLOT.REQUEST:
+      return { ...state, loading: true, error: false };
+    case GET_BOOKING_SLOT.SUCCESS:
+      return { ...state, loading: true, error: false, bookingSlots: payload };
+    case GET_BOOKING_SLOT.FAILURE:
+      return { ...state, loading: false, error: payload.message };
+
+    case DELETE_BOOKING_SLOT.SUCCESS:
+      return {
+        ...state,
+        bookingSlots: state.bookingSlots.filter(tSlot => tSlot.id !== payload),
+      };
+    case DELETE_BOOKING_SLOT.FAILURE: {
+      return {
+        ...state,
+        loading: false,
+        error: payload,
+      };
+    }
     default:
       return state;
   }

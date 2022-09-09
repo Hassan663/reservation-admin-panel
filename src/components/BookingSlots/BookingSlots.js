@@ -8,14 +8,60 @@ import BookingSlotsActions from 'modules/bookingSlots/actions';
 
 export const BookingSlots = () => {
   const dispatch = useDispatch();
+  const { bookingSlots } = useSelector(state => state.bookingSlotsReducer);
+  const [timeSlots, setTimeSlots] = useState([]);
+
+  useEffect(() => {
+    dispatch(BookingSlotsActions.getBookingSlot.request());
+  }, []);
+
+  useEffect(() => {
+    setTimeSlots([...bookingSlots]);
+  }, [bookingSlots]);
+
+  const handleDeleteSlot = id => {
+    dispatch(BookingSlotsActions.deleteBookingSlot.request(id));
+  };
 
   const onFinish = ({ timeSlot }) => {
     const startTime = moment(timeSlot[0], ['HH:mm']).format('HH:mm');
     const endTime = moment(timeSlot[1], ['HH:mm']).format('HH:mm');
-    const timeSlots = { startTime, endTime };
-    console.log('okay?: ', timeSlots);
-    dispatch(BookingSlotsActions.addBookingSlot.request(timeSlots));
+    const timeWiseSlots = { startTime, endTime };
+    dispatch(BookingSlotsActions.addBookingSlot.request(timeWiseSlots));
   };
+
+  const columns = [
+    {
+      title: 'Time Slots',
+      align: 'left',
+      dataIndex: 'name',
+      key: 'name',
+      sort: true,
+      defaultSortOrder: 'descend',
+      sorter: (a, b) => a.name - b.name,
+      render: (text, record) => {
+        return (
+          <div className="name_contacts">{`${record.startTime.hour}:${record.startTime.minutes} to ${record.endTime.hour}:${record.endTime.minutes}`}</div>
+        );
+      },
+    },
+    {
+      title: 'Options',
+      align: 'left',
+      dataIndex: 'option',
+      key: 'option',
+      render: (text, record) => {
+        return (
+          <div id="a" style={{ display: 'flex', justifyContent: 'space-evenly' }}>
+            <a style={{ color: 'red' }} onClick={() => handleDeleteSlot(record.id)}>
+              {' '}
+              Delete
+            </a>
+          </div>
+        );
+      },
+    },
+  ];
 
   return (
     <div className="slot-container">
@@ -40,6 +86,18 @@ export const BookingSlots = () => {
                 </Button>
               </Form.Item>
             </Form>
+          </>
+        }
+      ></Card>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <Card
+        style={{ width: '100%' }}
+        content={
+          <>
+            <Table columns={columns} dataSource={timeSlots}></Table>
           </>
         }
       ></Card>

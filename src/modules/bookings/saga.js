@@ -6,9 +6,7 @@ import { getBookingsApi } from 'services/bookings';
 
 export function* handleGetBookings() {
   try {
-    console.log('Calling Get Booking');
     const { data } = yield call(getBookingsApi);
-    console.log('Response of getting Bookimgs', data.results);
     yield put(bookingsAction.getBookings.success(data.results));
   } catch (e) {
     yield put(bookingsAction.getBookings.failure(e));

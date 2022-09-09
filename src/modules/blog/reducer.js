@@ -16,8 +16,6 @@ function blogReducer(state = initialState, { type, payload }) {
         error: false,
       };
     case ADD_BLOG.SUCCESS:
-      console.log('Payload...', state.blogs);
-      console.log('Payload', payload);
       return {
         ...state,
         loading: true,

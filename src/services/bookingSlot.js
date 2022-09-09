@@ -20,3 +20,41 @@ export const addSlotApi = slott => {
       });
   });
 };
+
+export const getSlotApi = () => {
+  const token = getTokens();
+  return new Promise((resolve, reject) => {
+    axios
+      .get(`${USERS_BASE_URL}/slot`, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then(data => {
+        resolve(data);
+      })
+      .catch(error => {
+        reject(error);
+      });
+  });
+};
+
+export const deleteSlotApi = slotId => {
+  const token = getTokens();
+  return new Promise((resolve, reject) => {
+    axios
+      .delete(`${USERS_BASE_URL}/slot/${slotId}`, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then(data => {
+        resolve(data);
+      })
+      .catch(error => {
+        reject(error);
+      });
+  });
+};
