@@ -13,7 +13,13 @@ export const SideBarData = [
     icon: <HomeFilled />,
   },
   { path: '/bookings', cName: 'list-text', name: 'Bookings', key: '2', icon: <HomeFilled /> },
-
+  {
+    path: '/bookingSlots',
+    cName: 'list-text',
+    name: 'Booking Slots',
+    key: '2',
+    icon: <HomeFilled />,
+  },
   { path: '/adminChat', cName: 'list-text', name: 'Chat', key: '2', icon: <HomeFilled /> },
 ];
 export const subSidebarData = [

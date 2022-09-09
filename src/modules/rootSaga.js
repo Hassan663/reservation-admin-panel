@@ -13,6 +13,7 @@ import productWatcher from './product/saga';
 import menuWatcher from './menu/saga';
 import blogWatcher from './blog/saga';
 import notificationWatcher from './notification/saga';
+import bookingSlotWatcher from './bookingSlots/saga';
 import bookingsWatcher from './bookings/saga';
 
 export default function* rootSaga() {
@@ -30,6 +31,7 @@ export default function* rootSaga() {
     fork(menuWatcher),
     fork(productWatcher),
     fork(blogWatcher),
+    fork(bookingSlotWatcher),
     fork(notificationWatcher),
     fork(bookingsWatcher),
   ]);

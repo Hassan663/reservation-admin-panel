@@ -1,6 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import Chat from './components/Chat';
+import Main from './layouts/Main/Main';
+import PrivateRoute from 'PrivateRoute';
+import AddBlog from 'components/AddBlog';
 import { withRouter } from 'react-router';
-import { Routes as Switch, Navigate, Route, HashRouter, useLocation } from 'react-router-dom';
+import Bookings from 'components/Bookings';
+import AddCategory from 'components/AddCategory';
+import BookingSlots from 'components/BookingSlots';
 import {
   Login,
   SignUp,
@@ -12,12 +18,8 @@ import {
   AddProduct,
   AddEvent,
 } from './components';
-import Bookings from 'components/Bookings';
-import AddCategory from 'components/AddCategory';
-import AddBlog from 'components/AddBlog';
-import PrivateRoute from 'PrivateRoute';
-import Chat from './components/Chat';
-import Main from './layouts/Main/Main';
+import { Routes as Switch, Navigate, Route, HashRouter } from 'react-router-dom';
+
 const Routes = withRouter(({ location }) => {
   const [split, setSplit] = useState('');
   setInterval(() => {
@@ -81,6 +83,14 @@ const Routes = withRouter(({ location }) => {
               element={
                 <Main>
                   <Bookings />
+                </Main>
+              }
+            />
+            <Route
+              path="/bookingSlots"
+              element={
+                <Main>
+                  <BookingSlots />
                 </Main>
               }
             />
