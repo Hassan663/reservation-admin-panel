@@ -11,7 +11,8 @@ function bookingsReducer(state = initialState, { type, payload }) {
     case GET_BOOKINGS.REQUEST:
       return { ...state, loading: true, error: false };
     case GET_BOOKINGS.SUCCESS:
-      return { ...state, loading: false, error: false, bookings: payload.data };
+      console.log('Bookings........', payload);
+      return { ...state, loading: false, error: false, bookings: payload };
     case GET_BOOKINGS.FAILURE:
       return { ...state, loading: false, error: payload.message };
     default:

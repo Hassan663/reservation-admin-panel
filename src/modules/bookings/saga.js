@@ -6,8 +6,10 @@ import { getBookingsApi } from 'services/bookings';
 
 export function* handleGetBookings() {
   try {
-    const data = yield call(getBookingsApi);
-    yield put(bookingsAction.getBookings.success(data));
+    console.log('Calling Get Booking');
+    const { data } = yield call(getBookingsApi);
+    console.log('Response of getting Bookimgs', data.results);
+    yield put(bookingsAction.getBookings.success(data.results));
   } catch (e) {
     yield put(bookingsAction.getBookings.failure(e));
     antMessage.error(e.message, 2);
