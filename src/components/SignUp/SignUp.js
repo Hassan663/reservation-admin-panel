@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import './SignUp.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { message as antMessage } from 'antd';
 import { Form, Input, Button } from 'antd';
 import authActions from 'modules/auth/actions';
 
@@ -14,8 +15,16 @@ const SignUp = () => {
     if (signedUp) navigate('/login');
   }, [signedUp]);
 
-  const onFinish = values => {
-    dispatch(authActions.signup.request(values));
+    const onFinish = values => {
+    const {confirmPassword, ...rest} = values;
+    if(values.password !== confirmPassword)
+    {
+      antMessage.error("Password and Confirm Password are not the same");
+    }
+    else
+    {
+    dispatch(authActions.signup.request(rest));
+    }
   };
 
   const onFinishFailed = errorInfo => {
@@ -67,13 +76,13 @@ const SignUp = () => {
             >
               <Input.Password placeholder="Password" />
             </Form.Item>
-            {/* <Form.Item
+            <Form.Item
               name="confirmPassword"
               style={{ marginBottom: '10px' }}
               rules={[{ required: true, message: 'Please confirm your password again!' }]}
             >
               <Input.Password placeholder="Re Enter Password" />
-            </Form.Item> */}
+            </Form.Item>
             <Form.Item>
               <Button htmlType="submit" className="login-form-button">
                 SIGN UP
