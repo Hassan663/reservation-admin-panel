@@ -1,4 +1,9 @@
-import { ADD_BOOKING_SLOT, DELETE_BOOKING_SLOT, GET_BOOKING_SLOT } from './actions';
+import {
+  ADD_BOOKING_SLOT,
+  DELETE_BOOKING_SLOT,
+  GET_BOOKING_SLOT,
+  UPDATE_BOOKING_SLOT,
+} from './actions';
 
 const initialState = {
   bookingSlots: [],
@@ -38,6 +43,22 @@ function bookingSlotsReducer(state = initialState, { type, payload }) {
         ...state,
         loading: false,
         error: payload,
+      };
+    }
+    case UPDATE_BOOKING_SLOT.REQUEST: {
+      return { ...state, loading: true, error: false };
+    }
+    case UPDATE_BOOKING_SLOT.SUCCESS: {
+      return {
+        ...state,
+        loading: true,
+        error: false,
+        bookingSlots: [
+          ...state.bookingSlots.map(slots => {
+            if (slots.id === action.payload.data.id) return action.payload.data;
+            else return slots;
+          }),
+        ],
       };
     }
     default:

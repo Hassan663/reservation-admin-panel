@@ -34,8 +34,6 @@ function eventReducer(state = initialState, action) {
         error: false,
       };
     case DELETE_EVENT.SUCCESS:
-      console.log('Events', state.events);
-      console.log('Events', action.payload);
       return {
         ...state,
         loading: true,

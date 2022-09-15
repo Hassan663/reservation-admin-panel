@@ -6,6 +6,7 @@ import BookingSlotsActions, {
   ADD_BOOKING_SLOT,
   GET_BOOKING_SLOT,
   DELETE_BOOKING_SLOT,
+  UPDATE_BOOKING_SLOT,
 } from './actions';
 
 export function* handleAddBookingSlot(action) {
@@ -36,6 +37,17 @@ export function* handleDeleteBookingSlot(action) {
   } catch (error) {
     yield put(BookingSlotsActions.deleteBookingSlot.failure(error.message));
     antMessage.error(error.message, 2);
+  }
+}
+export function* handleUpdateBookingSlot(action) {
+  try {
+    console.log('In New Sagaaa');
+    const { data } = yield call(event.updateEvent, action.payload);
+    console.log('API respone in SAGA::: ', data);
+    yield put(BookingSlotsActions.updateBookingSlot.success({ eventId: action.payload.id, data }));
+    message.success('Time Slot Updated Successfully!', 2);
+  } catch (error) {
+    yield put(BookingSlotsActions.updateBookingSlot.failure(error));
   }
 }
 

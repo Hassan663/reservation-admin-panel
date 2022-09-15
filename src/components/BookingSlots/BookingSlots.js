@@ -2,14 +2,16 @@ import React, { useEffect, useState } from 'react';
 import './BookingSlots.scss';
 import moment from 'moment';
 import { Card } from 'components/Common';
-import { Form, TimePicker, Button, Table } from 'antd';
+import Label from 'components/Common/Label';
 import { useDispatch, useSelector } from 'react-redux';
+import { Form, Input, TimePicker, Button, Table, Modal } from 'antd';
 import BookingSlotsActions from 'modules/bookingSlots/actions';
 
 export const BookingSlots = () => {
   const dispatch = useDispatch();
   const { bookingSlots } = useSelector(state => state.bookingSlotsReducer);
   const [timeSlots, setTimeSlots] = useState([]);
+  const [editModal, setEditModal] = useState(false);
 
   useEffect(() => {
     dispatch(BookingSlotsActions.getBookingSlot.request());
@@ -18,6 +20,11 @@ export const BookingSlots = () => {
   useEffect(() => {
     setTimeSlots([...bookingSlots]);
   }, [bookingSlots]);
+
+  const handleEditSlot = id => {
+    localStorage.setItem('ProductId', id);
+    setEditModal(true);
+  };
 
   const handleDeleteSlot = id => {
     dispatch(BookingSlotsActions.deleteBookingSlot.request(id));
@@ -30,6 +37,13 @@ export const BookingSlots = () => {
     dispatch(BookingSlotsActions.addBookingSlot.request(timeWiseSlots));
   };
 
+  const handEditOKAY = () => {
+    setEditModal(false);
+  };
+
+  const handleEditCancel = () => {
+    setEditModal(false);
+  };
   const columns = [
     {
       title: 'Time Slots',
@@ -53,6 +67,9 @@ export const BookingSlots = () => {
       render: (text, record) => {
         return (
           <div id="a" style={{ display: 'flex', justifyContent: 'space-evenly' }}>
+            <a style={{ color: '#746abc' }}>
+              <span onClick={() => handleEditSlot(record._id)}>Edit</span>
+            </a>
             <a style={{ color: 'red' }} onClick={() => handleDeleteSlot(record.id)}>
               {' '}
               Delete
@@ -98,6 +115,51 @@ export const BookingSlots = () => {
         content={
           <>
             <Table columns={columns} dataSource={timeSlots}></Table>
+            <Modal
+              title="Edit Time Slot"
+              okText="SAVE"
+              width={600}
+              cancelText="CLOSE"
+              visible={editModal}
+              onOk={handEditOKAY}
+              onCancel={handleEditCancel}
+            >
+              <Card
+                style={{ width: '100%' }}
+                content={
+                  <>
+                    <Form
+                      name="basic"
+                      labelCol={{ span: 24 }}
+                      wrapperCol={{ span: 100 }}
+                      initialValues={{ remember: true }}
+                      autoComplete="off"
+                    >
+                      <div className="form-main">
+                        <Label title="Title" required={true}></Label>
+                        <Input
+                          name="name"
+                          maxLength="20"
+                          // value={updatedData?.name}
+                          // required
+                          // ref={refValue}
+                          // onChange={event => handleChangeEdit(event)}
+                        />
+                        <Label title="Description" required={true}></Label>
+                        <Input
+                          name="desc"
+                          maxLength="50"
+                          // value={updatedData?.desc}
+                          // required
+                          // ref={refValue}
+                          // onChange={event => handleChangeEdit(event)}
+                        />
+                      </div>
+                    </Form>
+                  </>
+                }
+              ></Card>
+            </Modal>
           </>
         }
       ></Card>

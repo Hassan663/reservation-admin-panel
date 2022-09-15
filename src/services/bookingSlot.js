@@ -58,3 +58,22 @@ export const deleteSlotApi = slotId => {
       });
   });
 };
+
+export const updateSlotApi = slotId => {
+  const token = getTokens();
+  return new Promise((resolve, reject) => {
+    axios
+      .patch(`${USERS_BASE_URL}/slot/${slotId}`, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then(data => {
+        resolve(data);
+      })
+      .catch(error => {
+        reject(error);
+      });
+  });
+};
