@@ -124,6 +124,7 @@ const OpenChat = ({ receiverinfo, openStaffModel, setOpenStaffModel, setShowChat
           //   await sendMessage(messageCollection, IDRef.current, message.text, user, 1);
           // }//doule grey tick
           else {
+            dispatch(authActions.handleLatesttime.request(endUserid));
             await sendMessage(
               messageCollection,
               IDRef.current,

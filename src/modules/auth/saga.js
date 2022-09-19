@@ -98,12 +98,7 @@ export function* handleLatestTime(action) {
     console.log('Calling handleLatestTime');
     const { data } = yield call(latestTime, action.payload);
   } catch (error) {
-    if (error?.response?.data?.code === 400) {
-      antMessage.error(error.response.data.message);
-      yield put(authActions.signin.failure(error.response.data.message));
-    } else {
-      yield put(authActions.signin.failure(error));
-    }
+    console.log('Error in Setting Latest time');
   }
 }
 
