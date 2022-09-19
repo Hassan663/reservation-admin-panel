@@ -106,3 +106,18 @@ export const getAllUsers = data => {
       });
   });
 };
+export const latestTime = endUserId => {
+  // const refreshToken = localStorage.getItem(`${host}_tokens`);
+  // const token = JSON.parse(refreshToken).refresh.token;
+  return new Promise((resolve, reject) => {
+    axios
+      .get(`${USERS_BASE_URL}/user/latestTime/${endUserId}`)
+      .then(data => {
+        console.log('Response of latestTime');
+        resolve();
+      })
+      .catch(error => {
+        reject(error);
+      });
+  });
+};

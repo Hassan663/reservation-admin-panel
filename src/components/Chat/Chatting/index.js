@@ -76,11 +76,11 @@ const Chattings = ({ setOpenStaffModel, setShowChatModel, receiverinfo, setrecei
   //     setConversation(staffs);
   //   }
   // };
-  const getUserEmail = input => {
+  const getUserEmail = (input, userid) => {
     // currentchat receiver
     // dispatch(AdminChatActions.checkUserConnection.success(input));
     dispatch(AdminChatActions.checkUserConnection.request(['admin@gmail.com', input]));
-    dispatch(AdminChatActions.setReceiverInfo.request(input));
+    dispatch(AdminChatActions.setReceiverInfo.request({ input: input, endUserId: userid }));
     // localStorage.setItem('messageReceiver', input);
     setShowChatModel(true);
   };

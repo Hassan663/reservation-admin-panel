@@ -1,6 +1,6 @@
 import { REQUEST, SUCCESS, FAILURE, createRequestTypes, action } from '../common/actions';
 import { message as antMessage } from 'antd';
-import { GET_ALL_CLIENTS } from './types';
+import { GET_ALL_CLIENTS, LATEST_TIME } from './types';
 export const SIGNUP = createRequestTypes('SIGNUP');
 
 export const SIGNIN = createRequestTypes('SIGNIN');
@@ -75,6 +75,26 @@ const authActions = {
     },
     failure: error => {
       return { type: GET_ALL_CLIENTS.FAILURE, payload: error };
+    },
+  },
+  handleLatesttime: {
+    request: data => {
+      return {
+        type: LATEST_TIME.request,
+        paylaod: data,
+      };
+    },
+    success: data => {
+      return {
+        type: LATEST_TIME.success,
+        payload: data,
+      };
+    },
+    failure: error => {
+      return {
+        type: LATEST_TIME.failure,
+        payload: error,
+      };
     },
   },
 };

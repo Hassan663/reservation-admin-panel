@@ -36,6 +36,7 @@ import { Drawer, Space, Button } from 'antd';
 import AdminChatActions from 'modules/adminChat/actions';
 import StaffDrawer from '../StaffDrawer';
 import adminChat from 'services/adminChat';
+import authActions from 'modules/auth/actions';
 const OpenChat = ({ receiverinfo, openStaffModel, setOpenStaffModel, setShowChatModel }) => {
   const dispatch = useDispatch();
   const [usersLogin, setUsersLogin] = useState([]);
@@ -107,6 +108,7 @@ const OpenChat = ({ receiverinfo, openStaffModel, setOpenStaffModel, setShowChat
           console.log(usersLogin, 'usersLogin', endUser, 'endUser', user, 'endUser');
           if (usersLogin.includes(receiverinfo.email) && endUser === user) {
             // if receiver end  user is the user logged in then it will set blue tick to current message
+            dispatch(authActions.handleLatesttime.request(endUserid));
             await sendMessage(
               messageCollection,
               IDRef.current,

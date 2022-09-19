@@ -1,6 +1,6 @@
 import { SIGNUP, SIGNIN, SIGNOUT, FORGOT_PASSWORD, CHANGE_PASSWORD } from './actions';
 
-import { GET_ALL_CLIENTS } from './types';
+import { GET_ALL_CLIENTS, LATEST_TIME } from './types';
 const initialState = {
   isLoggedIn: false,
   isSignedUp: false,
@@ -49,7 +49,12 @@ function authReducer(state = initialState, { type, payload }) {
         error: false,
         isLoggedIn: false,
       };
-
+    case LATEST_TIME:
+      return {
+        ...state,
+        loading: true,
+        error: false,
+      };
     case SIGNIN.SUCCESS:
       return {
         ...state,
