@@ -10,8 +10,9 @@ import {
   forgotPassword,
   changePassword,
   getAllUsers,
+  latestTime,
 } from '../../services/auth';
-import { GET_ALL_CLIENTS } from './types';
+import { GET_ALL_CLIENTS, LATEST_TIME } from './types';
 
 const forcedLogin = action => {
   action.payload.forced = 'true';
@@ -92,10 +93,19 @@ export function* handleChangePassword() {
     }
   }
 }
+export function* handleLatestTime(action) {
+  try {
+    console.log('Calling handleLatestTime');
+    const { data } = yield call(latestTime, action.payload);
+  } catch (error) {
+    console.log('Error in Setting Latest time');
+  }
+}
 
 export default function* signWatcher() {
   yield takeLatest(SIGNIN.REQUEST, handleSigninRequest);
   yield takeLatest(SIGNUP.REQUEST, handleSignupSubmit);
   yield takeLatest(SIGNOUT.REQUEST, handleSignout);
   yield takeLatest(GET_ALL_CLIENTS.REQUEST, handleGetAllClients);
+  yield takeLatest(LATEST_TIME.request, handleLatestTime);
 }
