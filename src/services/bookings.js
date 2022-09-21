@@ -20,3 +20,43 @@ export const getBookingsApi = () => {
       });
   });
 };
+
+export const cancelBookingsApi = (payload) => {
+  const token = getTokens();
+  return new Promise((resolve, reject) => {
+    axios
+      .post(`${USERS_BASE_URL}/booking/user/cancel` ,{
+        "bookingId": `${payload}`
+    },{
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then(data => {
+        resolve(data);
+      })
+      .catch(err => {
+        reject(err);
+      });
+  });
+};
+
+export const approveBookingsApi = (payload) => {
+  const token = getTokens();
+  console.log(token,payload);
+  return new Promise((resolve, reject) => {
+    axios
+      .patch(`${USERS_BASE_URL}/booking/approve/${payload}`,{},{
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then(data => {
+        resolve(data);
+      })
+      .catch(err => {
+        reject(err);
+      });
+  });
+};

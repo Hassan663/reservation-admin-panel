@@ -95,8 +95,8 @@ export function* handleChangePassword() {
 }
 export function* handleLatestTime(action) {
   try {
-    console.log('Calling handleLatestTime');
-    const { data } = yield call(latestTime, action.payload);
+    console.log('Calling handleLatestTime',action.paylaod);
+    const { data } = yield call(latestTime, action.paylaod);
   } catch (error) {
     console.log('Error in Setting Latest time');
   }
