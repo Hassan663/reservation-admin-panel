@@ -42,6 +42,16 @@ export const Bookings = () => {
       },
     },
     {
+      title: 'Phone Number',
+      align: 'left',
+      dataIndex: `phone`,
+      key: 'phone',
+      defaultSortOrder: 'descend',
+      render: (text, record) => {
+        return <div>{record.user.phone}</div>;
+      },
+    },
+    {
       title: 'Reservation Date',
       align: 'left',
       dataIndex: 'date',
