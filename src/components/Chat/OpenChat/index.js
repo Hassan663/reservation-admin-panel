@@ -108,6 +108,7 @@ const OpenChat = ({ receiverinfo, openStaffModel, setOpenStaffModel, setShowChat
           console.log(usersLogin, 'usersLogin', endUser, 'endUser', user, 'endUser');
           if (usersLogin.includes(receiverinfo.email) && endUser === user) {
             // if receiver end  user is the user logged in then it will set blue tick to current message
+            console.log("dea",endUserid);
             dispatch(authActions.handleLatesttime.request(endUserid));
             await sendMessage(
               messageCollection,
@@ -124,6 +125,7 @@ const OpenChat = ({ receiverinfo, openStaffModel, setOpenStaffModel, setShowChat
           //   await sendMessage(messageCollection, IDRef.current, message.text, user, 1);
           // }//doule grey tick
           else {
+            console.log("dea",endUserid);
             dispatch(authActions.handleLatesttime.request(endUserid));
             await sendMessage(
               messageCollection,

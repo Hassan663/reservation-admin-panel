@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Booking.scss';
 import moment from 'moment';
-import { Table } from 'antd';
+import { Table, Button } from 'antd';
 import { Card } from 'components/Common';
 import bookingsAction from 'modules/bookings/actions';
 import { useDispatch, useSelector } from 'react-redux';
@@ -19,7 +19,7 @@ export const Bookings = () => {
   useEffect(() => {
     setBookingsData(bookings);
   }, [bookings]);
-
+  console.log(bookingsData);
   const columns = [
     {
       title: 'Name',
@@ -75,6 +75,16 @@ export const Bookings = () => {
         return <div>{!record.cancelled ? 'No' : 'Yes'}</div>;
       },
     },
+    {
+      title: 'Approved',
+      align: 'left',
+      dataIndex: 'approved',
+      key: 'approved',
+      defaultSortOrder: 'descend',
+      render: (text, record) => {
+        return <div>{!record.approved ? 'No' : 'Yes'}</div>;
+      },
+    },
 
     {
       title: 'Total Persons',
@@ -101,6 +111,40 @@ export const Bookings = () => {
       defaultSortOrder: 'descend',
       render: (text, record) => {
         return <div>{record.bookingSlot.unReservedTable}</div>;
+      },
+    },
+    ,
+    {
+      title: 'Action',
+      key: 'action',
+      render: record => {
+        return (
+          <>
+          <Button
+            danger
+            disabled={record.approved && record.cancelled ? true : record.cancelled ? true: ''}
+            style={{margin:"5px"}}
+            onClick={e => {
+              console.log("canceled")
+              dispatch(bookingsAction.cancelBookings.request(record.id));
+              setTimeout(() => dispatch(bookingsAction.getBookings.request()),500)
+              // dispatch(bookingsAction.getBookings.request());
+            }}
+          >
+            Cancel
+          </Button>
+          <Button
+            danger
+            disabled={ record.cancelled ? true:record.approved}
+            onClick={e => {
+              dispatch(bookingsAction.approveBookings.request(record.id));
+              setTimeout(() => dispatch(bookingsAction.getBookings.request()),500)
+            }}
+          >
+            Approved
+          </Button>
+          </>
+        );
       },
     },
   ];

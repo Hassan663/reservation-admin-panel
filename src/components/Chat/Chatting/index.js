@@ -79,6 +79,7 @@ const Chattings = ({ setOpenStaffModel, setShowChatModel, receiverinfo, setrecei
   const getUserEmail = (input, userid) => {
     // currentchat receiver
     // dispatch(AdminChatActions.checkUserConnection.success(input));
+    console.log(input,userid);
     dispatch(AdminChatActions.checkUserConnection.request(['admin@gmail.com', input]));
     dispatch(AdminChatActions.setReceiverInfo.request({ input: input, endUserId: userid }));
     // localStorage.setItem('messageReceiver', input);
@@ -113,9 +114,10 @@ const Chattings = ({ setOpenStaffModel, setShowChatModel, receiverinfo, setrecei
           <div className="admin_chat_side_inner_wrapper_u">
             <div style={{ overflowY: 'auto', height: '100%' }}>
               {conversation.map((user, index) => {
+                console.log(user);
                 return (
                   <SingleChat
-                    id={user._id}
+                    id={user.id}
                     key={index}
                     role={user.role}
                     time={user.time}

@@ -14,7 +14,7 @@ import menuWatcher from './menu/saga';
 import blogWatcher from './blog/saga';
 import notificationWatcher from './notification/saga';
 import bookingSlotWatcher from './bookingSlots/saga';
-import bookingsWatcher from './bookings/saga';
+import {bookingsWatcher,cancelBookingsWatcher,approveBookingsWatcher} from './bookings/saga';
 
 export default function* rootSaga() {
   yield all([
@@ -34,5 +34,7 @@ export default function* rootSaga() {
     fork(bookingSlotWatcher),
     fork(notificationWatcher),
     fork(bookingsWatcher),
+    fork(cancelBookingsWatcher),
+    fork(approveBookingsWatcher)
   ]);
 }

@@ -79,6 +79,7 @@ const authActions = {
   },
   handleLatesttime: {
     request: data => {
+      console.log("action",data);
       return {
         type: LATEST_TIME.request,
         paylaod: data,
