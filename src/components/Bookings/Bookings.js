@@ -19,7 +19,6 @@ export const Bookings = () => {
   useEffect(() => {
     setBookingsData(bookings);
   }, [bookings]);
-  console.log(bookingsData);
   const columns = [
     {
       title: 'Name',
@@ -125,10 +124,8 @@ export const Bookings = () => {
             disabled={record.approved && record.cancelled ? true : record.cancelled ? true: ''}
             style={{margin:"5px"}}
             onClick={e => {
-              console.log("canceled")
               dispatch(bookingsAction.cancelBookings.request(record.id));
               setTimeout(() => dispatch(bookingsAction.getBookings.request()),500)
-              // dispatch(bookingsAction.getBookings.request());
             }}
           >
             Cancel
