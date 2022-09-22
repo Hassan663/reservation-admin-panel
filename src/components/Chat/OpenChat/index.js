@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef,useContext } from 'react';
 import '../../../theme/base.scss';
 import './opnechat.scss';
 import TextMessage from '../TextMessage';
@@ -8,6 +8,7 @@ import {
 } from '../../../constants/config/FirebaseConnection';
 import { collection } from 'firebase/firestore';
 import { useDispatch, useSelector } from 'react-redux';
+import { SocketContext } from 'constants/context/socket';
 import 'moment-timezone';
 import OpenChatStaffHeader from '../OpenChhatStaffHeader';
 import OpenChatGroupHeader from '../OpenChatGroupHeader';
@@ -37,8 +38,9 @@ import AdminChatActions from 'modules/adminChat/actions';
 import StaffDrawer from '../StaffDrawer';
 import adminChat from 'services/adminChat';
 import authActions from 'modules/auth/actions';
-const OpenChat = ({ receiverinfo, openStaffModel, setOpenStaffModel, setShowChatModel }) => {
+const OpenChat = ({ receiverinfo, openStaffModel, setOpenStaffModel, setShowChatModel ,socket}) => {
   const dispatch = useDispatch();
+  // const socket = useContext(SocketContext);
   const [usersLogin, setUsersLogin] = useState([]);
   const formdata = new FormData();
   // localStorage.setItem('loggedInUserId', 'admin@gmail.com');
@@ -110,6 +112,7 @@ const OpenChat = ({ receiverinfo, openStaffModel, setOpenStaffModel, setShowChat
             // if receiver end  user is the user logged in then it will set blue tick to current message
             console.log("dea",endUserid);
             dispatch(authActions.handleLatesttime.request(endUserid));
+          socket.emit('latestListen'); // socket event function
             await sendMessage(
               messageCollection,
               IDRef.current,
@@ -127,6 +130,7 @@ const OpenChat = ({ receiverinfo, openStaffModel, setOpenStaffModel, setShowChat
           else {
             console.log("dea",endUserid);
             dispatch(authActions.handleLatesttime.request(endUserid));
+          socket.on('latestListen'); // socket event function
             await sendMessage(
               messageCollection,
               IDRef.current,

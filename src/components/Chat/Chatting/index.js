@@ -45,7 +45,13 @@ import { Link } from 'react-router-dom';
 const { Header, Footer, Sider, Content } = Layout;
 let user = localStorage.getItem('userloggedin');
 
-const Chattings = ({ setOpenStaffModel, setShowChatModel, receiverinfo, setreceiverinfo }) => {
+const Chattings = ({
+  setOpenStaffModel,
+  setShowChatModel,
+  receiverinfo,
+  setreceiverinfo,
+  socket,
+}) => {
   const dispatch = useDispatch();
   const { allUsers } = useSelector(state => state.authReducer);
   const [stafchat, setStaffChat] = useState(true);
@@ -60,6 +66,12 @@ const Chattings = ({ setOpenStaffModel, setShowChatModel, receiverinfo, setrecei
   useEffect(() => {
     dispatch(authActions.getAllClients.request());
   }, []);
+
+  useEffect(() => {
+    socket?.on('adminListen', () => {
+      dispatch(authActions.getAllClients.request());
+    });
+  }, [socket]);
   useEffect(() => {
     setConversation([...allUsers]);
     // console.log('All Users in Chat', allUsers);
@@ -79,7 +91,7 @@ const Chattings = ({ setOpenStaffModel, setShowChatModel, receiverinfo, setrecei
   const getUserEmail = (input, userid) => {
     // currentchat receiver
     // dispatch(AdminChatActions.checkUserConnection.success(input));
-    console.log(input,userid);
+    console.log(input, userid);
     dispatch(AdminChatActions.checkUserConnection.request(['admin@gmail.com', input]));
     dispatch(AdminChatActions.setReceiverInfo.request({ input: input, endUserId: userid }));
     // localStorage.setItem('messageReceiver', input);
