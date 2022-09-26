@@ -45,7 +45,13 @@ import { Link } from 'react-router-dom';
 const { Header, Footer, Sider, Content } = Layout;
 let user = localStorage.getItem('userloggedin');
 
-const Chattings = ({ setOpenStaffModel, setShowChatModel, receiverinfo, setreceiverinfo }) => {
+const Chattings = ({
+  setOpenStaffModel,
+  setShowChatModel,
+  receiverinfo,
+  setreceiverinfo,
+  socket,
+}) => {
   const dispatch = useDispatch();
   const { allUsers } = useSelector(state => state.authReducer);
   const [stafchat, setStaffChat] = useState(true);
@@ -60,6 +66,12 @@ const Chattings = ({ setOpenStaffModel, setShowChatModel, receiverinfo, setrecei
   useEffect(() => {
     dispatch(authActions.getAllClients.request());
   }, []);
+
+  useEffect(() => {
+    socket?.on('adminListen', () => {
+      dispatch(authActions.getAllClients.request());
+    });
+  }, [socket]);
   useEffect(() => {
     setConversation([...allUsers]);
     // console.log('All Users in Chat', allUsers);
@@ -76,11 +88,12 @@ const Chattings = ({ setOpenStaffModel, setShowChatModel, receiverinfo, setrecei
   //     setConversation(staffs);
   //   }
   // };
-  const getUserEmail = input => {
+  const getUserEmail = (input, userid) => {
     // currentchat receiver
     // dispatch(AdminChatActions.checkUserConnection.success(input));
+    console.log(input, userid);
     dispatch(AdminChatActions.checkUserConnection.request(['admin@gmail.com', input]));
-    dispatch(AdminChatActions.setReceiverInfo.request(input));
+    dispatch(AdminChatActions.setReceiverInfo.request({ input: input, endUserId: userid }));
     // localStorage.setItem('messageReceiver', input);
     setShowChatModel(true);
   };
@@ -113,9 +126,10 @@ const Chattings = ({ setOpenStaffModel, setShowChatModel, receiverinfo, setrecei
           <div className="admin_chat_side_inner_wrapper_u">
             <div style={{ overflowY: 'auto', height: '100%' }}>
               {conversation.map((user, index) => {
+                console.log(user);
                 return (
                   <SingleChat
-                    id={user._id}
+                    id={user.id}
                     key={index}
                     role={user.role}
                     time={user.time}

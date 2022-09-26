@@ -1,20 +1,51 @@
-import { HomeFilled } from '@ant-design/icons';
+import {
+  HomeFilled,
+  ShopFilled,
+  NotificationFilled,
+  CopyFilled,
+  SlidersFilled,
+  CheckSquareFilled,
+  ClockCircleFilled,
+  WechatFilled,
+} from '@ant-design/icons';
 export const SideBarData = [
-  // { path: '', cName: 'list-text', name: 'Dashboard', key: '1', icon: <HomeFilled /> },
-  // { path: '/menu', cName: 'list-text', name: 'Menu', key: '2', icon: <HomeFilled /> },
-  { path: '/addProduct', cName: 'list-text', name: 'Add Product', key: '2', icon: <HomeFilled /> },
-  { path: '/addEvent', cName: 'list-text', name: 'Add Event', key: '2', icon: <HomeFilled /> },
-  { path: '/addBlog', cName: 'list-text', name: 'Add Blog', key: '2', icon: <HomeFilled /> },
+  {
+    path: '/addProduct',
+    cName: 'list-text',
+    name: 'Add Product',
+    key: '2',
+    icon: <ShopFilled />,
+  },
+  {
+    path: '/addEvent',
+    cName: 'list-text',
+    name: 'Add Event',
+    key: '2',
+    icon: <NotificationFilled />,
+  },
+  { path: '/addBlog', cName: 'list-text', name: 'Add Blog', key: '2', icon: <CopyFilled /> },
   {
     path: '/addCategory',
     cName: 'list-text',
     name: 'Add Category',
     key: '2',
-    icon: <HomeFilled />,
+    icon: <SlidersFilled />,
   },
-  { path: '/bookings', cName: 'list-text', name: 'Bookings', key: '2', icon: <HomeFilled /> },
-
-  { path: '/adminChat', cName: 'list-text', name: 'Chat', key: '2', icon: <HomeFilled /> },
+  {
+    path: '/bookings',
+    cName: 'list-text',
+    name: 'Bookings',
+    key: '2',
+    icon: <CheckSquareFilled />,
+  },
+  {
+    path: '/bookingSlots',
+    cName: 'list-text',
+    name: 'Booking Slots',
+    key: '2',
+    icon: <ClockCircleFilled />,
+  },
+  { path: '/adminChat', cName: 'list-text', name: 'Chat', key: '2', icon: <WechatFilled /> },
 ];
 export const subSidebarData = [
   { path: '/dashboard/roles', cName: 'list-text', name: 'Roles', key: '8' },

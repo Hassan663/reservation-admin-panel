@@ -10,6 +10,8 @@ import menuReducer from './menu/reducer';
 import notificationReducer from './notification/reducer';
 import bookingsReducer from './bookings/reducer';
 import blogReducer from './blog/reducer';
+import bookingSlotsReducer from './bookingSlots/reducer';
+
 const rootReducer = history =>
   combineReducers({
     router: connectRouter(history),
@@ -21,6 +23,7 @@ const rootReducer = history =>
     menuReducer,
     notificationReducer,
     bookingsReducer,
+    bookingSlotsReducer,
     blogReducer,
   });
 export default rootReducer;

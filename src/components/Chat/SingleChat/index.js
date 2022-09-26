@@ -32,7 +32,8 @@ const SingleChat = ({
     <div
       className="singlechat_main_container"
       onClick={async () => {
-        func(email);
+        console.log(id);
+        func(email, id);
         setreceiverinfo({ ...receiverinfo, name: name, role: role, email: email, type: 'chat' });
         // await setCurrentUserChat(id, email);
         // dispatch(adminChat.getSingleUserToken.request(id));

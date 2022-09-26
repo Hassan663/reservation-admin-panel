@@ -3,3 +3,8 @@ export const GET_ALL_CLIENTS = {
   SUCCESS: 'GET_ALL_CLIENTS_SUCCESS',
   FAILURE: 'GET_ALL_CLIENTS_FAILURE',
 };
+export const LATEST_TIME = {
+  request: 'LATEST_TIME_REQUEST',
+  success: 'LATEST_TIME_SUCCESS',
+  failure: 'LATEST_TIME_FAILURE',
+};
