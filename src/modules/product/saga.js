@@ -38,9 +38,9 @@ export function* handleUpdateProduct({ payload }) {
     yield put(productActions.updateProduct.failure(error));
   }
 }
-export function* handleFetchProduct() {
+export function* handleFetchProduct({ payload }) {
   try {
-    const { data } = yield call(product.fetchProduct);
+    const { data } = yield call(product.fetchProduct, payload);
     yield put(productActions.fetchProduct.success(data.product));
   } catch (error) {
     yield put(productActions.fetchProduct.failure(error));

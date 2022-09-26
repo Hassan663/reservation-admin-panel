@@ -23,6 +23,7 @@ export const AddProduct = () => {
   useEffect(() => {
     dispatch(categoryActions.getCategory.request());
     createUser('admin@gmail.com');
+    dispatch(productActions.fetchProduct.request('page=1'));
   }, []);
   let SelectedProduct = proddata.filter(obj => obj._id === ProductId)[0];
 
@@ -45,7 +46,7 @@ export const AddProduct = () => {
   const [productdata, setProductData] = useState(initialvalues);
   const [file, setFile] = useState('');
   const { Option } = Select;
-  console.log(updatedData);
+
   const handleChange = event => {
     const { name, value } = event.target;
     setProductData({ ...productdata, [name]: value });
@@ -219,9 +220,9 @@ export const AddProduct = () => {
     // SelectedProduct = ''
   };
 
-  useEffect(() => {
-    dispatch(productActions.fetchProduct.request('page=1'));
-  }, []);
+  // useEffect(() => {
+  //   dispatch(productActions.fetchProduct.request());
+  // }, []);
 
   useEffect(() => {
     if (products.length > 0) {
