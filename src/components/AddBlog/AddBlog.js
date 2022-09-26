@@ -107,7 +107,7 @@ export const AddBlog = () => {
             <div>
               <img
                 style={{ height: '32px', width: '32px', borderRadius: '50px' }}
-                src={`${USERS_BASE_URL}/uploads/${record.blogPicture[0]?.img}`}
+                src={record.blogPicture[0]?.img}
                 fallback={defaultLogo}
                 preview={false}
               />
