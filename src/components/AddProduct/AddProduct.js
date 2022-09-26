@@ -148,7 +148,7 @@ export const AddProduct = () => {
             <div>
               <img
                 style={{ height: '32px', width: '32px', borderRadius: '50px' }}
-                src={`${USERS_BASE_URL}/uploads/${record.productPicture[0]?.img}`}
+                src={record?.productPicture[0]?.img}
                 fallback={defaultLogo}
                 preview={false}
               />
