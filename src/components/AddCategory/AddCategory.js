@@ -78,7 +78,7 @@ export const AddCategory = () => {
                   <Input placeholder="category" />
                 </Form.Item>
                 <Form.Item>
-                  <Button htmlType="submit" className="product-btn">
+                  <Button htmlType="submit" className="product-btn" loading={loading}>
                     Add Category
                   </Button>
                 </Form.Item>

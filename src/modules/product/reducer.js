@@ -4,6 +4,7 @@ const initialState = {
   error: false,
   products: [],
   product: {},
+  totalProducts: 0,
 };
 
 function productReducer(state = { ...initialState }, action) {
@@ -11,7 +12,7 @@ function productReducer(state = { ...initialState }, action) {
     case ADD_PRODUCT.REQUEST:
       return {
         ...state,
-        loading: false,
+        loading: true,
         error: false,
       };
 
@@ -32,7 +33,7 @@ function productReducer(state = { ...initialState }, action) {
     case DELETE_PRODUCT.REQUEST:
       return {
         ...state,
-        loading: false,
+        loading: true,
         error: false,
       };
 
@@ -52,7 +53,7 @@ function productReducer(state = { ...initialState }, action) {
     case UPDATE_PRODUCT.REQUEST:
       return {
         ...state,
-        loading: false,
+        loading: true,
         error: false,
       };
 
@@ -78,7 +79,7 @@ function productReducer(state = { ...initialState }, action) {
     case FETCH_PRODUCT.REQUEST:
       return {
         ...state,
-        loading: false,
+        loading: true,
         error: false,
       };
 
@@ -87,7 +88,8 @@ function productReducer(state = { ...initialState }, action) {
         ...state,
         loading: false,
         error: false,
-        products: [...action.payload],
+        totalProducts:action.payload.productCount,
+        products: [...action.payload.product],
       };
     case FETCH_PRODUCT.FAILURE:
       return {

@@ -9,6 +9,7 @@ import {
   Modal,
   Table,
   Typography,
+  Spin,
 } from 'antd';
 import defaultLogo from '../../assets/images/hero-image.png';
 import { Card } from 'components/Common';
@@ -29,7 +30,7 @@ export const AddProduct = () => {
   };
   const [isEditModalVisible, setIsEditModalVisible] = useState(false);
   const refValue = useRef(null);
-  const { events, event } = useSelector(state => state.eventReducer);
+  const { events, event, totalEvents,loading } = useSelector(state => state.eventReducer);
   const [productdata, setProductData] = useState(initialvalues);
   const [eventdata, setEventData] = useState([]);
   const [file, setFile] = useState('');
@@ -37,6 +38,24 @@ export const AddProduct = () => {
   const EventId = localStorage.getItem('EventId');
   let SelectedEvent = eventdata.filter(obj => obj.id === EventId)[0];
   const [updatedData, setUpdatedData] = useState();
+  const [currentPage, setCurrentPage] = useState(1);
+
+  useEffect(() => {
+    dispatch(EventActions.fetchEvent.request(currentPage));
+  }, []);
+
+  const handlePageChange = page => {
+    setCurrentPage(page);
+    dispatch(EventActions.fetchEvent.request(page));
+  };
+  const tableProps = {
+    pagination: {
+      total: totalEvents,
+      pageSize: 8,
+      current: currentPage,
+      onChange: handlePageChange,
+    },
+  };
 
   useEffect(() => {
     setUpdatedData(SelectedEvent);
@@ -215,16 +234,12 @@ export const AddProduct = () => {
   };
 
   useEffect(() => {
-    dispatch(EventActions.fetchEvent.request('page=1'));
-  }, []);
-
-  useEffect(() => {
     if (events.length > 0) {
       setEventData(events);
     }
   }, [events]);
 
-  const EditableFile = `${USERS_BASE_URL}/uploads/${SelectedEvent?.eventPicture[0]?.img}`;
+  const EditableFile = SelectedEvent?.eventPicture[0]?.img;
 
   return (
     <div className="profile-main">
@@ -307,6 +322,7 @@ export const AddProduct = () => {
                 marginTop: '20px',
               }}
               onClick={e => handleSubmit(e)}
+              loading={loading}
             >
               Add Event
             </Button>
@@ -321,7 +337,21 @@ export const AddProduct = () => {
         style={{ width: '100%' }}
         content={
           <>
-            <Table columns={columns} dataSource={eventdata}></Table>
+            {loading ? (
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  height: '100vh',
+                }}
+              >
+                {/* <h1>loading</h1> */}
+                <Spin size="large" />
+              </div>
+            ) : (
+              <Table columns={columns} dataSource={eventdata} {...tableProps}></Table>
+            )}
             <Modal
               title="Edit Event"
               okText="SAVE"

@@ -6,39 +6,58 @@ import productActions from 'modules/product/actions';
 import categoryActions from 'modules/category/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import defaultLogo from '../../assets/images/hero-image.png';
-import { Select, Form, Input, Button, InputNumber, Image, Modal, Table, Typography } from 'antd';
+import { Select, Form, Input, Button, InputNumber, Image, Modal, Table, Typography ,Spin,message} from 'antd';
 import { USERS_BASE_URL } from 'constants/config/config.dev';
 import { createUser } from '../../components/commonActions/FirebaseActions';
 
 export const AddProduct = () => {
-  const [isEditModalVisible, setIsEditModalVisible] = useState(false);
-  const { products, product } = useSelector(state => state.productReducer);
-  const [proddata, setproddata] = useState([]);
-  const [fileEdit, setFileEdit] = useState('');
-  const ProductId = localStorage.getItem('ProductId');
-
-  const [updatedData, setUpdatedData] = useState();
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(categoryActions.getCategory.request());
-    createUser('admin@gmail.com');
-  }, []);
+  const [isEditModalVisible, setIsEditModalVisible] = useState(false);
+  const { products, product, totalProducts,loading } = useSelector(state => state.productReducer);
+  const [proddata, setproddata] = useState([]);
+  const [fileEdit, setFileEdit] = useState('');
+  const [updatedData, setUpdatedData] = useState();
+  const ProductId = localStorage.getItem('ProductId');
+  const [currentPage, setCurrentPage] = useState(1);
+  const categoryData = useSelector(state => state.categoryReducer.category);
   let SelectedProduct = proddata.filter(obj => obj._id === ProductId)[0];
 
   useEffect(() => {
+    dispatch(productActions.fetchProduct.request(currentPage));
+    dispatch(categoryActions.getCategory.request());
+    createUser('admin@gmail.com');
+  }, []);
+  useEffect(() => {
+    if (products.length > 0) {
+    setproddata([...products]);
+    }
+  }, [products]);
+  useEffect(() => {
     setUpdatedData(SelectedProduct);
   }, [SelectedProduct]);
-  useEffect(() => {
-    setproddata([...products]);
-  }, [products]);
-  const categoryData = useSelector(state => state.categoryReducer.category);
+
+  const handlePageChange = page => {
+    setCurrentPage(page);
+    dispatch(productActions.fetchProduct.request(page));
+  };
+  const tableProps = {
+    pagination: {
+      total: totalProducts,
+      pageSize: 8,
+      current: currentPage,
+      onChange: handlePageChange,
+    },
+  };
+
+  console.log(products, totalProducts);
+
 
   const initialvalues = {
     name: '',
     desc: '',
     price: 0,
-    phone: '',
+    category: '',
     productPicture: '',
   };
   const refValue = useRef(null);
@@ -88,7 +107,19 @@ export const AddProduct = () => {
     formData.append('category', productdata.category);
     formData.append('productPicture', productdata.productPicture);
 
-    dispatch(productActions.addProduct.request(formData));
+    if (productdata.name && productdata.desc && productdata.price && productdata.category) {
+      dispatch(productActions.addProduct.request(formData));
+      setProductData({
+        ...productdata,
+        name: '',
+        desc: '',
+        price: 0,
+        phone: '',
+        productPicture: '',
+      });
+    } else {
+      message.error('kindly fill the form');
+    }
   };
   /////////////////// Edit Functionality ////////////////////
   const handleChangeEdit = event => {
@@ -219,17 +250,7 @@ export const AddProduct = () => {
     // SelectedProduct = ''
   };
 
-  useEffect(() => {
-    dispatch(productActions.fetchProduct.request('page=1'));
-  }, []);
-
-  useEffect(() => {
-    if (products.length > 0) {
-      setproddata(products);
-    }
-  }, [products]);
-
-  const EditableFile = `${USERS_BASE_URL}/uploads/${SelectedProduct?.productPicture[0]?.img}`;
+  const EditableFile = SelectedProduct?.productPicture[0]?.img;
   return (
     <div className="profile-main">
       <div className="header_profile">
@@ -338,6 +359,7 @@ export const AddProduct = () => {
                 marginTop: '20px',
               }}
               onClick={e => handleSubmit(e)}
+              loading={loading}
             >
               Add Product
             </Button>
@@ -352,7 +374,12 @@ export const AddProduct = () => {
         style={{ width: '100%' }}
         content={
           <>
-            <Table columns={columns} dataSource={proddata}></Table>
+            {loading ? (<div style={{display:'flex',justifyContent: 'center',alignItems: 'center',height:'100vh'}}>
+      {/* <h1>loading</h1> */}
+      <Spin size="large" />
+    </div>):(
+            <Table columns={columns} dataSource={proddata} {...tableProps}></Table>
+    )}
             <Modal
               title="Edit Product"
               okText="SAVE"

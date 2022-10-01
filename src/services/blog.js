@@ -9,6 +9,6 @@ const api = {
   addBlog: data => request.post('/blog', data),
   deleteBlog: id => request.delete(`/blog/${id}`),
   updateBlog: ({data,id}) => request.patch(`/blog/${id}`,data),
-  fetchBlog: () => request.get('/blog'),
+  fetchBlog: (payload) => request.get(`/blog?page=${payload}`),
 };
 export default apiWrapper(api);

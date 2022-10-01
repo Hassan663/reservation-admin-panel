@@ -14,6 +14,7 @@ function categoryReducer(state = initialState, { type, payload }) {
     case DELETE_CATEGORY.SUCCESS:
       return {
         ...state,
+        loading:false,
         category: state.category.filter(cat => cat.id !== payload),
       };
 
@@ -34,7 +35,7 @@ function categoryReducer(state = initialState, { type, payload }) {
     case GET_CATEGORY.REQUEST:
       return { ...state, loading: true, error: false };
     case GET_CATEGORY.SUCCESS:
-      return { ...state, loading: true, error: false, category: payload.data };
+      return { ...state, loading: false, error: false, category: payload.data };
     case GET_CATEGORY.FAILURE:
       return { ...state, loading: false, error: payload.message };
     case DELETE_CATEGORY.FAILURE: {

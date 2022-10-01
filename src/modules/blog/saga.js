@@ -39,7 +39,7 @@ export function* handleFetchBlog({ payload }) {
   try {
     const { data } = yield call(blog.fetchBlog, payload);
     console.log(data);
-    yield put(blogActions.fetchBlog.success(data.blog));
+    yield put(blogActions.fetchBlog.success(data));
   } catch (error) {
     yield put(blogActions.fetchBlog.failure(error));
   }

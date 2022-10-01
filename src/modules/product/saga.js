@@ -7,6 +7,7 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 export function* handleAddProduct({ payload }) {
   try {
     const data = yield call(product.addProduct, payload);
+    console.log(data);
     yield put(productActions.addProduct.success(data));
     antMessage.success('Product Added Successfully!', 2);
     yield put(productActions.fetchProduct.request());
@@ -38,10 +39,12 @@ export function* handleUpdateProduct({ payload }) {
     yield put(productActions.updateProduct.failure(error));
   }
 }
-export function* handleFetchProduct() {
+export function* handleFetchProduct(action) {
   try {
-    const { data } = yield call(product.fetchProduct);
-    yield put(productActions.fetchProduct.success(data.product));
+    console.log(action)
+    const { data } = yield call(product.fetchProduct, action.payload);
+    console.log(data);
+    yield put(productActions.fetchProduct.success(data));
   } catch (error) {
     yield put(productActions.fetchProduct.failure(error));
   }

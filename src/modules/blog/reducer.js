@@ -5,6 +5,7 @@ const initialState = {
   error: false,
   blogs: [],
   blog: {},
+  totalBlogs:0
 };
 
 function blogReducer(state = initialState, { type, payload }) {
@@ -18,14 +19,14 @@ function blogReducer(state = initialState, { type, payload }) {
     case ADD_BLOG.SUCCESS:
       return {
         ...state,
-        loading: true,
+        loading: false,
         blogs: [...state.blogs, payload],
         error: false,
       };
     case ADD_BLOG.FAILURE:
       return {
         ...state,
-        loading: true,
+        loading: false,
         error: false,
       };
     case DELETE_BLOG.REQUEST:
@@ -38,13 +39,13 @@ function blogReducer(state = initialState, { type, payload }) {
       return {
         ...state,
         blogs: [...state.blogs.filter(blog => blog.id !== payload)],
-        loading: true,
+        loading: false,
         error: false,
       };
     case DELETE_BLOG.FAILURE:
       return {
         ...state,
-        loading: true,
+        loading: false,
         error: false,
       };
     case UPDATE_BLOG.REQUEST:
@@ -56,7 +57,7 @@ function blogReducer(state = initialState, { type, payload }) {
     case UPDATE_BLOG.SUCCESS:
       return {
         ...state,
-        loading: true,
+        loading: false,
         error: false,
         blogs: [
           ...state.blogs.map(blog => {
@@ -68,7 +69,7 @@ function blogReducer(state = initialState, { type, payload }) {
     case UPDATE_BLOG.FAILURE:
       return {
         ...state,
-        loading: true,
+        loading: false,
         error: false,
       };
     case FETCH_BLOG.REQUEST:
@@ -81,14 +82,15 @@ function blogReducer(state = initialState, { type, payload }) {
       console.log(payload);
       return {
         ...state,
-        loading: true,
+        loading: false,
         error: false,
-        blogs: [...payload],
+        blogs: [...payload.blog],
+        totalBlogs:payload.BlogCount
       };
     case FETCH_BLOG.FAILURE:
       return {
         ...state,
-        loading: true,
+        loading: false,
         error: false,
       };
     default: {

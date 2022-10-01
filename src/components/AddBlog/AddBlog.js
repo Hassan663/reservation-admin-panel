@@ -4,22 +4,42 @@ import { Card } from 'components/Common';
 import { useDispatch, useSelector } from 'react-redux';
 import Label from 'components/Common/Label';
 import blogActions from 'modules/blog/actions';
-import { Form, Input, Button, message, Image, Modal, Table, Typography } from 'antd';
+import { Form, Input, Button, message, Image, Modal, Table, Typography ,Spin} from 'antd';
 import defaultLogo from '../../assets/images/hero-image.png';
 import { USERS_BASE_URL } from 'constants/config/config.dev';
 
 export const AddBlog = () => {
   const [isEditModalVisible, setIsEditModalVisible] = useState(false);
-  const { blogs, blog } = useSelector(state => state.blogReducer);
+  const { blogs, blog, totalBlogs,loading } = useSelector(state => state.blogReducer);
   const [blogdata, setBlogData] = useState([]);
   const [fileEdit, setFileEdit] = useState('');
   const BlogId = localStorage.getItem('BlogId');
   let SelectedBlog = blogdata.filter(obj => obj.id === BlogId)[0];
   const [updatedData, setUpdatedData] = useState();
+  const [currentPage, setCurrentPage] = useState(1);
+
   const initialvalues = {
     name: '',
     desc: '',
     blogPicture: '',
+  };
+
+  useEffect(() => {
+    dispatch(blogActions.fetchBlog.request(currentPage));
+  }, []);
+
+  const handlePageChange = page => {
+    setCurrentPage(page);
+    dispatch(blogActions.fetchBlog.request(page));
+  };
+  console.log(totalBlogs)
+  const tableProps = {
+    pagination: {
+      total: totalBlogs,
+      pageSize: 8,
+      current: currentPage,
+      onChange: handlePageChange,
+    },
   };
 
   const refValue = useRef(null);
@@ -208,16 +228,12 @@ export const AddBlog = () => {
   };
 
   useEffect(() => {
-    dispatch(blogActions.fetchBlog.request('page=1'));
-  }, []);
-
-  useEffect(() => {
     if (blogs.length > 0) {
       setBlogData(blogs);
     }
   }, [blogs]);
 
-  const EditableFile = `${USERS_BASE_URL}/uploads/${SelectedBlog?.blogPicture[0]?.img}`;
+  const EditableFile = SelectedBlog?.blogPicture[0]?.img;
 
   return (
     <>
@@ -293,7 +309,7 @@ export const AddBlog = () => {
                 </label>
                 <span>{productdata.blogPictureName}</span>
               </Form>
-              <Button className="category-btn" onClick={e => handleSubmit(e)}>
+              <Button className="category-btn" onClick={e => handleSubmit(e)} loading={loading}>
                 Add Blog
               </Button>
             </>
@@ -307,7 +323,21 @@ export const AddBlog = () => {
           style={{ width: '100%' }}
           content={
             <>
-              <Table columns={columns} dataSource={blogdata}></Table>
+             {loading ? (
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  height: '100vh',
+                }}
+              >
+                {/* <h1>loading</h1> */}
+                <Spin size="large" />
+              </div>
+            ) : (
+              <Table columns={columns} dataSource={blogdata} {...tableProps}></Table>
+            )}
               <Modal
                 title="Edit Blog"
                 okText="SAVE"

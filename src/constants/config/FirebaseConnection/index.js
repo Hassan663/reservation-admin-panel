@@ -12,13 +12,13 @@ import { ref, uploadString, getDownloadURL, getStorage } from 'firebase/storage'
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: 'AIzaSyBfhN5NjwLIgVpgyiiy_4daLR12Zy8BqGE',
-  authDomain: 'nest360-c325f.firebaseapp.com',
-  projectId: 'nest360-c325f',
-  storageBucket: 'nest360-c325f.appspot.com',
-  messagingSenderId: '792240065012',
-  appId: '1:792240065012:web:ca7d01e4085f02cce291a1',
-  measurementId: 'G-TCC9B6ZG4N',
+  apiKey: 'AIzaSyBEOTprg3CZ9ObssWJcfzDagKiUk7j8CRM',
+  authDomain: 'bostom-855fe.firebaseapp.com',
+  projectId: 'bostom-855fe',
+  storageBucket: 'bostom-855fe.appspot.com',
+  messagingSenderId: '100399206149',
+  appId: '1:100399206149:web:0a871083dab21782f9f16c',
+  measurementId: 'G-6Q4TN1K9T4',
 };
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
