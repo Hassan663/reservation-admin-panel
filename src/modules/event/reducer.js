@@ -4,6 +4,7 @@ const initialState = {
   error: false,
   events: [],
   event: {},
+  totalEvents: 0,
 };
 
 function eventReducer(state = initialState, action) {
@@ -17,14 +18,14 @@ function eventReducer(state = initialState, action) {
     case ADD_EVENT.SUCCESS:
       return {
         ...state,
-        loading: true,
+        loading: false,
         error: false,
         events: [...state.events, action.payload],
       };
     case ADD_EVENT.FAILURE:
       return {
         ...state,
-        loading: true,
+        loading: false,
         error: false,
       };
     case DELETE_EVENT.REQUEST:
@@ -38,14 +39,14 @@ function eventReducer(state = initialState, action) {
       console.log('Events', action.payload);
       return {
         ...state,
-        loading: true,
+        loading: false,
         events: [...state.events.filter(event => event.id !== action.payload)],
         error: false,
       };
     case DELETE_EVENT.FAILURE:
       return {
         ...state,
-        loading: true,
+        loading: false,
         error: false,
       };
     case UPDATE_EVENT.REQUEST:
@@ -57,7 +58,7 @@ function eventReducer(state = initialState, action) {
     case UPDATE_EVENT.SUCCESS:
       return {
         ...state,
-        loading: true,
+        loading: false,
         error: false,
         events: [
           ...state.events.map(event => {
@@ -69,7 +70,7 @@ function eventReducer(state = initialState, action) {
     case UPDATE_EVENT.FAILURE:
       return {
         ...state,
-        loading: true,
+        loading: false,
         error: false,
       };
     case FETCH_EVENT.REQUEST:
@@ -81,14 +82,15 @@ function eventReducer(state = initialState, action) {
     case FETCH_EVENT.SUCCESS:
       return {
         ...state,
-        loading: true,
+        loading: false,
         error: false,
-        events: action.payload,
+        events: action.payload.event,
+        totalEvents: action.payload.eventCount
       };
     case FETCH_EVENT.FAILURE:
       return {
         ...state,
-        loading: true,
+        loading: false,
         error: false,
       };
     default: {

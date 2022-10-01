@@ -40,7 +40,8 @@ export function* handleUpdateEvent({ payload }) {
 export function* handleFetchEvent({ payload }) {
   try {
     const { data } = yield call(event.fetchEvent, payload);
-    yield put(actions.fetchEvent.success(data.event));
+    console.log(data);
+    yield put(actions.fetchEvent.success(data));
   } catch (error) {
     yield put(actions.fetchEvent.failure(error));
   }

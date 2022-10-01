@@ -11,6 +11,6 @@ const api = {
   addEvent: data => request.post('/event', data),
   deleteEvent: id => request.delete(`/event/${id}`),
   updateEvent: ({data,id}) => request.patch(`/event/${id}`,data),
-  fetchEvent: () => request.get('/event'),
+  fetchEvent: (payload) => request.get(`/event?page=${payload}`),
 };
 export default apiWrapper(api);

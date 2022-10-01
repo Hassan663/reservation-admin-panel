@@ -11,6 +11,6 @@ const api = {
   addProduct: data => request.post(`${USERS_BASE_URL}/product`, data),
   deleteProduct: id => request.delete(`/product/${id}`),
   updateProduct: ({data,id}) => request.patch(`/product/${id}`,data),
-  fetchProduct: () => request.get('/product'),
+  fetchProduct: (payload) => request.get(`/product?page=${payload}`),
 };
 export default apiWrapper(api);

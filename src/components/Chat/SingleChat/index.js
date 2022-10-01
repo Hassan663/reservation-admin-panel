@@ -41,7 +41,7 @@ const SingleChat = ({
     >
       {' '}
       <div className="singlechat_inner_wrapper">
-        <Tooltip placement="top" title="Last Seen: date & time">
+        {/* <Tooltip placement="top" title="Last Seen: date & time"> */}
           <Row>
             {/* <Tooltip placement="top" title="Online/Offline"> */}
             <Col className="singlechat_outer_box_col" span={5}>
@@ -101,7 +101,7 @@ const SingleChat = ({
               </Row>
             </Col>
           </Row>
-        </Tooltip>
+        {/* </Tooltip> */}
       </div>
     </div>
   );

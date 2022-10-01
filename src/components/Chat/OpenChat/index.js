@@ -130,7 +130,7 @@ const OpenChat = ({ receiverinfo, openStaffModel, setOpenStaffModel, setShowChat
           else {
             console.log("dea",endUserid);
             dispatch(authActions.handleLatesttime.request(endUserid));
-          socket.on('latestListen'); // socket event function
+          // socket.on('latestListen'); // socket event function
             await sendMessage(
               messageCollection,
               IDRef.current,

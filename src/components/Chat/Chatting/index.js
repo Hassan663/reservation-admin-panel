@@ -105,7 +105,7 @@ const Chattings = ({
           <img src="pic.png" alt="person" />
           <span>Admin Chat</span>
         </Header>
-        <div className="input_main_wrapper">
+        {/* <div className="input_main_wrapper">
           <MdPersonSearch
             color="#eceaea"
             fontSize="20px"
@@ -118,7 +118,7 @@ const Chattings = ({
               // onChange={SearchItems}
             />
           </Tooltip>
-        </div>
+        </div> */}
       </div>
 
       {stafchat ? (

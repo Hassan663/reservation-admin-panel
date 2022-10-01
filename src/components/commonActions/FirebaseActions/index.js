@@ -102,6 +102,7 @@ export const createChatRoom = async (messagesender, messagereceiver) => {
   return data;
 };
 export const sendMessage = async (collection, idRef, message, user, scene, receiver, name) => {
+  console.log(user,receiver)
   const data = await addDoc(collection, {
     chat_id: idRef,
     text: message,
